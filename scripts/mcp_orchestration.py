@@ -20,44 +20,94 @@ Both normalize into the SAME unified structure consumed by cross_analysis.
 from __future__ import annotations
 
 import asyncio
+import copy
 import json
 import pathlib
 from typing import Any, Dict, List, Mapping, Optional
 
+from common import collect_detail_pages
 from multi_mcp_client import MultiMcpClient, MultiMcpError
+
+# Live detail interfaces traversed against their upstream total. Only tools
+# whose input schema accepts pageIndex/pageSize AND that return a detail
+# resultList+total are listed here; stats/summary, profile, fuzzy-resolution
+# and single-shot interfaces stay one call.
+#   key (from build_mcp_calls) -> safe interface label
+PAGED_DETAIL_TOOLS: Dict[str, str] = {
+    "bid_info": "招投标标讯明细",
+    "op_rankings": "企业上榜榜单明细",
+}
+
+# Detail-list interfaces that return resultList+total but whose tool input
+# schema accepts only ``keyword`` (no pageIndex/pageSize). They stay a single
+# call; when upstream total exceeds the rows returned we disclose the gap so
+# consumers know the collection cannot be completed.
+SCHEMA_LIMITED_DETAIL: Dict[str, str] = {
+    "ent_invest": "对外投资明细",
+    "ent_person": "主要人员明细",
+}
+
+# Default paid-detail budget: one page per detail interface. The page is used
+# both as the data page and as upstream-total discovery (never refetched), and
+# its total/remaining counts are disclosed via attach_pagination. Full
+# traversal requires an explicit positive max_pages budget from the caller.
+DEFAULT_DETAIL_MAX_PAGES = 1
+
+
+def _canonical_request_key(domain: str, tool: str, arguments: Mapping[str, Any]) -> str:
+    """Canonical identity for a paid request so identical calls are never repaid."""
+    return json.dumps(
+        [domain, tool, dict(arguments)], sort_keys=True, ensure_ascii=False, separators=(",", ":")
+    )
 
 # --------------------------------------------------------------------------- #
 # Generic extractors
 # --------------------------------------------------------------------------- #
 
 def _is_api_error(value: Any) -> bool:
-    """Detect MCP API error responses (not empty data, but actual failures like 405)."""
+    """Return True for protocol/tool/upstream failures, never for empty data."""
+    markers = ("接口调用失败", "查询失败", "状态码：4", "状态码：5",
+               "error executing tool", "unknown tool", "validation error",
+               "signature", "credential", "unauthorized", "forbidden")
     if value is None:
         return False
     if isinstance(value, str):
-        return any(s in value for s in ("接口调用失败", "查询失败", "状态码：4", "状态码：5"))
+        return any(m in value.lower() for m in markers)
     if isinstance(value, dict):
-        # Check all string values for error indicators
-        for v in value.values():
-            if isinstance(v, str) and any(s in v for s in ("接口调用失败", "查询失败", "状态码：4", "状态码：5")):
-                return True
+        if value.get("_error") or value.get("isError") is True or value.get("is_error") is True:
+            return True
+        code = value.get("code")
+        if code not in (None, 0, "0", 200, "200"):
+            return True
+        return any(_is_api_error(v) for v in value.values())
+    if isinstance(value, list):
+        return any(_is_api_error(v) for v in value)
     return False
 
+
 def _first_list(value: Any) -> List[Any]:
+    if _is_api_error(value):
+        return []
     if isinstance(value, list):
         return value
     if isinstance(value, dict):
-        if _is_api_error(value):
-            return []
         for key in ("resultList", "list", "items", "data", "holderList", "stockHolderList",
-                    "fpFinancingList", "tpQualificationList", "winbidStatList", "winbidAreaStat",
-                    "tmTypeList", "tmStatusList", "patentTypeAppTimeStat"):
+                    "fpFinancingList", "tpQualificationList", "punishmentList", "anomalyList",
+                    "tmTypeList", "tmStatusList", "winbidStatList", "winbidAreaStat", "tenderStatList",
+                    "sentimentLabelList"):
             if isinstance(value.get(key), list):
                 return value[key]
-    if value in (None, "", {}):
-        return []
-    return [value]
+    return []
 
+
+def _tool_errors(raw: Mapping[str, Any]) -> Dict[str, str]:
+    errors: Dict[str, str] = {}
+    for key, value in raw.items():
+        if str(key).startswith("_"):
+            continue
+        if _is_api_error(value):
+            errors[str(key)] = "工具调用失败"
+    return errors
 
 def _safe_total(value: Any) -> Optional[int]:
     if isinstance(value, dict):
@@ -168,11 +218,11 @@ def build_mcp_calls(enterprise: str, keyword_type: str) -> List[tuple[str, str, 
         ("tm_stats", "trademark", "trademark_bigdata_trademark_stats", mk_kw),
         # --- bidding (招投标) ---
         ("bid_win_stats", "bidding", "bid_bigdata_bid_win_stats", mk_kw),
-        ("bid_info", "bidding", "bid_bigdata_bidding_info", {**mk_kw, "pageSize": 20}),
+        ("bid_info", "bidding", "bid_bigdata_bidding_info", {**mk_kw, "pageSize": 50}),
         # --- news (舆情) ---
         ("news_stats", "news", "news_bigdata_news_stats", mk_kw),
         # --- qualification (资质) ---
-        ("qual_stats", "qualification", "qualification_bigdata_qualification_stats", mk_kw),
+        ("qual_stats", "qualification", "qualification_bigdata_qualification_certificate_profile", mk_kw),
     ]
 
 
@@ -183,32 +233,133 @@ def is_full_name(raw: str) -> bool:
     return any(s in (raw or "") for s in _ENTERPRISE_SUFFIXES)
 
 
-async def resolve_enterprise(client: MultiMcpClient, keyword: str) -> Dict[str, Any]:
+async def resolve_enterprise(client: MultiMcpClient, keyword: str, *, call: Any = None) -> Dict[str, Any]:
     """Resolve a keyword to a canonical enterprise name via enterprise MCP fuzzy search."""
     keyword = (keyword or "").strip()
     if not keyword:
         return {"keyword": "", "enterprise": "", "resolved": False}
     if is_full_name(keyword):
         return {"keyword": keyword, "enterprise": keyword, "resolved": True, "reason": "视为企业全称"}
-    fuzzy = await client.call(
-        "enterprise", "enterprise_get_keyword_search", {"matchKeyword": keyword, "pageSize": 1}
+    fuzzy = await (call or client.call)(
+        "enterprise", "enterprise_get_keyword_search", {"matchKeyword": keyword, "pageSize": 5}
     )
-    for rec in _first_list(fuzzy):
-        if isinstance(rec, dict):
-            name = str(rec.get("name") or "").strip()
-            if name:
-                return {"keyword": keyword, "enterprise": name, "resolved": True, "reason": "关键词模糊查询补全"}
-    return {"keyword": keyword, "enterprise": keyword, "resolved": False, "reason": "模糊查询未命中，按关键词直查"}
+    candidates = [str(rec.get("name") or "").strip() for rec in _first_list(fuzzy)
+                  if isinstance(rec, dict) and str(rec.get("name") or "").strip()]
+    exact = next((name for name in candidates if name == keyword), None)
+    if exact:
+        return {"keyword": keyword, "enterprise": exact, "resolved": True, "reason": "精确名称命中"}
+    if len(candidates) == 1:
+        return {"keyword": keyword, "enterprise": candidates[0], "resolved": True, "reason": "唯一候选补全"}
+    reason = "模糊查询存在多个候选，未自动确认主体" if candidates else "模糊查询未命中，停止后续查询"
+    return {"keyword": keyword, "enterprise": keyword, "resolved": False, "reason": reason, "candidates": candidates}
 
 
-async def _collect_live(enterprise: str, keyword_type: str) -> Dict[str, Any]:
-    """Connect to 7 MCP servers, resolve name, fan out all tool calls."""
+async def _collect_live(
+    enterprise: str, keyword_type: str, *, detail_max_pages: Optional[int] = None
+) -> Dict[str, Any]:
+    """Connect to 7 MCP servers, resolve name, fan out all tool calls with
+    bounded total-driven pagination for detail-list interfaces.
+
+    *detail_max_pages* is a paid-call budget per detail interface; the first
+    page doubles as total discovery and is never refetched. Default is the
+    module-level DEFAULT_DETAIL_MAX_PAGES (one page); full traversal requires
+    an explicit positive budget from the caller.
+    """
+    budget = detail_max_pages if detail_max_pages is not None else DEFAULT_DETAIL_MAX_PAGES
+    if isinstance(budget, bool) or not isinstance(budget, int) or budget < 1:
+        raise ValueError("detail_max_pages 必须为正整数或 None（默认单页预算）")
+    loop = asyncio.get_running_loop()
     async with MultiMcpClient() as client:
-        resolved = await resolve_enterprise(client, enterprise)
+
+        # Client-scoped request reuse: identical domain+tool+params within this
+        # task share ONE in-flight awaitable (failures included) and are never
+        # repaid. Lives and dies with this client/task; no persistent cache.
+        inflight: Dict[str, asyncio.Future] = {}
+        executed = 0
+        reused = 0
+
+        async def _call_once(domain: str, tool: str, arguments: Dict[str, Any]) -> Any:
+            nonlocal executed, reused
+            key = _canonical_request_key(domain, tool, arguments)
+            existing = inflight.get(key)
+            if existing is not None:
+                reused += 1
+                return copy.deepcopy(await asyncio.shield(existing))
+            task = asyncio.ensure_future(client.call(domain, tool, arguments))
+            inflight[key] = task
+            executed += 1
+            return copy.deepcopy(await task)
+        if keyword_type == "name":
+            resolved = await resolve_enterprise(client, enterprise, call=_call_once)
+        else:
+            resolved = {"keyword": enterprise, "enterprise": enterprise,
+                        "resolved": bool(enterprise.strip()), "reason": "使用显式企业标识"}
+        if not resolved.get("resolved"):
+            candidates = "；".join(resolved.get("candidates") or [])
+            detail = f"候选企业：{candidates}。" if candidates else "请核对企业查询工具状态与输入。"
+            raise ValueError("企业主体未唯一确认，已停止后续付费查询；请确认企业全称或明确企业标识。" + detail)
         canon = resolved["enterprise"] or enterprise
         calls = build_mcp_calls(canon, keyword_type)
-        raw = await client.call_many(calls)
+        paged = [c for c in calls if c[0] in PAGED_DETAIL_TOOLS]
+        plain = [c for c in calls if c[0] not in PAGED_DETAIL_TOOLS]
+
+        needed: List[str] = []
+        for _k, domain, _t, _a in plain:
+            if domain not in needed:
+                needed.append(domain)
+        await client.warmup(needed)
+
+        async def _one(key: str, domain: str, tool: str, args: Dict[str, Any]) -> tuple[str, Any]:
+            return key, await _call_once(domain, tool, args)
+
+        raw: Dict[str, Any] = {}
+        tasks = [asyncio.ensure_future(_one(k, d, t, a)) for k, d, t, a in plain]
+        for coro in asyncio.as_completed(tasks):
+            try:
+                key, value = await coro
+                raw[key] = value
+            except Exception as exc:  # last-resort isolation, mirrors call_many
+                raw[f"_task_error_{len(raw)}"] = {"_error": str(exc)}
+
+        pagination_payloads: Dict[str, Any] = {}
+        for key, domain, tool, args in paged:
+            label = PAGED_DETAIL_TOOLS[key]
+
+            def _sync_call(_tool: str, _arguments: Dict[str, Any]) -> Any:
+                future = asyncio.run_coroutine_threadsafe(
+                    _call_once(domain, _tool, _arguments), loop
+                )
+                return future.result()
+
+            collected = await asyncio.to_thread(
+                collect_detail_pages,
+                _sync_call, tool, args,
+                get_rows=_first_list, get_total=_safe_total, is_error=_is_api_error,
+                max_pages=budget,
+            )
+            raw[key] = collected
+            pagination_payloads[label] = collected
+        schema_limited: Dict[str, str] = {}
+        for key, label in SCHEMA_LIMITED_DETAIL.items():
+            payload = raw.get(key)
+            total = _safe_total(payload)
+            rows = _first_list(payload)
+            if total is not None and total > len(rows):
+                schema_limited[label] = (
+                    f"{label}工具参数不含分页（仅 keyword），上游 total={total}、"
+                    f"实际取得 {len(rows)} 条，其余 {total - len(rows)} 条无法遍历，采集不完整。"
+                )
     raw["_resolved"] = resolved
+    if pagination_payloads:
+        raw["_pagination_payloads"] = pagination_payloads
+    if schema_limited:
+        raw["_schema_limited"] = schema_limited
+    raw["_detail_max_pages"] = detail_max_pages
+    raw["_call_usage"] = {
+        "executed_requests": executed,
+        "reused_requests": reused,
+        "scope": "current_task_client_lifecycle",
+    }
     return normalize_mcp(raw)
 
 
@@ -249,7 +400,7 @@ def _collect_cache(skills_root: str, enterprise: str) -> Dict[str, Any]:
 def normalize_mcp(raw: Mapping[str, Any]) -> Dict[str, Any]:
     """Normalize live MCP results into the unified cross-analysis structure."""
     resolved = raw.get("_resolved") or {}
-    errors = {k: v["_error"] for k, v in raw.items() if isinstance(v, dict) and "_error" in v}
+    errors = _tool_errors(raw)
 
     # --- enterprise ---
     base_raw = raw.get("ent_base") or {}
@@ -276,7 +427,6 @@ def normalize_mcp(raw: Mapping[str, Any]) -> Dict[str, Any]:
         base["资本实缴率"] = f"{paid_v / reg_v * 100:.1f}%"
     holders = _first_list(raw.get("ent_holder"))
     investments = _first_list(raw.get("ent_invest"))
-    investments_total = _safe_total(raw.get("ent_invest")) or len(investments)
     persons = _first_list(raw.get("ent_person"))
 
     # --- operation ---
@@ -301,16 +451,20 @@ def normalize_mcp(raw: Mapping[str, Any]) -> Dict[str, Any]:
     else:
         patent_stats = ps if isinstance(ps, dict) else {}
 
+    type_stat = patent_stats.get("patentTypeStat") if isinstance(patent_stats.get("patentTypeStat"), dict) else {}
     patent = {
-        "patentCount": _int(patent_stats.get("patentCount")),
-        "inventionAppPatentCount": _int(patent_stats.get("inventionAppPatentCount")),
-        "inventionLicPatentCount": _int(patent_stats.get("inventionLicPatentCount")),
-        "utilityModelPatentCount": _int(patent_stats.get("utilityModelPatentCount")),
-        "appearanceDesignPatentCount": _int(patent_stats.get("appearanceDesignPatentCount")),
+        "patentCount": _int(patent_stats.get("patentCount") or type_stat.get("patentCount")),
+        "inventionAppPatentCount": _int(patent_stats.get("inventionAppPatentCount") or type_stat.get("inventionAppPatentCount")),
+        "inventionLicPatentCount": _int(patent_stats.get("inventionLicPatentCount") or type_stat.get("inventionLicPatentCount")),
+        "utilityModelPatentCount": _int(patent_stats.get("utilityModelPatentCount") or type_stat.get("utilityModelPatentCount")),
+        "appearanceDesignPatentCount": _int(patent_stats.get("appearanceDesignPatentCount") or type_stat.get("appearanceDesignPatentCount")),
         "patentTypeAppTimeStat": _first_list(patent_stats.get("patentTypeAppTimeStat")),
         "patentTypePubTimeStat": _first_list(patent_stats.get("patentTypePubTimeStat")),
         "patentDivAppLegalStat": _first_list(patent_stats.get("patentDivAppLegalStat")),
     }
+    if patent["patentCount"] is None:
+        known = [patent[k] for k in ("inventionAppPatentCount", "inventionLicPatentCount", "utilityModelPatentCount", "appearanceDesignPatentCount") if patent[k] is not None]
+        patent["patentCount"] = sum(known) if known else None
 
     # --- trademark (商标) ---
     tmp = raw.get("tm_profile") or {}
@@ -384,7 +538,11 @@ def normalize_mcp(raw: Mapping[str, Any]) -> Dict[str, Any]:
     return _wrap(resolved, errors, "live", enterprise=resolved.get("enterprise", ""),
                  base=base, holders=holders, investments=investments, persons=persons,
                  operation=operation, patent=patent, trademark=trademark,
-                 bidding=bidding, news=news, qualification=qualification)
+                 bidding=bidding, news=news, qualification=qualification,
+                 pagination_payloads=raw.get("_pagination_payloads") or {},
+                 schema_limited=raw.get("_schema_limited") or {},
+                 detail_max_pages=raw.get("_detail_max_pages"),
+                 call_usage=raw.get("_call_usage") or {})
 
 
 def normalize_reports(reports: Mapping[str, Any], enterprise: str, *, resolved: bool = True) -> Dict[str, Any]:
@@ -468,7 +626,6 @@ def normalize_reports(reports: Mapping[str, Any], enterprise: str, *, resolved: 
     }
 
     # qualification
-    qc = _ca(qr)
     qualification = {
         "certificateCount": _metric_int(qr, "证书数量"),
         "certNumberThisYear": _metric_int(qr, "近一年获证数"),
@@ -514,12 +671,20 @@ def _pick(d: Any, *keys: str) -> Any:
 
 def _wrap(resolved: Mapping[str, Any], errors: Mapping[str, Any], source: str, **domain: Any) -> Dict[str, Any]:
     enterprise = domain.pop("enterprise", resolved.get("enterprise", ""))
+    pagination_payloads = domain.pop("pagination_payloads", {})
+    schema_limited = domain.pop("schema_limited", {})
+    detail_max_pages = domain.pop("detail_max_pages", None)
+    call_usage = domain.pop("call_usage", {})
     return {
         "_meta": {
             "enterprise": enterprise,
             "resolved": dict(resolved),
             "source": source,  # "live" | "cache"
             "errors": dict(errors),
+            "pagination_payloads": dict(pagination_payloads),
+            "schema_limited": dict(schema_limited),
+            "detail_max_pages": detail_max_pages,
+            "call_usage": dict(call_usage),
         },
         "enterprise": {
             "base": domain.get("base", {}),
@@ -539,12 +704,20 @@ def _wrap(resolved: Mapping[str, Any], errors: Mapping[str, Any], source: str, *
 # --------------------------------------------------------------------------- #
 # Public entry point
 # --------------------------------------------------------------------------- #
-def collect_direct(enterprise: str, keyword_type: str, *, dry_run: bool, skills_root: str) -> Dict[str, Any]:
-    """Collect multi-source data: live MCP (default) or cached reports (dry-run)."""
+def collect_direct(
+    enterprise: str, keyword_type: str, *, dry_run: bool, skills_root: str,
+    detail_max_pages: Optional[int] = None,
+) -> Dict[str, Any]:
+    """Collect multi-source data: live MCP (default) or cached reports (dry-run).
+
+    *detail_max_pages* bounds the paid detail pages per paginated interface in
+    live mode (default: one page, DEFAULT_DETAIL_MAX_PAGES); non-positive
+    values are rejected before any real call.
+    """
     if dry_run:
         return _collect_cache(skills_root, enterprise)
     try:
-        return asyncio.run(_collect_live(enterprise, keyword_type))
+        return asyncio.run(_collect_live(enterprise, keyword_type, detail_max_pages=detail_max_pages))
     except MultiMcpError as exc:
         # No MCP connection available — gracefully degrade to cached reports.
         print(f"⚠️  MCP 连接不可用 ({exc})，回退到缓存报告模式", file=__import__("sys").stderr)
