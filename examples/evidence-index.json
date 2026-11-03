@@ -17,7 +17,7 @@
         "business-review.json": "658cefaa17c3ac04bc922e58ede84b15a406a2ebb4e7d7b6cb8c3878aa6a18ee",
         "browser-check.json": "12779b8f46ea385a45015d4c4523590c8767d3821411a71f05259e8766e4333b"
       },
-      "audit_record": "../../test-records/live-replaced-20261027/09-technical-ip-evidence.md"
+      "audit_record": "../test-records/live-replaced-20261027/09-technical-ip-evidence.md"
     },
     {
       "skill": "competitive-analysis-skill",
@@ -35,7 +35,7 @@
         "business-review.json": "96430569ec0c2b3d355ec035dad564f79424a7b0392b2d5bf0b67a2f80fda53f",
         "browser-check.json": "28b2fd2c85f333f5de2c34b4ba1e4e26cbb256a0ff5b4cd12268ecb938947805"
       },
-      "audit_record": "../../test-records/live-replaced-20261027/10-qualification-tender-evidence.md"
+      "audit_record": "../test-records/live-replaced-20261027/10-qualification-tender-evidence.md"
     },
     {
       "skill": "competitive-analysis-skill",
@@ -53,7 +53,7 @@
         "business-review.json": "80287189a88b622fec569199bd7de2d1a8b19e70ca0ba10bebfeca4028833abe",
         "browser-check.json": "c8c4b37fd1b53d93386f4c046078ec384a041f153cf6618fdf8f5f8ea75aad39"
       },
-      "audit_record": "../../test-records/live-replaced-20261027/11-brand-protection-evidence.md"
+      "audit_record": "../test-records/live-replaced-20261027/11-brand-protection-evidence.md"
     },
     {
       "skill": "competitive-analysis-skill",
@@ -71,7 +71,7 @@
         "business-review.json": "dc0392a68457d6077e05f60c86965c1c8b29a77ff52d7151fd76611d18f659a0",
         "browser-check.json": "0d3bc309526b93d304f80d9171072593785e1c06b596691a90e1611c92e5bf09"
       },
-      "audit_record": "../../test-records/live-replaced-20261027/12-news-qualification-review.md"
+      "audit_record": "../test-records/live-replaced-20261027/12-news-qualification-review.md"
     },
     {
       "skill": "competitive-analysis-skill",
@@ -89,7 +89,7 @@
         "business-review.json": "18f0a819314f24661c93c65333e290c67afee6c0bf6598a7ad322043183802ce",
         "browser-check.json": "e8288257c82ae8a555083056f54ed1d730402e739417997facc5c0050775bf58"
       },
-      "audit_record": "../../test-records/live-replaced-20261027/06-news-risk.md"
+      "audit_record": "../test-records/live-replaced-20261027/06-news-risk.md"
     },
     {
       "skill": "competitive-analysis-skill",
@@ -107,7 +107,7 @@
         "business-review.json": "ba8b0d171bcda3e34062a00081f2d505a5a41e8619be5404358418438347de13",
         "browser-check.json": "d4594e0888690bfae723c1e2ca13440bbfdb06bcee44a055e06d094b61b3e062"
       },
-      "audit_record": "../../test-records/live-replaced-20261027/08-sparse-boundary.md"
+      "audit_record": "../test-records/live-replaced-20261027/08-sparse-boundary.md"
     }
   ]
 }
