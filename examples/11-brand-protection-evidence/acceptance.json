@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "skill": "competitive-analysis-skill",
+  "case_id": "11-brand-protection-evidence",
+  "title": "消费品牌商标保护事实清单",
+  "invocation_id": "1793068931712993000",
+  "provenance": {
+    "integrator_id": "683e574805537ace146cc05e",
+    "runner_sha256": "05777c2f2b0791cb5157aef691206606dade8df7af3b17212285b7ae74632a66",
+    "credential_policy_sha256": "bcabf08a1ca92f28357c0e57a8bae9bfa910eb1d4b204d8195ee3b7a77106eed",
+    "scenario_sha256": "e53d3518250d6ab1dc4afbf77beabf7fdbf5c6f4a8d2a9da97461b99d6dee0e7",
+    "skill_source_hashes": {
+      "scripts/common.py": "3281f5dbf7325103dc67628f9babee8857e308dbf2ee0c9199b3c08091de2073",
+      "scripts/compose_direct.py": "5b806dcf8120348e6add91735beca87558435e14e7eab8ea4b6a6d48df8f6628",
+      "scripts/compose_fusion_report.py": "46b65760f6729493491bc03bcce9627a4fc72fef6f8b058510badf9271c2538e",
+      "scripts/cross_analysis.py": "a3b52b7b46008ffc892bdd917a269c2ac7ec8c74d61dcdc3ae8b18cd3802cc9f",
+      "scripts/fusion_engine.py": "d50fecf6e3365bf639690a025011934a761cae1dc709ad1a9effb5bf93f409d3",
+      "scripts/mcp_orchestration.py": "cd33313fb672a973226665c3056f427bdfc5cb50263b2b9c810df8a99b745a9b",
+      "scripts/multi_mcp_client.py": "0a49b3bc61e8265a130e2678c460b66f601feeda1123d1264ab09c6cb625aa60",
+      "scripts/render_report.py": "7bbc4279a8b73045a00c6a226da04a7980dcda044d8f228fe74bf1c29f09d630"
+    },
+    "upstream_source_hashes": {
+      "enterprise-mcp-server": "09953383194a4e48706af21c2c5b2c6e728f20df35c8c8c2f53c8d8f6c81e722",
+      "enterprise-operation-mcp-server": "46af6307784e60a051c16fb45a890979a4c994ff26c50af6cec85b3117619a49",
+      "patent-mcp-server": "6415af144978311c545a4ba5e914de3b1b192eb6b667f2398faaa0e7d599e485",
+      "trademark-mcp-server": "8540e21cd293a850b8a1fe2fcbe8ede0d125ef7b41fb30296fd961975c4462d8",
+      "bidding-mcp-server": "76ed472a6796e09d7ef7098f4b4f8e18f252a033aa0b0642b40a9920bcc0f7b1",
+      "news-mcp-server": "e1ef4df6b49d8e02d53fd98a1576243ce2a8ba8a534e8dab92f9f7af23f55a5f",
+      "qualification-mcp-server": "4584657674aeabdbfebba2037ece26a5cb0f48063de131311bdd62e6267d54b7"
+    },
+    "upstream_dependency_hashes": {
+      "enterprise-mcp-server/server/mcp_server.py": "09953383194a4e48706af21c2c5b2c6e728f20df35c8c8c2f53c8d8f6c81e722",
+      "enterprise-operation-mcp-server/server/mcp_server.py": "46af6307784e60a051c16fb45a890979a4c994ff26c50af6cec85b3117619a49",
+      "patent-mcp-server/server/mcp_server.py": "6415af144978311c545a4ba5e914de3b1b192eb6b667f2398faaa0e7d599e485",
+      "trademark-mcp-server/server/mcp_server.py": "8540e21cd293a850b8a1fe2fcbe8ede0d125ef7b41fb30296fd961975c4462d8",
+      "bidding-mcp-server/server/mcp_server.py": "76ed472a6796e09d7ef7098f4b4f8e18f252a033aa0b0642b40a9920bcc0f7b1",
+      "news-mcp-server/server/mcp_server.py": "e1ef4df6b49d8e02d53fd98a1576243ce2a8ba8a534e8dab92f9f7af23f55a5f",
+      "qualification-mcp-server/server/mcp_server.py": "4584657674aeabdbfebba2037ece26a5cb0f48063de131311bdd62e6267d54b7"
+    }
+  },
+  "source_changed_during_run": false,
+  "started_at": "2026-10-27T10:42:11+08:00",
+  "elapsed_seconds": 10.619,
+  "returncode": 0,
+  "exception_type": null,
+  "command": "python3 competitive-analysis-skill/scripts/compose_fusion_report.py --enterprise '贵州茅台酒股份有限公司' --keyword-type name --output competitive-analysis-skill/output/live-replaced-20261027/11-brand-protection-evidence/report.json --report-output competitive-analysis-skill/output/live-replaced-20261027/11-brand-protection-evidence/report.html",
+  "transport": "local MCP servers via loopback streamable-http",
+  "cache_used": false,
+  "call_count": 15,
+  "successful_data_calls": 15,
+  "empty_calls": 0,
+  "failed_calls": 0,
+  "checks": {
+    "issues": [],
+    "warnings": [],
+    "coverage_pct": 100,
+    "subject": {
+      "enterprise": "贵州茅台酒股份有限公司",
+      "match_raw": "贵州茅台酒股份有限公司",
+      "keywordType": "name",
+      "resolved": true,
+      "resolve_reason": "工商基础信息中的企业名称和统一社会信用代码已返回"
+    },
+    "title": "贵州茅台酒股份有限公司 企业竞争基准画像",
+    "data_mode": "live_mcp",
+    "metrics": [
+      {
+        "label": "专利类型统计合计",
+        "value": "927",
+        "hint": "由已返回专利类型字段合计；不代表质量或领先"
+      },
+      {
+        "label": "商标总数",
+        "value": "89",
+        "hint": "商标数量事实"
+      },
+      {
+        "label": "有效商标数",
+        "value": "33",
+        "hint": "接口有效状态统计"
+      },
+      {
+        "label": "资质证书数",
+        "value": "66",
+        "hint": "证书概况数量"
+      },
+      {
+        "label": "近一年获证数",
+        "value": "8",
+        "hint": "证书接口年度口径"
+      },
+      {
+        "label": "招投标记录总量",
+        "value": "1000",
+        "hint": "市场活动记录，不代表收入或履约质量"
+      },
+      {
+        "label": "舆情统计总量",
+        "value": "4287",
+        "hint": "接口情感分类合计，不是竞争分"
+      },
+      {
+        "label": "负面舆情统计",
+        "value": "632",
+        "hint": "需人工复核样本，不作法律定性"
+      }
+    ],
+    "quality_report": {
+      "total_sections": 7,
+      "populated_sections": 7,
+      "empty_sections": 0,
+      "coverage_pct": 100
+    },
+    "unregistered_tools": [],
+    "checks": {
+      "json_html_markdown": true,
+      "explicit_live": true,
+      "tool_calls_recorded": 15,
+      "offline_scripts": true,
+      "independent_rerender": true,
+      "offline_browser": true
+    }
+  },
+  "status": "passed",
+  "source_hashes": {
+    "scripts/common.py": "3281f5dbf7325103dc67628f9babee8857e308dbf2ee0c9199b3c08091de2073",
+    "scripts/compose_direct.py": "5b806dcf8120348e6add91735beca87558435e14e7eab8ea4b6a6d48df8f6628",
+    "scripts/compose_fusion_report.py": "46b65760f6729493491bc03bcce9627a4fc72fef6f8b058510badf9271c2538e",
+    "scripts/cross_analysis.py": "a3b52b7b46008ffc892bdd917a269c2ac7ec8c74d61dcdc3ae8b18cd3802cc9f",
+    "scripts/fusion_engine.py": "d50fecf6e3365bf639690a025011934a761cae1dc709ad1a9effb5bf93f409d3",
+    "scripts/mcp_orchestration.py": "cd33313fb672a973226665c3056f427bdfc5cb50263b2b9c810df8a99b745a9b",
+    "scripts/multi_mcp_client.py": "0a49b3bc61e8265a130e2678c460b66f601feeda1123d1264ab09c6cb625aa60",
+    "scripts/render_report.py": "7bbc4279a8b73045a00c6a226da04a7980dcda044d8f228fe74bf1c29f09d630"
+  },
+  "technical_status": "passed",
+  "audited_at": "2026-10-27T11:12:57+08:00",
+  "evidence_binding": {
+    "report.json": "86bd367f8dff09a6cb5b5a7496edca47eb3498807c639a08f606abe9751a71da",
+    "report.html": "4f7373c653531e514d513b18a29fa56515544f2f8fce9fa1730b7daee9471142",
+    "report.md": "53710c901e305da719e0637156c301f05b8d6ca705c9620f4cf81a99e60c915d",
+    "calls.json": "b110d587e7e8d6ca72e82855d4afb6199fc433c44ecc4e12916eb17f328f2118",
+    "result.json": "e6a8ff16f81a8f7985956f8c9fe3a424beed22538a3d88480fe48126212743e9",
+    "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+  },
+  "business_review": {
+    "id": "11-brand-protection-evidence",
+    "verdict": "acceptable",
+    "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+    "checks": [
+      {
+        "expectation": "工商主体必须确认",
+        "status": "pass",
+        "evidence": "工商=贵州茅台酒股份有限公司/9152000071430580XT"
+      },
+      {
+        "expectation": "商标总量或有效商标字段至少一项真实非空",
+        "status": "pass",
+        "evidence": "tmCount=89、tmValidNumber=33"
+      },
+      {
+        "expectation": "商标状态分布至少一个非空项",
+        "status": "pass",
+        "evidence": "状态项=[25, 14, 1, 35]"
+      },
+      {
+        "expectation": "商标类别分布至少一个实际项非空",
+        "status": "pass",
+        "evidence": "类别项=[{'count': 46, 'tmName': '33-酒'}, {'count': 20, 'tmName': '35-广告销售'}, {'count': 10, 'tmName': '32-啤酒饮料'}, {'count': 6, 'tmName': '16-办公用品'}]"
+      },
+      {
+        "expectation": "商标申请或注册时间序列至少一个系列含真实非空数据",
+        "status": "pass",
+        "evidence": "申请/注册时间序列=10项"
+      },
+      {
+        "expectation": "不得用商标数量推断品牌价值、销量、份额或排名",
+        "status": "pass",
+        "evidence": "trademark=data，未检出品牌价值/销量/份额/排名外推"
+      }
+    ],
+    "issues": [],
+    "evidence_binding": {
+      "report.json": "86bd367f8dff09a6cb5b5a7496edca47eb3498807c639a08f606abe9751a71da",
+      "report.html": "4f7373c653531e514d513b18a29fa56515544f2f8fce9fa1730b7daee9471142",
+      "report.md": "53710c901e305da719e0637156c301f05b8d6ca705c9620f4cf81a99e60c915d",
+      "calls.json": "b110d587e7e8d6ca72e82855d4afb6199fc433c44ecc4e12916eb17f328f2118",
+      "result.json": "e6a8ff16f81a8f7985956f8c9fe3a424beed22538a3d88480fe48126212743e9",
+      "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+    }
+  }
+}

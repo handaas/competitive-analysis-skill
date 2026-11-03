@@ -1,0 +1,46 @@
+{
+  "id": "11-brand-protection-evidence",
+  "verdict": "acceptable",
+  "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+  "checks": [
+    {
+      "expectation": "工商主体必须确认",
+      "status": "pass",
+      "evidence": "工商=贵州茅台酒股份有限公司/9152000071430580XT"
+    },
+    {
+      "expectation": "商标总量或有效商标字段至少一项真实非空",
+      "status": "pass",
+      "evidence": "tmCount=89、tmValidNumber=33"
+    },
+    {
+      "expectation": "商标状态分布至少一个非空项",
+      "status": "pass",
+      "evidence": "状态项=[25, 14, 1, 35]"
+    },
+    {
+      "expectation": "商标类别分布至少一个实际项非空",
+      "status": "pass",
+      "evidence": "类别项=[{'count': 46, 'tmName': '33-酒'}, {'count': 20, 'tmName': '35-广告销售'}, {'count': 10, 'tmName': '32-啤酒饮料'}, {'count': 6, 'tmName': '16-办公用品'}]"
+    },
+    {
+      "expectation": "商标申请或注册时间序列至少一个系列含真实非空数据",
+      "status": "pass",
+      "evidence": "申请/注册时间序列=10项"
+    },
+    {
+      "expectation": "不得用商标数量推断品牌价值、销量、份额或排名",
+      "status": "pass",
+      "evidence": "trademark=data，未检出品牌价值/销量/份额/排名外推"
+    }
+  ],
+  "issues": [],
+  "evidence_binding": {
+    "report.json": "86bd367f8dff09a6cb5b5a7496edca47eb3498807c639a08f606abe9751a71da",
+    "report.html": "4f7373c653531e514d513b18a29fa56515544f2f8fce9fa1730b7daee9471142",
+    "report.md": "53710c901e305da719e0637156c301f05b8d6ca705c9620f4cf81a99e60c915d",
+    "calls.json": "b110d587e7e8d6ca72e82855d4afb6199fc433c44ecc4e12916eb17f328f2118",
+    "result.json": "e6a8ff16f81a8f7985956f8c9fe3a424beed22538a3d88480fe48126212743e9",
+    "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+  }
+}

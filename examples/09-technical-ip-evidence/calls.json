@@ -1,0 +1,1072 @@
+[
+  {
+    "tool": "qualification_bigdata_qualification_certificate_profile",
+    "domain": "qualification",
+    "arguments": {
+      "matchKeyword": "华为技术有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 0.319,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "certFirstPublishTime",
+      "certLastPublishTime",
+      "certNumberThisYear",
+      "certTypeList",
+      "certificateCount"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "certNumberThisYear",
+        "value": 1943
+      },
+      {
+        "path": "certificateCount",
+        "value": 23312
+      }
+    ],
+    "response_sha256": "bb8e0443d42f66c0ef3de4ffd11ea23b8bb5d3f232f48121fe59d43ffe017862"
+  },
+  {
+    "tool": "news_bigdata_news_stats",
+    "domain": "news",
+    "arguments": {
+      "matchKeyword": "华为技术有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 0.323,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "newsSentimentStats",
+      "newsSentimentTrend",
+      "sentimentLabelList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "newsSentimentStats.negative",
+        "value": 307
+      },
+      {
+        "path": "newsSentimentStats.neutral",
+        "value": 3670
+      },
+      {
+        "path": "newsSentimentStats.positive",
+        "value": 4617
+      },
+      {
+        "path": "newsSentimentStats.unknown",
+        "value": 18
+      },
+      {
+        "path": "newsSentimentTrend[0].stats.negative",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[0].stats.positive",
+        "value": 3
+      },
+      {
+        "path": "newsSentimentTrend[1].stats.negative",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[1].stats.positive",
+        "value": 1
+      },
+      {
+        "path": "newsSentimentTrend[2].stats.negative",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[2].stats.positive",
+        "value": 11
+      },
+      {
+        "path": "newsSentimentTrend[3].stats.negative",
+        "value": 4
+      },
+      {
+        "path": "newsSentimentTrend[3].stats.positive",
+        "value": 15
+      },
+      {
+        "path": "newsSentimentTrend[4].stats.negative",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[4].stats.positive",
+        "value": 2
+      }
+    ],
+    "response_sha256": "b2ea530c6a368a48bf35d7d3cfa329f2a86dccd7e79c0570fa2f61b8d0aecaa7"
+  },
+  {
+    "tool": "patent_bigdata_patent_stats",
+    "domain": "patent",
+    "arguments": {
+      "matchKeyword": "华为技术有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 0.362,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "patentDivAppLegalStat",
+      "patentTypeAppTimeStat",
+      "patentTypePubTimeStat",
+      "patentTypeStat"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "patentDivAppLegalStat[0].patentCount",
+        "value": 1429
+      },
+      {
+        "path": "patentDivAppLegalStat[1].patentCount",
+        "value": 217
+      },
+      {
+        "path": "patentDivAppLegalStat[2].patentCount",
+        "value": 13
+      },
+      {
+        "path": "patentDivAppLegalStat[3].patentCount",
+        "value": 2
+      },
+      {
+        "path": "patentDivAppLegalStat[4].patentCount",
+        "value": 11772
+      },
+      {
+        "path": "patentTypeAppTimeStat[0].appearanceDesignPatentCount",
+        "value": 102
+      },
+      {
+        "path": "patentTypeAppTimeStat[0].inventionAppPatentCount",
+        "value": 1640
+      },
+      {
+        "path": "patentTypeAppTimeStat[0].inventionLicPatentCount",
+        "value": 5202
+      },
+      {
+        "path": "patentTypeAppTimeStat[0].utilityModelPatentCount",
+        "value": 53
+      },
+      {
+        "path": "patentTypeAppTimeStat[1].appearanceDesignPatentCount",
+        "value": 133
+      },
+      {
+        "path": "patentTypeAppTimeStat[1].inventionAppPatentCount",
+        "value": 1773
+      },
+      {
+        "path": "patentTypeAppTimeStat[1].inventionLicPatentCount",
+        "value": 4633
+      },
+      {
+        "path": "patentTypeAppTimeStat[1].utilityModelPatentCount",
+        "value": 126
+      },
+      {
+        "path": "patentTypeAppTimeStat[2].appearanceDesignPatentCount",
+        "value": 282
+      },
+      {
+        "path": "patentTypeAppTimeStat[2].inventionAppPatentCount",
+        "value": 2283
+      },
+      {
+        "path": "patentTypeAppTimeStat[2].inventionLicPatentCount",
+        "value": 5746
+      },
+      {
+        "path": "patentTypeAppTimeStat[2].utilityModelPatentCount",
+        "value": 270
+      },
+      {
+        "path": "patentTypeAppTimeStat[3].appearanceDesignPatentCount",
+        "value": 321
+      },
+      {
+        "path": "patentTypeAppTimeStat[3].inventionAppPatentCount",
+        "value": 4142
+      },
+      {
+        "path": "patentTypeAppTimeStat[3].inventionLicPatentCount",
+        "value": 6428
+      },
+      {
+        "path": "patentTypeAppTimeStat[3].utilityModelPatentCount",
+        "value": 252
+      },
+      {
+        "path": "patentTypeAppTimeStat[4].appearanceDesignPatentCount",
+        "value": 333
+      },
+      {
+        "path": "patentTypeAppTimeStat[4].inventionAppPatentCount",
+        "value": 6290
+      },
+      {
+        "path": "patentTypeAppTimeStat[4].inventionLicPatentCount",
+        "value": 3310
+      },
+      {
+        "path": "patentTypeAppTimeStat[4].utilityModelPatentCount",
+        "value": 206
+      },
+      {
+        "path": "patentTypePubTimeStat[0].appearanceDesignPatentCount",
+        "value": 137
+      },
+      {
+        "path": "patentTypePubTimeStat[0].inventionAppPatentCount",
+        "value": 727
+      },
+      {
+        "path": "patentTypePubTimeStat[0].inventionLicPatentCount",
+        "value": 2681
+      },
+      {
+        "path": "patentTypePubTimeStat[0].utilityModelPatentCount",
+        "value": 56
+      },
+      {
+        "path": "patentTypePubTimeStat[1].appearanceDesignPatentCount",
+        "value": 80
+      },
+      {
+        "path": "patentTypePubTimeStat[1].inventionAppPatentCount",
+        "value": 1682
+      },
+      {
+        "path": "patentTypePubTimeStat[1].inventionLicPatentCount",
+        "value": 2908
+      },
+      {
+        "path": "patentTypePubTimeStat[1].utilityModelPatentCount",
+        "value": 61
+      },
+      {
+        "path": "patentTypePubTimeStat[2].appearanceDesignPatentCount",
+        "value": 137
+      },
+      {
+        "path": "patentTypePubTimeStat[2].inventionAppPatentCount",
+        "value": 1813
+      },
+      {
+        "path": "patentTypePubTimeStat[2].inventionLicPatentCount",
+        "value": 4028
+      },
+      {
+        "path": "patentTypePubTimeStat[2].utilityModelPatentCount",
+        "value": 140
+      },
+      {
+        "path": "patentTypePubTimeStat[3].appearanceDesignPatentCount",
+        "value": 301
+      },
+      {
+        "path": "patentTypePubTimeStat[3].inventionAppPatentCount",
+        "value": 1049
+      },
+      {
+        "path": "patentTypePubTimeStat[3].inventionLicPatentCount",
+        "value": 5652
+      },
+      {
+        "path": "patentTypePubTimeStat[3].utilityModelPatentCount",
+        "value": 272
+      },
+      {
+        "path": "patentTypePubTimeStat[4].appearanceDesignPatentCount",
+        "value": 273
+      },
+      {
+        "path": "patentTypePubTimeStat[4].inventionAppPatentCount",
+        "value": 2621
+      },
+      {
+        "path": "patentTypePubTimeStat[4].inventionLicPatentCount",
+        "value": 7047
+      },
+      {
+        "path": "patentTypePubTimeStat[4].utilityModelPatentCount",
+        "value": 244
+      },
+      {
+        "path": "patentTypeStat.appearanceDesignPatentCount",
+        "value": 3407
+      },
+      {
+        "path": "patentTypeStat.inventionAppPatentCount",
+        "value": 59570
+      },
+      {
+        "path": "patentTypeStat.inventionLicPatentCount",
+        "value": 66820
+      },
+      {
+        "path": "patentTypeStat.utilityModelPatentCount",
+        "value": 3440
+      }
+    ],
+    "response_sha256": "78d6a10840365eb35f2672a8dfb4de0d4aff6bf490034d448fc5a266f7831e5a"
+  },
+  {
+    "tool": "bid_bigdata_bidding_info",
+    "domain": "bidding",
+    "arguments": {
+      "matchKeyword": "华为技术有限公司",
+      "keywordType": "name",
+      "pageSize": 20
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 0.647,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 20,
+    "reported_total": 1000,
+    "numeric_evidence": [
+      {
+        "path": "resultList[1].projectAmount",
+        "value": 201.48
+      },
+      {
+        "path": "total",
+        "value": 1000
+      }
+    ],
+    "response_sha256": "222ba7d16210736c9f90b932dfbefadbc15b5fa25b35be8e07f42a2024b2dfe1"
+  },
+  {
+    "tool": "bid_bigdata_bid_win_stats",
+    "domain": "bidding",
+    "arguments": {
+      "matchKeyword": "华为技术有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 0.648,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "winbidAmountStatList",
+      "winbidAreaStat",
+      "winbidStatList",
+      "winbidTrend"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "winbidAmountStatList[0].percent",
+        "value": 7.84
+      },
+      {
+        "path": "winbidAmountStatList[0].count",
+        "value": 125
+      },
+      {
+        "path": "winbidAmountStatList[1].percent",
+        "value": 11.72
+      },
+      {
+        "path": "winbidAmountStatList[1].count",
+        "value": 187
+      },
+      {
+        "path": "winbidAmountStatList[2].percent",
+        "value": 13.35
+      },
+      {
+        "path": "winbidAmountStatList[2].count",
+        "value": 213
+      },
+      {
+        "path": "winbidAmountStatList[3].percent",
+        "value": 35.11
+      },
+      {
+        "path": "winbidAmountStatList[3].count",
+        "value": 560
+      },
+      {
+        "path": "winbidAmountStatList[4].percent",
+        "value": 31.97
+      },
+      {
+        "path": "winbidAmountStatList[4].count",
+        "value": 510
+      },
+      {
+        "path": "winbidAreaStat[0].count",
+        "value": 878
+      },
+      {
+        "path": "winbidAreaStat[1].count",
+        "value": 211
+      },
+      {
+        "path": "winbidAreaStat[2].count",
+        "value": 427
+      },
+      {
+        "path": "winbidAreaStat[3].count",
+        "value": 558
+      },
+      {
+        "path": "winbidAreaStat[4].count",
+        "value": 80
+      },
+      {
+        "path": "winbidStatList[0].count",
+        "value": 77
+      },
+      {
+        "path": "winbidStatList[0].percent",
+        "value": 1.07
+      },
+      {
+        "path": "winbidStatList[1].count",
+        "value": 65
+      },
+      {
+        "path": "winbidStatList[1].percent",
+        "value": 0.9
+      },
+      {
+        "path": "winbidStatList[2].count",
+        "value": 38
+      },
+      {
+        "path": "winbidStatList[2].percent",
+        "value": 0.53
+      },
+      {
+        "path": "winbidStatList[3].count",
+        "value": 35
+      },
+      {
+        "path": "winbidStatList[3].percent",
+        "value": 0.49
+      },
+      {
+        "path": "winbidStatList[4].count",
+        "value": 29
+      },
+      {
+        "path": "winbidStatList[4].percent",
+        "value": 0.4
+      },
+      {
+        "path": "winbidTrend[0].count",
+        "value": 397
+      },
+      {
+        "path": "winbidTrend[1].count",
+        "value": 587
+      },
+      {
+        "path": "winbidTrend[2].count",
+        "value": 612
+      },
+      {
+        "path": "winbidTrend[3].count",
+        "value": 447
+      },
+      {
+        "path": "winbidTrend[4].count",
+        "value": 1096
+      }
+    ],
+    "response_sha256": "2746630bf7cef5dba414d06a399c4dbd5a864e665792f57db5689e8fc6d93f4c"
+  },
+  {
+    "tool": "operation_insight_enterprise_rankings",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "华为技术有限公司",
+      "keywordType": "name",
+      "pageSize": 10
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 0.808,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 10,
+    "reported_total": 18,
+    "numeric_evidence": [
+      {
+        "path": "resultList[0].rankingListYear",
+        "value": 2022
+      },
+      {
+        "path": "resultList[1].rankingListYear",
+        "value": 2016
+      },
+      {
+        "path": "resultList[1].rank",
+        "value": 27
+      },
+      {
+        "path": "resultList[2].rankingListYear",
+        "value": 2016
+      },
+      {
+        "path": "resultList[2].rank",
+        "value": 5
+      },
+      {
+        "path": "resultList[3].rankingListYear",
+        "value": 2015
+      },
+      {
+        "path": "resultList[3].rank",
+        "value": 39
+      },
+      {
+        "path": "resultList[4].rankingListYear",
+        "value": 2015
+      },
+      {
+        "path": "resultList[4].rank",
+        "value": 11
+      },
+      {
+        "path": "total",
+        "value": 18
+      }
+    ],
+    "response_sha256": "9009273fca81b8d487d71f83703262c55a935431ba92d9af85f703a06e7e1f77"
+  },
+  {
+    "tool": "operation_insight_business_scale",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "华为技术有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 0.812,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "annualTurnover",
+      "enterpriseScale"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [],
+    "response_sha256": "7c05a4d3bcd474b7963faa2bcced12f8a2be0b1d908d323dfe3d894da56b4354"
+  },
+  {
+    "tool": "operation_insight_financing_info",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "华为技术有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 0.814,
+    "status": "empty",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "text"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [],
+    "response_sha256": "b2da0c4c26e517e5a1eae0af2a20ca47c52ef51906cf1c3dfa2fe10a67cc714c"
+  },
+  {
+    "tool": "operation_insight_company_trends",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "华为技术有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 0.816,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "isExpandNewCityIn3Month",
+      "isExpandNewCityIn6Month",
+      "isExpandNewCityIn12Month",
+      "isDiffAreaWinBidIn3Month",
+      "isDiffAreaWinBidIn6Month",
+      "isDiffAreaWinBidIn12Month",
+      "qualificationIn6MonthList",
+      "qualificationIn12MonthList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "isExpandNewCityIn3Month",
+        "value": 1
+      },
+      {
+        "path": "isExpandNewCityIn6Month",
+        "value": 1
+      },
+      {
+        "path": "isExpandNewCityIn12Month",
+        "value": 1
+      },
+      {
+        "path": "isDiffAreaWinBidIn3Month",
+        "value": 1
+      },
+      {
+        "path": "isDiffAreaWinBidIn6Month",
+        "value": 1
+      },
+      {
+        "path": "isDiffAreaWinBidIn12Month",
+        "value": 1
+      }
+    ],
+    "response_sha256": "7c628a76fe352837dc279e07708711aebd4526c505a2d28dc345f92e5578f0df"
+  },
+  {
+    "tool": "enterprise_get_enterprise_main_person_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "华为技术有限公司"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 1.97,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 32,
+    "reported_total": 32,
+    "numeric_evidence": [
+      {
+        "path": "resultList[1].relatedEnterpriseCurrentNum",
+        "value": 5
+      },
+      {
+        "path": "resultList[1].relatedEnterpriseHistoryNum",
+        "value": 4
+      },
+      {
+        "path": "resultList[2].relatedEnterpriseCurrentNum",
+        "value": 2
+      },
+      {
+        "path": "resultList[2].relatedEnterpriseHistoryNum",
+        "value": 28
+      },
+      {
+        "path": "resultList[4].relatedEnterpriseCurrentNum",
+        "value": 2
+      },
+      {
+        "path": "resultList[4].relatedEnterpriseHistoryNum",
+        "value": 3
+      },
+      {
+        "path": "total",
+        "value": 32
+      }
+    ],
+    "response_sha256": "b726e9a125ba8da182b5156e496ff0d43bb136c39e4747a3906623ba16f6162b"
+  },
+  {
+    "tool": "enterprise_get_enterprise_base_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "华为技术有限公司"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 1.978,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "base_info",
+      "desc",
+      "tag"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "base_info.payAmountCount.amount",
+        "value": 41041131820.0
+      },
+      {
+        "path": "base_info.regCapital.value",
+        "value": 41141131820.0
+      },
+      {
+        "path": "tag.isAnomaly",
+        "value": 0
+      },
+      {
+        "path": "tag.isHighTechEnterprise",
+        "value": 1
+      }
+    ],
+    "response_sha256": "f129a4852d80335a7f0c20e9becf8ce00d796606d4faecd2c1fe9e13178c84dc"
+  },
+  {
+    "tool": "enterprise_get_enterprise_holder_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "华为技术有限公司"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 1.98,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "holderList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "holderList[0].payAmount.value",
+        "value": 40541131800.0
+      },
+      {
+        "path": "holderList[0].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "holderList[0].subscriptionDetail.amount",
+        "value": 41141131820.0
+      }
+    ],
+    "response_sha256": "bc3be2a1afb4e26d106da3c8559eb258e90c9128b89e5d78b1def677a5c545bb"
+  },
+  {
+    "tool": "enterprise_get_enterprise_invest_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "华为技术有限公司"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 1.981,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 50,
+    "reported_total": 54,
+    "numeric_evidence": [
+      {
+        "path": "resultList[0].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[0].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "resultList[0].regCapital.value",
+        "value": 5100000000.0
+      },
+      {
+        "path": "resultList[0].subscriptionAmount.value",
+        "value": 5100000000.0
+      },
+      {
+        "path": "resultList[1].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[1].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "resultList[1].regCapital.value",
+        "value": 2000000000.0
+      },
+      {
+        "path": "resultList[1].subscriptionAmount.value",
+        "value": 2000000000.0
+      },
+      {
+        "path": "resultList[2].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[2].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "resultList[2].regCapital.value",
+        "value": 200000000.0
+      },
+      {
+        "path": "resultList[2].subscriptionAmount.value",
+        "value": 200000000.0
+      },
+      {
+        "path": "resultList[3].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[3].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "resultList[3].regCapital.value",
+        "value": 12000000.0
+      },
+      {
+        "path": "resultList[3].subscriptionAmount.value",
+        "value": 12000000.0
+      },
+      {
+        "path": "resultList[4].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[4].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "resultList[4].regCapital.value",
+        "value": 15000000.0
+      },
+      {
+        "path": "resultList[4].subscriptionAmount.value",
+        "value": 15000000.0
+      },
+      {
+        "path": "total",
+        "value": 54
+      }
+    ],
+    "response_sha256": "7cd3d2f7dab3e0f9f3e9e6cdb3e2d5cc698e816bcd64772612099df1b9ebd167"
+  },
+  {
+    "tool": "trademark_bigdata_trademark_profile",
+    "domain": "trademark",
+    "arguments": {
+      "matchKeyword": "华为技术有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 3.033,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "tmCount",
+      "tmInvalidNumber",
+      "tmNumberThisYear",
+      "tmTypeList",
+      "tmValidNumber",
+      "tmStatusList",
+      "tmStatusStat"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "tmCount",
+        "value": 22694
+      },
+      {
+        "path": "tmInvalidNumber",
+        "value": 7068
+      },
+      {
+        "path": "tmNumberThisYear",
+        "value": 814
+      },
+      {
+        "path": "tmValidNumber",
+        "value": 15548
+      },
+      {
+        "path": "tmStatusStat.初审公告",
+        "value": 589
+      },
+      {
+        "path": "tmStatusStat.商标其他情形",
+        "value": 35
+      },
+      {
+        "path": "tmStatusStat.商标已注册",
+        "value": 13429
+      },
+      {
+        "path": "tmStatusStat.商标异议中",
+        "value": 38
+      },
+      {
+        "path": "tmStatusStat.商标无效",
+        "value": 4745
+      },
+      {
+        "path": "tmStatusStat.商标申请中",
+        "value": 76
+      },
+      {
+        "path": "tmStatusStat.撤销/无效宣告申请审查中",
+        "value": 278
+      },
+      {
+        "path": "tmStatusStat.等待实质审查",
+        "value": 2446
+      },
+      {
+        "path": "tmStatusStat.驳回复审中",
+        "value": 980
+      }
+    ],
+    "response_sha256": "0893938e76740de0b2f87cc9ab6c51bd1760db5df8137da94dc89af7f3daa0cd"
+  },
+  {
+    "tool": "trademark_bigdata_trademark_stats",
+    "domain": "trademark",
+    "arguments": {
+      "matchKeyword": "华为技术有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068930571765000",
+    "elapsed_seconds": 3.037,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "tmAppTimeStat",
+      "tmRegTimeStat",
+      "tmTypeStats",
+      "tmStatusStat"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "tmAppTimeStat[0].count",
+        "value": 457
+      },
+      {
+        "path": "tmAppTimeStat[1].count",
+        "value": 1004
+      },
+      {
+        "path": "tmAppTimeStat[2].count",
+        "value": 4723
+      },
+      {
+        "path": "tmAppTimeStat[3].count",
+        "value": 3378
+      },
+      {
+        "path": "tmAppTimeStat[4].count",
+        "value": 2824
+      },
+      {
+        "path": "tmRegTimeStat[0].count",
+        "value": 508
+      },
+      {
+        "path": "tmRegTimeStat[1].count",
+        "value": 448
+      },
+      {
+        "path": "tmRegTimeStat[2].count",
+        "value": 957
+      },
+      {
+        "path": "tmRegTimeStat[3].count",
+        "value": 2841
+      },
+      {
+        "path": "tmRegTimeStat[4].count",
+        "value": 2540
+      },
+      {
+        "path": "tmTypeStats[0].count",
+        "value": 8823
+      },
+      {
+        "path": "tmTypeStats[1].count",
+        "value": 3958
+      },
+      {
+        "path": "tmTypeStats[2].count",
+        "value": 1333
+      },
+      {
+        "path": "tmTypeStats[3].count",
+        "value": 1291
+      },
+      {
+        "path": "tmTypeStats[4].count",
+        "value": 1254
+      },
+      {
+        "path": "tmStatusStat[0].count",
+        "value": 13380
+      },
+      {
+        "path": "tmStatusStat[1].count",
+        "value": 2368
+      },
+      {
+        "path": "tmStatusStat[2].count",
+        "value": 4705
+      },
+      {
+        "path": "tmStatusStat[3].count",
+        "value": 968
+      },
+      {
+        "path": "tmStatusStat[4].count",
+        "value": 269
+      }
+    ],
+    "response_sha256": "dd51e594342edba36c0b907d25faf71a0e5ded6d0afd573877392a0ec6c68f17"
+  }
+]

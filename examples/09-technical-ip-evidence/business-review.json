@@ -1,0 +1,41 @@
+{
+  "id": "09-technical-ip-evidence",
+  "verdict": "acceptable",
+  "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+  "checks": [
+    {
+      "expectation": "工商主体必须确认",
+      "status": "pass",
+      "evidence": "工商=华为技术有限公司/914403001922038216"
+    },
+    {
+      "expectation": "专利类型累计量至少一个字段为真实非空值",
+      "status": "pass",
+      "evidence": "类型值=[133237, 59570, 66820, 3440, 3407]"
+    },
+    {
+      "expectation": "申请趋势或公开趋势至少一个序列含真实非空数据",
+      "status": "pass",
+      "evidence": "申请/公开时间序列=10项"
+    },
+    {
+      "expectation": "法律状态分布保留上游口径",
+      "status": "pass",
+      "evidence": "法律状态=[{'patentCount': 1429, 'patentDivAppLegal': '专利实施许可合同备案的生效、变更及注销'}, {'patentCount': 217, 'patentDivAppLegal': '著录事项变更'}, {'patentCount': 13, 'patentDivAppLegal': '专利权的终止专利权有效期届满'}, {'patentCount': 2, 'patentDivAppLegal': '专利权的终止专利权的主动放弃'}]"
+    },
+    {
+      "expectation": "不得输出专利质量、商业价值、总分、排名或领先结论",
+      "status": "pass",
+      "evidence": "patent调用=data；摘要明确“不生成竞争总分、领先性、排名”，洞察明确“不能称领先或形成排名”"
+    }
+  ],
+  "issues": [],
+  "evidence_binding": {
+    "report.json": "2969926c6293db2a4a7952bad83dc8d33178d35563e78699b5460421e6f71af5",
+    "report.html": "6c6b7c079d08f56640e7dac6f7048b75d5f5218343083935081ea017cdf8efaf",
+    "report.md": "fe8efaf4e42b9f6385b9ebf20dfa4f5cd35eb67760995ccf20387dd406169938",
+    "calls.json": "387596066bb355b2415bfa97cc80fdcbe2ebc151b1ec0b50115dc0a0da30d1d4",
+    "result.json": "2028f777564b98d00ce5a8b4e2007ca77505ec4a7578edfa3e55f37f4407b136",
+    "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+  }
+}

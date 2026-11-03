@@ -1,0 +1,41 @@
+{
+  "id": "10-qualification-tender-evidence",
+  "verdict": "acceptable",
+  "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+  "checks": [
+    {
+      "expectation": "工商主体必须确认",
+      "status": "pass",
+      "evidence": "工商=中国建筑第八工程局有限公司/9131000063126503X1"
+    },
+    {
+      "expectation": "资质证书统计至少一个实际字段非空",
+      "status": "pass",
+      "evidence": "资质实际值样本=[451, 29]"
+    },
+    {
+      "expectation": "标讯统计总量和当前页代表记录均真实非空",
+      "status": "pass",
+      "evidence": "标讯总量=1000、当前页记录=20"
+    },
+    {
+      "expectation": "总量与样本数分开呈现",
+      "status": "pass",
+      "evidence": "报告分别呈现总量=1000与样本=20"
+    },
+    {
+      "expectation": "不得推断全部订单、收入、中标率或市场份额",
+      "status": "pass",
+      "evidence": "qualification=data、bidding=data；洞察明确“不能据此归因商业化收入、履约质量或市场份额”"
+    }
+  ],
+  "issues": [],
+  "evidence_binding": {
+    "report.json": "44995fcf5f683614ad9fc963f48574c37428ebbca2bbedd6860126cd109b51ba",
+    "report.html": "008c948ad5b1672bf163aac2f7b8c5762bcd5cfd4e7d1ea22c898017eb21a52f",
+    "report.md": "53f945caea220054d4b389b8f6cff0af7086fc964abf418ef40f431846f32a43",
+    "calls.json": "a7eee27df0d0a53ae4eb2a0799aa6d38a0af51ad98d55e55b8d935cebf1dfc6c",
+    "result.json": "1673ba44979bd54ea8ce8cb49b13fa6b7fe5708f67bbc1df6c1d6279fc463648",
+    "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+  }
+}

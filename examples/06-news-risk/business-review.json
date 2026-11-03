@@ -1,0 +1,36 @@
+{
+  "id": "06-news-risk",
+  "verdict": "acceptable",
+  "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+  "checks": [
+    {
+      "expectation": "情感分布有具体统计依据",
+      "status": "pass",
+      "evidence": "metrics给舆情总量721、负面121，保留具体情感统计。；本轮当前产物：technical=passed，successful_data_calls=13；subject.enterprise=特斯拉（上海）有限公司，resolved=False；metrics[专利类型统计合计=2；商标总数=18；有效商标数=0；资质证书数=81；近一年获证数=22；招投标记录总量=28；舆情统计总量=721；负面舆情统计=121]；quality={'total_sections': 7, 'populated_sections': 7, 'empty_sections': 0, 'coverage_pct': 100}；非空章节=['主体与工商基础', '专利事实', '商标事实', '招投标公开活动', '经营公开线索', '资质证书事实', '舆情情感统计']；代表记录=8；calls[patent:patent_bigdata_patent_stats=data；qualification:qualification_bigdata_qualification_certificate_profile=data；news:news_bigdata_news_stats=data；bidding:bid_bigdata_bid_win_stats=data；bidding:bid_bigdata_bidding_info=data(20/28)；trademark:trademark_bigdata_trademark_profile=data；trademark:trademark_bigdata_trademark_stats=data；operation:operation_insight_business_scale=data；operation:operation_insight_financing_info=data；operation:operation_insight_company_trends=data；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=data；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=data(7/7)]"
+    },
+    {
+      "expectation": "新闻数量与风险严重性不混淆",
+      "status": "pass",
+      "evidence": "洞察要求复核时间与样本相关性，不用正面声量抵消负面或推断法律风险。；本轮当前产物：technical=passed，successful_data_calls=13；subject.enterprise=特斯拉（上海）有限公司，resolved=False；metrics[专利类型统计合计=2；商标总数=18；有效商标数=0；资质证书数=81；近一年获证数=22；招投标记录总量=28；舆情统计总量=721；负面舆情统计=121]；quality={'total_sections': 7, 'populated_sections': 7, 'empty_sections': 0, 'coverage_pct': 100}；非空章节=['主体与工商基础', '专利事实', '商标事实', '招投标公开活动', '经营公开线索', '资质证书事实', '舆情情感统计']；代表记录=8；calls[patent:patent_bigdata_patent_stats=data；qualification:qualification_bigdata_qualification_certificate_profile=data；news:news_bigdata_news_stats=data；bidding:bid_bigdata_bid_win_stats=data；bidding:bid_bigdata_bidding_info=data(20/28)；trademark:trademark_bigdata_trademark_profile=data；trademark:trademark_bigdata_trademark_stats=data；operation:operation_insight_business_scale=data；operation:operation_insight_financing_info=data；operation:operation_insight_company_trends=data；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=data；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=data(7/7)]"
+    },
+    {
+      "expectation": "创新和市场维度独立展示",
+      "status": "pass",
+      "evidence": "专利2与招投标28独立展示。；本轮当前产物：technical=passed，successful_data_calls=13；subject.enterprise=特斯拉（上海）有限公司，resolved=False；metrics[专利类型统计合计=2；商标总数=18；有效商标数=0；资质证书数=81；近一年获证数=22；招投标记录总量=28；舆情统计总量=721；负面舆情统计=121]；quality={'total_sections': 7, 'populated_sections': 7, 'empty_sections': 0, 'coverage_pct': 100}；非空章节=['主体与工商基础', '专利事实', '商标事实', '招投标公开活动', '经营公开线索', '资质证书事实', '舆情情感统计']；代表记录=8；calls[patent:patent_bigdata_patent_stats=data；qualification:qualification_bigdata_qualification_certificate_profile=data；news:news_bigdata_news_stats=data；bidding:bid_bigdata_bid_win_stats=data；bidding:bid_bigdata_bidding_info=data(20/28)；trademark:trademark_bigdata_trademark_profile=data；trademark:trademark_bigdata_trademark_stats=data；operation:operation_insight_business_scale=data；operation:operation_insight_financing_info=data；operation:operation_insight_company_trends=data；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=data；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=data(7/7)]"
+    },
+    {
+      "expectation": "综合结论说明数据不足项",
+      "status": "pass",
+      "evidence": "summary说明主体未确认，caliber明确主体工商确认缺口。；本轮当前产物：technical=passed，successful_data_calls=13；subject.enterprise=特斯拉（上海）有限公司，resolved=False；metrics[专利类型统计合计=2；商标总数=18；有效商标数=0；资质证书数=81；近一年获证数=22；招投标记录总量=28；舆情统计总量=721；负面舆情统计=121]；quality={'total_sections': 7, 'populated_sections': 7, 'empty_sections': 0, 'coverage_pct': 100}；非空章节=['主体与工商基础', '专利事实', '商标事实', '招投标公开活动', '经营公开线索', '资质证书事实', '舆情情感统计']；代表记录=8；calls[patent:patent_bigdata_patent_stats=data；qualification:qualification_bigdata_qualification_certificate_profile=data；news:news_bigdata_news_stats=data；bidding:bid_bigdata_bid_win_stats=data；bidding:bid_bigdata_bidding_info=data(20/28)；trademark:trademark_bigdata_trademark_profile=data；trademark:trademark_bigdata_trademark_stats=data；operation:operation_insight_business_scale=data；operation:operation_insight_financing_info=data；operation:operation_insight_company_trends=data；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=data；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=data(7/7)]"
+    }
+  ],
+  "issues": [],
+  "evidence_binding": {
+    "report.json": "ab4ee2a6ae6397f28906d4d536dc0ccae0d5cdabdc18955d51954c2c0115f6fa",
+    "report.html": "226e79304aadbe034de43be9c0bdfa37457bfe064ddaf2ea11fbb7f59a305c09",
+    "report.md": "c95db7784b6b61b757a06ff55d0e02b5267c442ae7fd45fb0251cf3946106931",
+    "calls.json": "35c68392ba0fcabf68e2c6a82e4319c39840dcc4b5b74d72f7a1b0c8d4d71d20",
+    "result.json": "5e7d9ab7fbff5ac13fd6613ead90c7ec72f27d0dea5797e8e7897367a35ad2d0",
+    "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+  }
+}

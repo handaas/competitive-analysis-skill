@@ -1,0 +1,248 @@
+{
+  "schema_version": 2,
+  "run_id": "live-replaced-20261027",
+  "review_scope": "仅筛选原已验收的正向案例；未重新调用或改写业务结论",
+  "cases": [
+    {
+      "id": "09-technical-ip-evidence",
+      "verdict": "acceptable",
+      "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+      "checks": [
+        {
+          "expectation": "工商主体必须确认",
+          "status": "pass",
+          "evidence": "工商=华为技术有限公司/914403001922038216"
+        },
+        {
+          "expectation": "专利类型累计量至少一个字段为真实非空值",
+          "status": "pass",
+          "evidence": "类型值=[133237, 59570, 66820, 3440, 3407]"
+        },
+        {
+          "expectation": "申请趋势或公开趋势至少一个序列含真实非空数据",
+          "status": "pass",
+          "evidence": "申请/公开时间序列=10项"
+        },
+        {
+          "expectation": "法律状态分布保留上游口径",
+          "status": "pass",
+          "evidence": "法律状态=[{'patentCount': 1429, 'patentDivAppLegal': '专利实施许可合同备案的生效、变更及注销'}, {'patentCount': 217, 'patentDivAppLegal': '著录事项变更'}, {'patentCount': 13, 'patentDivAppLegal': '专利权的终止专利权有效期届满'}, {'patentCount': 2, 'patentDivAppLegal': '专利权的终止专利权的主动放弃'}]"
+        },
+        {
+          "expectation": "不得输出专利质量、商业价值、总分、排名或领先结论",
+          "status": "pass",
+          "evidence": "patent调用=data；摘要明确“不生成竞争总分、领先性、排名”，洞察明确“不能称领先或形成排名”"
+        }
+      ],
+      "issues": [],
+      "evidence_binding": {
+        "report.json": "2969926c6293db2a4a7952bad83dc8d33178d35563e78699b5460421e6f71af5",
+        "report.html": "6c6b7c079d08f56640e7dac6f7048b75d5f5218343083935081ea017cdf8efaf",
+        "report.md": "fe8efaf4e42b9f6385b9ebf20dfa4f5cd35eb67760995ccf20387dd406169938",
+        "calls.json": "387596066bb355b2415bfa97cc80fdcbe2ebc151b1ec0b50115dc0a0da30d1d4",
+        "result.json": "2028f777564b98d00ce5a8b4e2007ca77505ec4a7578edfa3e55f37f4407b136",
+        "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+      }
+    },
+    {
+      "id": "10-qualification-tender-evidence",
+      "verdict": "acceptable",
+      "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+      "checks": [
+        {
+          "expectation": "工商主体必须确认",
+          "status": "pass",
+          "evidence": "工商=中国建筑第八工程局有限公司/9131000063126503X1"
+        },
+        {
+          "expectation": "资质证书统计至少一个实际字段非空",
+          "status": "pass",
+          "evidence": "资质实际值样本=[451, 29]"
+        },
+        {
+          "expectation": "标讯统计总量和当前页代表记录均真实非空",
+          "status": "pass",
+          "evidence": "标讯总量=1000、当前页记录=20"
+        },
+        {
+          "expectation": "总量与样本数分开呈现",
+          "status": "pass",
+          "evidence": "报告分别呈现总量=1000与样本=20"
+        },
+        {
+          "expectation": "不得推断全部订单、收入、中标率或市场份额",
+          "status": "pass",
+          "evidence": "qualification=data、bidding=data；洞察明确“不能据此归因商业化收入、履约质量或市场份额”"
+        }
+      ],
+      "issues": [],
+      "evidence_binding": {
+        "report.json": "44995fcf5f683614ad9fc963f48574c37428ebbca2bbedd6860126cd109b51ba",
+        "report.html": "008c948ad5b1672bf163aac2f7b8c5762bcd5cfd4e7d1ea22c898017eb21a52f",
+        "report.md": "53f945caea220054d4b389b8f6cff0af7086fc964abf418ef40f431846f32a43",
+        "calls.json": "a7eee27df0d0a53ae4eb2a0799aa6d38a0af51ad98d55e55b8d935cebf1dfc6c",
+        "result.json": "1673ba44979bd54ea8ce8cb49b13fa6b7fe5708f67bbc1df6c1d6279fc463648",
+        "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+      }
+    },
+    {
+      "id": "11-brand-protection-evidence",
+      "verdict": "acceptable",
+      "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+      "checks": [
+        {
+          "expectation": "工商主体必须确认",
+          "status": "pass",
+          "evidence": "工商=贵州茅台酒股份有限公司/9152000071430580XT"
+        },
+        {
+          "expectation": "商标总量或有效商标字段至少一项真实非空",
+          "status": "pass",
+          "evidence": "tmCount=89、tmValidNumber=33"
+        },
+        {
+          "expectation": "商标状态分布至少一个非空项",
+          "status": "pass",
+          "evidence": "状态项=[25, 14, 1, 35]"
+        },
+        {
+          "expectation": "商标类别分布至少一个实际项非空",
+          "status": "pass",
+          "evidence": "类别项=[{'count': 46, 'tmName': '33-酒'}, {'count': 20, 'tmName': '35-广告销售'}, {'count': 10, 'tmName': '32-啤酒饮料'}, {'count': 6, 'tmName': '16-办公用品'}]"
+        },
+        {
+          "expectation": "商标申请或注册时间序列至少一个系列含真实非空数据",
+          "status": "pass",
+          "evidence": "申请/注册时间序列=10项"
+        },
+        {
+          "expectation": "不得用商标数量推断品牌价值、销量、份额或排名",
+          "status": "pass",
+          "evidence": "trademark=data，未检出品牌价值/销量/份额/排名外推"
+        }
+      ],
+      "issues": [],
+      "evidence_binding": {
+        "report.json": "86bd367f8dff09a6cb5b5a7496edca47eb3498807c639a08f606abe9751a71da",
+        "report.html": "4f7373c653531e514d513b18a29fa56515544f2f8fce9fa1730b7daee9471142",
+        "report.md": "53710c901e305da719e0637156c301f05b8d6ca705c9620f4cf81a99e60c915d",
+        "calls.json": "b110d587e7e8d6ca72e82855d4afb6199fc433c44ecc4e12916eb17f328f2118",
+        "result.json": "e6a8ff16f81a8f7985956f8c9fe3a424beed22538a3d88480fe48126212743e9",
+        "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+      }
+    },
+    {
+      "id": "12-news-qualification-review",
+      "verdict": "acceptable",
+      "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+      "checks": [
+        {
+          "expectation": "工商主体必须确认",
+          "status": "pass",
+          "evidence": "工商=宁德时代新能源科技股份有限公司/91350900587527783P"
+        },
+        {
+          "expectation": "新闻情感统计至少一个分类为真实非空值",
+          "status": "pass",
+          "evidence": "情感分类=[184, 3006, 2362, 20]"
+        },
+        {
+          "expectation": "新闻趋势至少一个时间点含真实数据",
+          "status": "pass",
+          "evidence": "新闻趋势=[{'month': '2025-09', 'stats': {'negative': 0, 'positive': 6}}, {'month': '2025-10', 'stats': {'negative': 0, 'positive': 1}}, {'month': '2025-11', 'stats': {'negative': 0, 'positive': 4}}, {'month': '2025-12', 'stats': {'negative': 0, 'positive': 10}}]"
+        },
+        {
+          "expectation": "资质证书或许可统计至少一个实际字段非空",
+          "status": "pass",
+          "evidence": "资质实际值样本=[196, 25]"
+        },
+        {
+          "expectation": "负面标签不得直接定性为违法或合规结论",
+          "status": "pass",
+          "evidence": "news=data、qualification=data，负面项仅作线索且未检出违法/合规定性"
+        }
+      ],
+      "issues": [],
+      "evidence_binding": {
+        "report.json": "a0088662deaab88a2beb030d0f8666355504f9cc15b24cf4e3378f0b1be20192",
+        "report.html": "72956a02df568f7eba35fdb5f7019a3c14c2a82fb6909d141ea8e479e477b3e3",
+        "report.md": "1ab588ddd1641edacd29c6917e7d513e58a3c1af1888f9d2c37c089e2e3f7070",
+        "calls.json": "85f6a2bdb754581d922d2019521e21da8612fa9a859ba6a0d2d489ad1e38970e",
+        "result.json": "e80d7d1bee36ae703532df02b9776c2e7d61268edccc22a5361603d222f46ab2",
+        "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+      }
+    },
+    {
+      "id": "06-news-risk",
+      "verdict": "acceptable",
+      "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+      "checks": [
+        {
+          "expectation": "情感分布有具体统计依据",
+          "status": "pass",
+          "evidence": "metrics给舆情总量721、负面121，保留具体情感统计。；本轮当前产物：technical=passed，successful_data_calls=13；subject.enterprise=特斯拉（上海）有限公司，resolved=False；metrics[专利类型统计合计=2；商标总数=18；有效商标数=0；资质证书数=81；近一年获证数=22；招投标记录总量=28；舆情统计总量=721；负面舆情统计=121]；quality={'total_sections': 7, 'populated_sections': 7, 'empty_sections': 0, 'coverage_pct': 100}；非空章节=['主体与工商基础', '专利事实', '商标事实', '招投标公开活动', '经营公开线索', '资质证书事实', '舆情情感统计']；代表记录=8；calls[patent:patent_bigdata_patent_stats=data；qualification:qualification_bigdata_qualification_certificate_profile=data；news:news_bigdata_news_stats=data；bidding:bid_bigdata_bid_win_stats=data；bidding:bid_bigdata_bidding_info=data(20/28)；trademark:trademark_bigdata_trademark_profile=data；trademark:trademark_bigdata_trademark_stats=data；operation:operation_insight_business_scale=data；operation:operation_insight_financing_info=data；operation:operation_insight_company_trends=data；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=data；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=data(7/7)]"
+        },
+        {
+          "expectation": "新闻数量与风险严重性不混淆",
+          "status": "pass",
+          "evidence": "洞察要求复核时间与样本相关性，不用正面声量抵消负面或推断法律风险。；本轮当前产物：technical=passed，successful_data_calls=13；subject.enterprise=特斯拉（上海）有限公司，resolved=False；metrics[专利类型统计合计=2；商标总数=18；有效商标数=0；资质证书数=81；近一年获证数=22；招投标记录总量=28；舆情统计总量=721；负面舆情统计=121]；quality={'total_sections': 7, 'populated_sections': 7, 'empty_sections': 0, 'coverage_pct': 100}；非空章节=['主体与工商基础', '专利事实', '商标事实', '招投标公开活动', '经营公开线索', '资质证书事实', '舆情情感统计']；代表记录=8；calls[patent:patent_bigdata_patent_stats=data；qualification:qualification_bigdata_qualification_certificate_profile=data；news:news_bigdata_news_stats=data；bidding:bid_bigdata_bid_win_stats=data；bidding:bid_bigdata_bidding_info=data(20/28)；trademark:trademark_bigdata_trademark_profile=data；trademark:trademark_bigdata_trademark_stats=data；operation:operation_insight_business_scale=data；operation:operation_insight_financing_info=data；operation:operation_insight_company_trends=data；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=data；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=data(7/7)]"
+        },
+        {
+          "expectation": "创新和市场维度独立展示",
+          "status": "pass",
+          "evidence": "专利2与招投标28独立展示。；本轮当前产物：technical=passed，successful_data_calls=13；subject.enterprise=特斯拉（上海）有限公司，resolved=False；metrics[专利类型统计合计=2；商标总数=18；有效商标数=0；资质证书数=81；近一年获证数=22；招投标记录总量=28；舆情统计总量=721；负面舆情统计=121]；quality={'total_sections': 7, 'populated_sections': 7, 'empty_sections': 0, 'coverage_pct': 100}；非空章节=['主体与工商基础', '专利事实', '商标事实', '招投标公开活动', '经营公开线索', '资质证书事实', '舆情情感统计']；代表记录=8；calls[patent:patent_bigdata_patent_stats=data；qualification:qualification_bigdata_qualification_certificate_profile=data；news:news_bigdata_news_stats=data；bidding:bid_bigdata_bid_win_stats=data；bidding:bid_bigdata_bidding_info=data(20/28)；trademark:trademark_bigdata_trademark_profile=data；trademark:trademark_bigdata_trademark_stats=data；operation:operation_insight_business_scale=data；operation:operation_insight_financing_info=data；operation:operation_insight_company_trends=data；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=data；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=data(7/7)]"
+        },
+        {
+          "expectation": "综合结论说明数据不足项",
+          "status": "pass",
+          "evidence": "summary说明主体未确认，caliber明确主体工商确认缺口。；本轮当前产物：technical=passed，successful_data_calls=13；subject.enterprise=特斯拉（上海）有限公司，resolved=False；metrics[专利类型统计合计=2；商标总数=18；有效商标数=0；资质证书数=81；近一年获证数=22；招投标记录总量=28；舆情统计总量=721；负面舆情统计=121]；quality={'total_sections': 7, 'populated_sections': 7, 'empty_sections': 0, 'coverage_pct': 100}；非空章节=['主体与工商基础', '专利事实', '商标事实', '招投标公开活动', '经营公开线索', '资质证书事实', '舆情情感统计']；代表记录=8；calls[patent:patent_bigdata_patent_stats=data；qualification:qualification_bigdata_qualification_certificate_profile=data；news:news_bigdata_news_stats=data；bidding:bid_bigdata_bid_win_stats=data；bidding:bid_bigdata_bidding_info=data(20/28)；trademark:trademark_bigdata_trademark_profile=data；trademark:trademark_bigdata_trademark_stats=data；operation:operation_insight_business_scale=data；operation:operation_insight_financing_info=data；operation:operation_insight_company_trends=data；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=data；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=data(7/7)]"
+        }
+      ],
+      "issues": [],
+      "evidence_binding": {
+        "report.json": "ab4ee2a6ae6397f28906d4d536dc0ccae0d5cdabdc18955d51954c2c0115f6fa",
+        "report.html": "226e79304aadbe034de43be9c0bdfa37457bfe064ddaf2ea11fbb7f59a305c09",
+        "report.md": "c95db7784b6b61b757a06ff55d0e02b5267c442ae7fd45fb0251cf3946106931",
+        "calls.json": "35c68392ba0fcabf68e2c6a82e4319c39840dcc4b5b74d72f7a1b0c8d4d71d20",
+        "result.json": "5e7d9ab7fbff5ac13fd6613ead90c7ec72f27d0dea5797e8e7897367a35ad2d0",
+        "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+      }
+    },
+    {
+      "id": "08-sparse-boundary",
+      "verdict": "acceptable",
+      "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+      "checks": [
+        {
+          "expectation": "主体无法确认时明确提示",
+          "status": "pass",
+          "evidence": "subject.resolved=false并明确缺少工商名称和统一社会信用代码。；本轮当前产物：technical=passed，successful_data_calls=1；subject.enterprise=深圳市不存在的星河量子商业有限公司，resolved=False；metrics[招投标记录总量=0]；quality={'total_sections': 7, 'populated_sections': 2, 'empty_sections': 5, 'coverage_pct': 29}；非空章节=['招投标公开活动', '经营公开线索']；代表记录=1；calls[patent:patent_bigdata_patent_stats=empty；qualification:qualification_bigdata_qualification_certificate_profile=empty；news:news_bigdata_news_stats=empty；bidding:bid_bigdata_bid_win_stats=empty；bidding:bid_bigdata_bidding_info=empty；trademark:trademark_bigdata_trademark_profile=empty；trademark:trademark_bigdata_trademark_stats=empty；operation:operation_insight_business_scale=empty；operation:operation_insight_financing_info=empty；operation:operation_insight_company_trends=empty；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=empty；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=empty]"
+        },
+        {
+          "expectation": "空维度不获得正向评分",
+          "status": "pass",
+          "evidence": "无竞争域分；标讯总量0为客观空记录，不是正向评分。；本轮当前产物：technical=passed，successful_data_calls=1；subject.enterprise=深圳市不存在的星河量子商业有限公司，resolved=False；metrics[招投标记录总量=0]；quality={'total_sections': 7, 'populated_sections': 2, 'empty_sections': 5, 'coverage_pct': 29}；非空章节=['招投标公开活动', '经营公开线索']；代表记录=1；calls[patent:patent_bigdata_patent_stats=empty；qualification:qualification_bigdata_qualification_certificate_profile=empty；news:news_bigdata_news_stats=empty；bidding:bid_bigdata_bid_win_stats=empty；bidding:bid_bigdata_bidding_info=empty；trademark:trademark_bigdata_trademark_profile=empty；trademark:trademark_bigdata_trademark_stats=empty；operation:operation_insight_business_scale=empty；operation:operation_insight_financing_info=empty；operation:operation_insight_company_trends=empty；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=empty；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=empty]"
+        },
+        {
+          "expectation": "不生成虚构专利商标或标讯",
+          "status": "pass",
+          "evidence": "专利、商标、标讯调用均为空，core_analysis未生成虚构明细。；本轮当前产物：technical=passed，successful_data_calls=1；subject.enterprise=深圳市不存在的星河量子商业有限公司，resolved=False；metrics[招投标记录总量=0]；quality={'total_sections': 7, 'populated_sections': 2, 'empty_sections': 5, 'coverage_pct': 29}；非空章节=['招投标公开活动', '经营公开线索']；代表记录=1；calls[patent:patent_bigdata_patent_stats=empty；qualification:qualification_bigdata_qualification_certificate_profile=empty；news:news_bigdata_news_stats=empty；bidding:bid_bigdata_bid_win_stats=empty；bidding:bid_bigdata_bidding_info=empty；trademark:trademark_bigdata_trademark_profile=empty；trademark:trademark_bigdata_trademark_stats=empty；operation:operation_insight_business_scale=empty；operation:operation_insight_financing_info=empty；operation:operation_insight_company_trends=empty；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=empty；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=empty]"
+        },
+        {
+          "expectation": "数据源模式不从失败静默降级为已验证结论",
+          "status": "pass",
+          "evidence": "mode为live_mcp，summary明确主体未确认而非把失败降级为已验证结论。；本轮当前产物：technical=passed，successful_data_calls=1；subject.enterprise=深圳市不存在的星河量子商业有限公司，resolved=False；metrics[招投标记录总量=0]；quality={'total_sections': 7, 'populated_sections': 2, 'empty_sections': 5, 'coverage_pct': 29}；非空章节=['招投标公开活动', '经营公开线索']；代表记录=1；calls[patent:patent_bigdata_patent_stats=empty；qualification:qualification_bigdata_qualification_certificate_profile=empty；news:news_bigdata_news_stats=empty；bidding:bid_bigdata_bid_win_stats=empty；bidding:bid_bigdata_bidding_info=empty；trademark:trademark_bigdata_trademark_profile=empty；trademark:trademark_bigdata_trademark_stats=empty；operation:operation_insight_business_scale=empty；operation:operation_insight_financing_info=empty；operation:operation_insight_company_trends=empty；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=empty；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=empty]"
+        }
+      ],
+      "issues": [],
+      "evidence_binding": {
+        "report.json": "37a42432b9c283fd8050a9d221735b9f9c8278e5a7c604d362d00b941791df05",
+        "report.html": "ea02e7583152adb8c5eabbfb03cc3940b8ce9a4c2284307896dbd790ef4d0f98",
+        "report.md": "ae680a3af112cc1e3f007d2dcd8f3162ee9b2b5b134845d1ab20bafe77c33770",
+        "calls.json": "cd9c7da4445f38d35cdf6dae85e4e878aeea92118535769272e0833bd4131476",
+        "result.json": "2bb9f22f1118a4b989b57f2322c4fe634f21cd934332651839f7da6a987459fb",
+        "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+      }
+    }
+  ]
+}

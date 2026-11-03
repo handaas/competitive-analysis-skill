@@ -1,0 +1,1091 @@
+[
+  {
+    "tool": "qualification_bigdata_qualification_certificate_profile",
+    "domain": "qualification",
+    "arguments": {
+      "matchKeyword": "贵州茅台酒股份有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 1.096,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "certFirstPublishTime",
+      "certLastPublishTime",
+      "certNumberThisYear",
+      "certTypeList",
+      "certificateCount"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "certNumberThisYear",
+        "value": 8
+      },
+      {
+        "path": "certificateCount",
+        "value": 66
+      }
+    ],
+    "response_sha256": "ef304f71e6859f5af142ca5ef954fe13b3dc64bfc825df0f25f4cad77540dd61"
+  },
+  {
+    "tool": "news_bigdata_news_stats",
+    "domain": "news",
+    "arguments": {
+      "matchKeyword": "贵州茅台酒股份有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 1.284,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "newsSentimentStats",
+      "newsSentimentTrend",
+      "sentimentLabelList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "newsSentimentStats.negative",
+        "value": 632
+      },
+      {
+        "path": "newsSentimentStats.neutral",
+        "value": 2851
+      },
+      {
+        "path": "newsSentimentStats.positive",
+        "value": 776
+      },
+      {
+        "path": "newsSentimentStats.unknown",
+        "value": 28
+      },
+      {
+        "path": "newsSentimentTrend[0].stats.negative",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[0].stats.positive",
+        "value": 1
+      },
+      {
+        "path": "newsSentimentTrend[1].stats.negative",
+        "value": 1
+      },
+      {
+        "path": "newsSentimentTrend[1].stats.positive",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[2].stats.negative",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[2].stats.positive",
+        "value": 4
+      },
+      {
+        "path": "newsSentimentTrend[3].stats.negative",
+        "value": 3
+      },
+      {
+        "path": "newsSentimentTrend[3].stats.positive",
+        "value": 2
+      },
+      {
+        "path": "newsSentimentTrend[4].stats.negative",
+        "value": 1
+      },
+      {
+        "path": "newsSentimentTrend[4].stats.positive",
+        "value": 0
+      }
+    ],
+    "response_sha256": "7d6ca2b69ee1b38bce9a9e6aa2c8e3cdf0380ab8ff6623e5047d49da3e9a2ec8"
+  },
+  {
+    "tool": "patent_bigdata_patent_stats",
+    "domain": "patent",
+    "arguments": {
+      "matchKeyword": "贵州茅台酒股份有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 1.285,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "patentDivAppLegalStat",
+      "patentTypeAppTimeStat",
+      "patentTypePubTimeStat",
+      "patentTypeStat"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "patentDivAppLegalStat[0].patentCount",
+        "value": 12
+      },
+      {
+        "path": "patentDivAppLegalStat[1].patentCount",
+        "value": 181
+      },
+      {
+        "path": "patentDivAppLegalStat[2].patentCount",
+        "value": 531
+      },
+      {
+        "path": "patentDivAppLegalStat[3].patentCount",
+        "value": 29
+      },
+      {
+        "path": "patentDivAppLegalStat[4].patentCount",
+        "value": 35
+      },
+      {
+        "path": "patentTypeAppTimeStat[0].appearanceDesignPatentCount",
+        "value": 2
+      },
+      {
+        "path": "patentTypeAppTimeStat[0].inventionAppPatentCount",
+        "value": 7
+      },
+      {
+        "path": "patentTypeAppTimeStat[0].inventionLicPatentCount",
+        "value": 6
+      },
+      {
+        "path": "patentTypeAppTimeStat[0].utilityModelPatentCount",
+        "value": 2
+      },
+      {
+        "path": "patentTypeAppTimeStat[1].appearanceDesignPatentCount",
+        "value": 26
+      },
+      {
+        "path": "patentTypeAppTimeStat[1].inventionAppPatentCount",
+        "value": 7
+      },
+      {
+        "path": "patentTypeAppTimeStat[1].inventionLicPatentCount",
+        "value": 6
+      },
+      {
+        "path": "patentTypeAppTimeStat[1].utilityModelPatentCount",
+        "value": 2
+      },
+      {
+        "path": "patentTypeAppTimeStat[2].appearanceDesignPatentCount",
+        "value": 23
+      },
+      {
+        "path": "patentTypeAppTimeStat[2].inventionAppPatentCount",
+        "value": 4
+      },
+      {
+        "path": "patentTypeAppTimeStat[2].inventionLicPatentCount",
+        "value": 4
+      },
+      {
+        "path": "patentTypeAppTimeStat[2].utilityModelPatentCount",
+        "value": 2
+      },
+      {
+        "path": "patentTypeAppTimeStat[3].appearanceDesignPatentCount",
+        "value": 14
+      },
+      {
+        "path": "patentTypeAppTimeStat[3].inventionAppPatentCount",
+        "value": 9
+      },
+      {
+        "path": "patentTypeAppTimeStat[3].inventionLicPatentCount",
+        "value": 3
+      },
+      {
+        "path": "patentTypeAppTimeStat[3].utilityModelPatentCount",
+        "value": 4
+      },
+      {
+        "path": "patentTypeAppTimeStat[4].appearanceDesignPatentCount",
+        "value": 62
+      },
+      {
+        "path": "patentTypeAppTimeStat[4].inventionAppPatentCount",
+        "value": 31
+      },
+      {
+        "path": "patentTypeAppTimeStat[4].inventionLicPatentCount",
+        "value": 15
+      },
+      {
+        "path": "patentTypeAppTimeStat[4].utilityModelPatentCount",
+        "value": 9
+      },
+      {
+        "path": "patentTypePubTimeStat[0].appearanceDesignPatentCount",
+        "value": 2
+      },
+      {
+        "path": "patentTypePubTimeStat[0].inventionAppPatentCount",
+        "value": 9
+      },
+      {
+        "path": "patentTypePubTimeStat[0].inventionLicPatentCount",
+        "value": 6
+      },
+      {
+        "path": "patentTypePubTimeStat[0].utilityModelPatentCount",
+        "value": 2
+      },
+      {
+        "path": "patentTypePubTimeStat[1].appearanceDesignPatentCount",
+        "value": 7
+      },
+      {
+        "path": "patentTypePubTimeStat[1].inventionAppPatentCount",
+        "value": 4
+      },
+      {
+        "path": "patentTypePubTimeStat[1].inventionLicPatentCount",
+        "value": 1
+      },
+      {
+        "path": "patentTypePubTimeStat[1].utilityModelPatentCount",
+        "value": 2
+      },
+      {
+        "path": "patentTypePubTimeStat[2].appearanceDesignPatentCount",
+        "value": 18
+      },
+      {
+        "path": "patentTypePubTimeStat[2].inventionAppPatentCount",
+        "value": 8
+      },
+      {
+        "path": "patentTypePubTimeStat[2].inventionLicPatentCount",
+        "value": 1
+      },
+      {
+        "path": "patentTypePubTimeStat[2].utilityModelPatentCount",
+        "value": 3
+      },
+      {
+        "path": "patentTypePubTimeStat[3].appearanceDesignPatentCount",
+        "value": 30
+      },
+      {
+        "path": "patentTypePubTimeStat[3].inventionAppPatentCount",
+        "value": 7
+      },
+      {
+        "path": "patentTypePubTimeStat[3].inventionLicPatentCount",
+        "value": 8
+      },
+      {
+        "path": "patentTypePubTimeStat[3].utilityModelPatentCount",
+        "value": 2
+      },
+      {
+        "path": "patentTypePubTimeStat[4].appearanceDesignPatentCount",
+        "value": 55
+      },
+      {
+        "path": "patentTypePubTimeStat[4].inventionAppPatentCount",
+        "value": 23
+      },
+      {
+        "path": "patentTypePubTimeStat[4].inventionLicPatentCount",
+        "value": 10
+      },
+      {
+        "path": "patentTypePubTimeStat[4].utilityModelPatentCount",
+        "value": 7
+      },
+      {
+        "path": "patentTypeStat.appearanceDesignPatentCount",
+        "value": 312
+      },
+      {
+        "path": "patentTypeStat.inventionAppPatentCount",
+        "value": 351
+      },
+      {
+        "path": "patentTypeStat.inventionLicPatentCount",
+        "value": 118
+      },
+      {
+        "path": "patentTypeStat.utilityModelPatentCount",
+        "value": 146
+      }
+    ],
+    "response_sha256": "aa13b4c71d00462802ff213f66a70165b07f2f1ff1409a391b4a3b64289f6cdb"
+  },
+  {
+    "tool": "bid_bigdata_bid_win_stats",
+    "domain": "bidding",
+    "arguments": {
+      "matchKeyword": "贵州茅台酒股份有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 2.42,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "winbidAmountStatList",
+      "winbidAreaStat",
+      "winbidStatList",
+      "winbidTrend"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "winbidAmountStatList[0].percent",
+        "value": 8.33
+      },
+      {
+        "path": "winbidAmountStatList[0].count",
+        "value": 3
+      },
+      {
+        "path": "winbidAmountStatList[1].percent",
+        "value": 11.11
+      },
+      {
+        "path": "winbidAmountStatList[1].count",
+        "value": 4
+      },
+      {
+        "path": "winbidAmountStatList[2].percent",
+        "value": 80.56
+      },
+      {
+        "path": "winbidAmountStatList[2].count",
+        "value": 29
+      },
+      {
+        "path": "winbidAreaStat[0].count",
+        "value": 190
+      },
+      {
+        "path": "winbidAreaStat[1].count",
+        "value": 34
+      },
+      {
+        "path": "winbidAreaStat[2].count",
+        "value": 41
+      },
+      {
+        "path": "winbidAreaStat[3].count",
+        "value": 4
+      },
+      {
+        "path": "winbidAreaStat[4].count",
+        "value": 22
+      },
+      {
+        "path": "winbidStatList[0].count",
+        "value": 13
+      },
+      {
+        "path": "winbidStatList[0].percent",
+        "value": 13.83
+      },
+      {
+        "path": "winbidStatList[1].count",
+        "value": 10
+      },
+      {
+        "path": "winbidStatList[1].percent",
+        "value": 10.64
+      },
+      {
+        "path": "winbidStatList[2].count",
+        "value": 8
+      },
+      {
+        "path": "winbidStatList[2].percent",
+        "value": 8.51
+      },
+      {
+        "path": "winbidStatList[3].count",
+        "value": 4
+      },
+      {
+        "path": "winbidStatList[3].percent",
+        "value": 4.26
+      },
+      {
+        "path": "winbidStatList[4].count",
+        "value": 4
+      },
+      {
+        "path": "winbidStatList[4].percent",
+        "value": 4.26
+      },
+      {
+        "path": "winbidTrend[0].count",
+        "value": 21
+      },
+      {
+        "path": "winbidTrend[1].count",
+        "value": 93
+      },
+      {
+        "path": "winbidTrend[2].count",
+        "value": 119
+      },
+      {
+        "path": "winbidTrend[3].count",
+        "value": 14
+      },
+      {
+        "path": "winbidTrend[4].count",
+        "value": 27
+      }
+    ],
+    "response_sha256": "24b56bf54b93f4e5b2caad9987328bfc46ca491c42e2a92028458c916666c406"
+  },
+  {
+    "tool": "bid_bigdata_bidding_info",
+    "domain": "bidding",
+    "arguments": {
+      "matchKeyword": "贵州茅台酒股份有限公司",
+      "keywordType": "name",
+      "pageSize": 20
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 2.432,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 20,
+    "reported_total": 1000,
+    "numeric_evidence": [
+      {
+        "path": "resultList[3].projectAmount",
+        "value": 4228.0
+      },
+      {
+        "path": "total",
+        "value": 1000
+      }
+    ],
+    "response_sha256": "f958fe0bfc26c910f9a5a3712ed15772c585d048296a4251ea4d416be0d2aac4"
+  },
+  {
+    "tool": "trademark_bigdata_trademark_profile",
+    "domain": "trademark",
+    "arguments": {
+      "matchKeyword": "贵州茅台酒股份有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 2.596,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "tmCount",
+      "tmInvalidNumber",
+      "tmNumberThisYear",
+      "tmTypeList",
+      "tmValidNumber",
+      "tmStatusList",
+      "tmStatusStat"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "tmCount",
+        "value": 89
+      },
+      {
+        "path": "tmInvalidNumber",
+        "value": 56
+      },
+      {
+        "path": "tmNumberThisYear",
+        "value": 38
+      },
+      {
+        "path": "tmValidNumber",
+        "value": 33
+      },
+      {
+        "path": "tmStatusStat.商标已注册",
+        "value": 25
+      },
+      {
+        "path": "tmStatusStat.商标无效",
+        "value": 14
+      },
+      {
+        "path": "tmStatusStat.撤销/无效宣告申请审查中",
+        "value": 1
+      },
+      {
+        "path": "tmStatusStat.等待实质审查",
+        "value": 35
+      },
+      {
+        "path": "tmStatusStat.驳回复审中",
+        "value": 14
+      }
+    ],
+    "response_sha256": "48ca43506fb916adddd5e4261ecc29ef67f0b09f0c4ef0ee33a1357428829fe0"
+  },
+  {
+    "tool": "trademark_bigdata_trademark_stats",
+    "domain": "trademark",
+    "arguments": {
+      "matchKeyword": "贵州茅台酒股份有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 2.598,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "tmAppTimeStat",
+      "tmRegTimeStat",
+      "tmTypeStats",
+      "tmStatusStat"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "tmAppTimeStat[2].count",
+        "value": 1
+      },
+      {
+        "path": "tmAppTimeStat[3].count",
+        "value": 1
+      },
+      {
+        "path": "tmAppTimeStat[4].count",
+        "value": 4
+      },
+      {
+        "path": "tmRegTimeStat[0].count",
+        "value": 1
+      },
+      {
+        "path": "tmRegTimeStat[3].count",
+        "value": 1
+      },
+      {
+        "path": "tmTypeStats[0].count",
+        "value": 46
+      },
+      {
+        "path": "tmTypeStats[1].count",
+        "value": 20
+      },
+      {
+        "path": "tmTypeStats[2].count",
+        "value": 10
+      },
+      {
+        "path": "tmTypeStats[3].count",
+        "value": 6
+      },
+      {
+        "path": "tmTypeStats[4].count",
+        "value": 6
+      },
+      {
+        "path": "tmStatusStat[0].count",
+        "value": 37
+      },
+      {
+        "path": "tmStatusStat[1].count",
+        "value": 25
+      },
+      {
+        "path": "tmStatusStat[2].count",
+        "value": 12
+      },
+      {
+        "path": "tmStatusStat[3].count",
+        "value": 14
+      },
+      {
+        "path": "tmStatusStat[4].count",
+        "value": 1
+      }
+    ],
+    "response_sha256": "33877f8a580cb3118fb24d44a633d1801712e20ef574d324e5602f266f9fbe2c"
+  },
+  {
+    "tool": "operation_insight_business_scale",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "贵州茅台酒股份有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 3.111,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "annualTurnover",
+      "enterpriseScale"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [],
+    "response_sha256": "7c05a4d3bcd474b7963faa2bcced12f8a2be0b1d908d323dfe3d894da56b4354"
+  },
+  {
+    "tool": "operation_insight_financing_info",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "贵州茅台酒股份有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 3.117,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "fpFinancingCount",
+      "fpFinancingList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "fpFinancingCount",
+        "value": 4
+      }
+    ],
+    "response_sha256": "e8b00d91da8e1c1fd12212706442bedc087957f9c283893cdd091e4418ede69f"
+  },
+  {
+    "tool": "operation_insight_company_trends",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "贵州茅台酒股份有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 3.12,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "isDiffAreaWinBidIn3Month",
+      "isDiffAreaWinBidIn6Month",
+      "isDiffAreaWinBidIn12Month",
+      "isLegalRpAlterIn12Month"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "isDiffAreaWinBidIn3Month",
+        "value": 1
+      },
+      {
+        "path": "isDiffAreaWinBidIn6Month",
+        "value": 1
+      },
+      {
+        "path": "isDiffAreaWinBidIn12Month",
+        "value": 1
+      },
+      {
+        "path": "isLegalRpAlterIn12Month",
+        "value": 1
+      }
+    ],
+    "response_sha256": "961fd66ed5a0ec81d8fb7680917754392609537faca44672b9515d1ad8073c64"
+  },
+  {
+    "tool": "operation_insight_enterprise_rankings",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "贵州茅台酒股份有限公司",
+      "keywordType": "name",
+      "pageSize": 10
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 3.133,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 10,
+    "reported_total": 25,
+    "numeric_evidence": [
+      {
+        "path": "resultList[0].rankingListYear",
+        "value": 2024
+      },
+      {
+        "path": "resultList[0].rank",
+        "value": 164
+      },
+      {
+        "path": "resultList[1].rankingListYear",
+        "value": 2023
+      },
+      {
+        "path": "resultList[1].rank",
+        "value": 181
+      },
+      {
+        "path": "resultList[2].rankingListYear",
+        "value": 2022
+      },
+      {
+        "path": "resultList[2].rank",
+        "value": 228
+      },
+      {
+        "path": "resultList[3].rankingListYear",
+        "value": 2022
+      },
+      {
+        "path": "resultList[3].rank",
+        "value": 125
+      },
+      {
+        "path": "resultList[4].rankingListYear",
+        "value": 2022
+      },
+      {
+        "path": "resultList[4].rank",
+        "value": 105
+      },
+      {
+        "path": "total",
+        "value": 25
+      }
+    ],
+    "response_sha256": "d76be6edbdc29ee150c6660dba9720017b020915a63e2debbb5dcf4f77253d26"
+  },
+  {
+    "tool": "enterprise_get_enterprise_base_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "贵州茅台酒股份有限公司"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 5.355,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "base_info",
+      "desc",
+      "tag"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "base_info.payAmountCount.amount",
+        "value": 1250081601.0
+      },
+      {
+        "path": "base_info.regCapital.value",
+        "value": 1252270215.0
+      },
+      {
+        "path": "tag.hasStock",
+        "value": 1
+      },
+      {
+        "path": "tag.isAnomaly",
+        "value": 0
+      },
+      {
+        "path": "tag.isTopEnterprise",
+        "value": 1
+      }
+    ],
+    "response_sha256": "f4ce6ce0652546e8305787cc8c926384e301135e96cd934cf04d41153b4b2df3"
+  },
+  {
+    "tool": "enterprise_get_enterprise_holder_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "贵州茅台酒股份有限公司"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 5.359,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "holderList",
+      "stockHolderList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "holderList[0].payAmount.value",
+        "value": 0
+      },
+      {
+        "path": "holderList[0].ratio",
+        "value": 0.6175840057
+      },
+      {
+        "path": "holderList[0].subscriptionDetail.amount",
+        "value": 641163363.0
+      },
+      {
+        "path": "holderList[1].payAmount.value",
+        "value": 0
+      },
+      {
+        "path": "holderList[1].ratio",
+        "value": 0.3824159943
+      },
+      {
+        "path": "holderList[1].subscriptionDetail.amount",
+        "value": 397016637.0
+      },
+      {
+        "path": "stockHolderList[0].shareHolding",
+        "value": 681000000.0
+      },
+      {
+        "path": "stockHolderList[0].shareHoldingRatio",
+        "value": 0.545
+      },
+      {
+        "path": "stockHolderList[1].shareHolding",
+        "value": 56996800.0
+      },
+      {
+        "path": "stockHolderList[1].shareHoldingRatio",
+        "value": 0.0456
+      },
+      {
+        "path": "stockHolderList[2].shareHolding",
+        "value": 53711700.0
+      },
+      {
+        "path": "stockHolderList[2].shareHoldingRatio",
+        "value": 0.043
+      },
+      {
+        "path": "stockHolderList[3].shareHolding",
+        "value": 27849699.0
+      },
+      {
+        "path": "stockHolderList[3].shareHoldingRatio",
+        "value": 0.0223
+      },
+      {
+        "path": "stockHolderList[4].shareHolding",
+        "value": 5583900.0
+      },
+      {
+        "path": "stockHolderList[4].shareHoldingRatio",
+        "value": 0.0045
+      }
+    ],
+    "response_sha256": "a239780a68582070661ae69bcd2601aabe484fd7b00979ea81f860cec69232ff"
+  },
+  {
+    "tool": "enterprise_get_enterprise_invest_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "贵州茅台酒股份有限公司"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 5.361,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 15,
+    "reported_total": 15,
+    "numeric_evidence": [
+      {
+        "path": "resultList[0].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[0].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "resultList[0].regCapital.value",
+        "value": 600000000.0
+      },
+      {
+        "path": "resultList[0].subscriptionAmount.value",
+        "value": 600000000.0
+      },
+      {
+        "path": "resultList[1].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[1].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "resultList[1].regCapital.value",
+        "value": 200000000.0
+      },
+      {
+        "path": "resultList[1].subscriptionAmount.value",
+        "value": 200000000.0
+      },
+      {
+        "path": "resultList[2].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[2].ratio",
+        "value": 0.95
+      },
+      {
+        "path": "resultList[2].regCapital.value",
+        "value": 10000000.0
+      },
+      {
+        "path": "resultList[2].subscriptionAmount.value",
+        "value": 9500000.0
+      },
+      {
+        "path": "resultList[3].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[3].ratio",
+        "value": 0.9074410163
+      },
+      {
+        "path": "resultList[3].regCapital.value",
+        "value": 5510000000.0
+      },
+      {
+        "path": "resultList[3].subscriptionAmount.value",
+        "value": 5000000000.0
+      },
+      {
+        "path": "resultList[4].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[4].ratio",
+        "value": 0.7
+      },
+      {
+        "path": "resultList[4].regCapital.value",
+        "value": 8000000.0
+      },
+      {
+        "path": "resultList[4].subscriptionAmount.value",
+        "value": 5600000.0
+      },
+      {
+        "path": "total",
+        "value": 15
+      }
+    ],
+    "response_sha256": "de276f78803a0428735d3ff51fed874d791106a0f9a7dbecbf350804db6a2341"
+  },
+  {
+    "tool": "enterprise_get_enterprise_main_person_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "贵州茅台酒股份有限公司"
+    },
+    "invocation_id": "1793068931712993000",
+    "elapsed_seconds": 5.363,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 7,
+    "reported_total": 7,
+    "numeric_evidence": [
+      {
+        "path": "resultList[0].relatedEnterpriseCurrentNum",
+        "value": 10
+      },
+      {
+        "path": "resultList[0].relatedEnterpriseHistoryNum",
+        "value": 22
+      },
+      {
+        "path": "resultList[1].relatedEnterpriseCurrentNum",
+        "value": 1
+      },
+      {
+        "path": "resultList[1].relatedEnterpriseHistoryNum",
+        "value": 0
+      },
+      {
+        "path": "resultList[2].relatedEnterpriseCurrentNum",
+        "value": 5
+      },
+      {
+        "path": "resultList[2].relatedEnterpriseHistoryNum",
+        "value": 0
+      },
+      {
+        "path": "resultList[3].relatedEnterpriseCurrentNum",
+        "value": 2
+      },
+      {
+        "path": "resultList[3].relatedEnterpriseHistoryNum",
+        "value": 0
+      },
+      {
+        "path": "resultList[4].relatedEnterpriseCurrentNum",
+        "value": 2
+      },
+      {
+        "path": "resultList[4].relatedEnterpriseHistoryNum",
+        "value": 4
+      },
+      {
+        "path": "total",
+        "value": 7
+      }
+    ],
+    "response_sha256": "8ffb134a8c8d3f3ecc27bc23babe3598d40473821b8084de4aca17a057cc1935"
+  }
+]

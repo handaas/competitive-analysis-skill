@@ -1,0 +1,1328 @@
+{
+  "report_type": "competitive_analysis_direct",
+  "title": "中国建筑第八工程局有限公司 企业竞争基准画像",
+  "banner": "企业竞争基准事实画像",
+  "subject": {
+    "enterprise": "中国建筑第八工程局有限公司",
+    "match_raw": "中国建筑第八工程局有限公司",
+    "keywordType": "name",
+    "resolved": true,
+    "resolve_reason": "工商基础信息中的企业名称和统一社会信用代码已返回"
+  },
+  "abstract": "本报告整理「中国建筑第八工程局有限公司」的单企业竞争基准事实。本报告只给出单企业客观基准事实，不生成竞争总分、域分、领先性、排名或市场份额结论。",
+  "summary": "本报告整理「中国建筑第八工程局有限公司」的单企业竞争基准事实。本报告只给出单企业客观基准事实，不生成竞争总分、域分、领先性、排名或市场份额结论。",
+  "executive_summary": [
+    "本报告只给出单企业客观基准事实，不生成竞争总分、域分、领先性、排名或市场份额结论。",
+    "说明知识产权两类公开记录均存在；未提供同业分母、专利质量和权利人逐项核验，不能称领先或形成排名。",
+    "两个独立域均有公开活动；不能据此归因商业化收入、履约质量或市场份额。",
+    "竞争基准必须保留该风险线索；需复核时间、样本相关性，不能用正面声量抵消。"
+  ],
+  "verdict": {
+    "level": "单企业基准事实可用",
+    "recommendation": "用于人工对标准备",
+    "summary": "本报告只给出单企业客观基准事实，不生成竞争总分、域分、领先性、排名或市场份额结论。",
+    "blockers": [],
+    "key_concerns": [
+      "负面舆情统计 244 条"
+    ],
+    "specialty_average": null
+  },
+  "specialty_scores": {
+    "items": [],
+    "average": null,
+    "rating_eligible": false
+  },
+  "metrics": [
+    {
+      "label": "专利类型统计合计",
+      "value": "14641",
+      "hint": "由已返回专利类型字段合计；不代表质量或领先"
+    },
+    {
+      "label": "商标总数",
+      "value": "248",
+      "hint": "商标数量事实"
+    },
+    {
+      "label": "有效商标数",
+      "value": "110",
+      "hint": "接口有效状态统计"
+    },
+    {
+      "label": "资质证书数",
+      "value": "451",
+      "hint": "证书概况数量"
+    },
+    {
+      "label": "近一年获证数",
+      "value": "29",
+      "hint": "证书接口年度口径"
+    },
+    {
+      "label": "招投标记录总量",
+      "value": "1000",
+      "hint": "市场活动记录，不代表收入或履约质量"
+    },
+    {
+      "label": "舆情统计总量",
+      "value": "2331",
+      "hint": "接口情感分类合计，不是竞争分"
+    },
+    {
+      "label": "负面舆情统计",
+      "value": "244",
+      "hint": "需人工复核样本，不作法律定性"
+    }
+  ],
+  "caliber": {
+    "match_target": "中国建筑第八工程局有限公司",
+    "match_type": "单企业竞争基准（非多企业横向对比）",
+    "data_scope": "有效覆盖 7/7 个主题域；生成时间 2026-10-27T10:42:22+08:00",
+    "products": [
+      "企业基础信息",
+      "经营公开线索",
+      "专利统计",
+      "商标统计",
+      "招投标统计",
+      "舆情统计",
+      "资质证书概况"
+    ],
+    "limit": "无可比企业和行业分母，不作排名、领先性、市场份额、收入归因或履约质量结论。缺口："
+  },
+  "core_analysis": {
+    "enterprise": {
+      "企业名称": "中国建筑第八工程局有限公司",
+      "统一社会信用代码": "9131000063126503X1",
+      "法定代表人": "周可璋",
+      "企业类型": "有限责任公司(非自然人投资或控股的法人独资)",
+      "行业": "建筑业 / 房屋建筑业 / 住宅房屋建筑",
+      "注册资本": "人民币 152.18亿",
+      "实缴资本": "-",
+      "成立日期": "1998-09-29",
+      "经营状态": "营业",
+      "注册地址": "中国(上海)自由贸易试验区世纪大道1568号27层",
+      "经营范围": "房屋建筑、公路、铁路、市政公用、港口与航道、水利水电各类别工程的咨询、设计、施工、总承包和项目管理,化工石油工程,电力工程,基础工程,装饰工程,工业筑炉,城市轨道交通工程,园林绿化工程,线路、管道、设备的安装,混凝土预制构件及制品,非标制作,建筑材料生产、销售,建筑设备销售,建筑机械租赁,房地产开发,自有房屋租赁,物业管理,从事建筑领域内的技术转让、技术咨询、技术服务,企业管理咨询,商务信息咨询,经营各类商品和技术的进出口,但国家限定公司经营或禁止进出口的商品及技术除外依法须经批准的项目,经相关部门批准后方可开展经营活动"
+    },
+    "patent": {
+      "patentCount": 14641,
+      "inventionAppPatentCount": 4067,
+      "inventionLicPatentCount": 2237,
+      "utilityModelPatentCount": 8260,
+      "appearanceDesignPatentCount": 77,
+      "patentTypeAppTimeStat": [
+        {
+          "inventionAppPatentCount": 113,
+          "inventionLicPatentCount": 137,
+          "utilityModelPatentCount": 685,
+          "year": "2017"
+        },
+        {
+          "appearanceDesignPatentCount": 1,
+          "inventionAppPatentCount": 106,
+          "inventionLicPatentCount": 112,
+          "utilityModelPatentCount": 639,
+          "year": "2018"
+        },
+        {
+          "appearanceDesignPatentCount": 1,
+          "inventionAppPatentCount": 127,
+          "inventionLicPatentCount": 137,
+          "utilityModelPatentCount": 862,
+          "year": "2019"
+        },
+        {
+          "appearanceDesignPatentCount": 7,
+          "inventionAppPatentCount": 248,
+          "inventionLicPatentCount": 191,
+          "utilityModelPatentCount": 653,
+          "year": "2020"
+        },
+        {
+          "appearanceDesignPatentCount": 1,
+          "inventionAppPatentCount": 313,
+          "inventionLicPatentCount": 234,
+          "utilityModelPatentCount": 621,
+          "year": "2021"
+        },
+        {
+          "appearanceDesignPatentCount": 14,
+          "inventionAppPatentCount": 415,
+          "inventionLicPatentCount": 319,
+          "utilityModelPatentCount": 770,
+          "year": "2022"
+        },
+        {
+          "appearanceDesignPatentCount": 7,
+          "inventionAppPatentCount": 572,
+          "inventionLicPatentCount": 251,
+          "utilityModelPatentCount": 1014,
+          "year": "2023"
+        },
+        {
+          "appearanceDesignPatentCount": 26,
+          "inventionAppPatentCount": 757,
+          "inventionLicPatentCount": 247,
+          "utilityModelPatentCount": 632,
+          "year": "2024"
+        },
+        {
+          "appearanceDesignPatentCount": 18,
+          "inventionAppPatentCount": 882,
+          "inventionLicPatentCount": 66,
+          "utilityModelPatentCount": 381,
+          "year": "2025"
+        },
+        {
+          "inventionAppPatentCount": 359,
+          "inventionLicPatentCount": 2,
+          "year": "2026"
+        }
+      ],
+      "patentTypePubTimeStat": [
+        {
+          "inventionAppPatentCount": 86,
+          "inventionLicPatentCount": 113,
+          "utilityModelPatentCount": 640,
+          "year": "2017"
+        },
+        {
+          "appearanceDesignPatentCount": 1,
+          "inventionAppPatentCount": 113,
+          "inventionLicPatentCount": 137,
+          "utilityModelPatentCount": 601,
+          "year": "2018"
+        },
+        {
+          "inventionAppPatentCount": 114,
+          "inventionLicPatentCount": 102,
+          "utilityModelPatentCount": 665,
+          "year": "2019"
+        },
+        {
+          "appearanceDesignPatentCount": 5,
+          "inventionAppPatentCount": 191,
+          "inventionLicPatentCount": 105,
+          "utilityModelPatentCount": 928,
+          "year": "2020"
+        },
+        {
+          "appearanceDesignPatentCount": 4,
+          "inventionAppPatentCount": 346,
+          "inventionLicPatentCount": 141,
+          "utilityModelPatentCount": 532,
+          "year": "2021"
+        },
+        {
+          "appearanceDesignPatentCount": 3,
+          "inventionAppPatentCount": 331,
+          "inventionLicPatentCount": 212,
+          "utilityModelPatentCount": 803,
+          "year": "2022"
+        },
+        {
+          "appearanceDesignPatentCount": 14,
+          "inventionAppPatentCount": 523,
+          "inventionLicPatentCount": 252,
+          "utilityModelPatentCount": 946,
+          "year": "2023"
+        },
+        {
+          "appearanceDesignPatentCount": 5,
+          "inventionAppPatentCount": 758,
+          "inventionLicPatentCount": 211,
+          "utilityModelPatentCount": 691,
+          "year": "2024"
+        },
+        {
+          "appearanceDesignPatentCount": 39,
+          "inventionAppPatentCount": 805,
+          "inventionLicPatentCount": 488,
+          "utilityModelPatentCount": 503,
+          "year": "2025"
+        },
+        {
+          "appearanceDesignPatentCount": 4,
+          "inventionAppPatentCount": 641,
+          "inventionLicPatentCount": 251,
+          "utilityModelPatentCount": 382,
+          "year": "2026"
+        }
+      ],
+      "patentDivAppLegalStat": [
+        {
+          "patentCount": 3746,
+          "patentDivAppLegal": "专利权终止"
+        },
+        {
+          "patentCount": 5789,
+          "patentDivAppLegal": "授权"
+        },
+        {
+          "patentCount": 2392,
+          "patentDivAppLegal": "实质审查的生效"
+        },
+        {
+          "patentCount": 648,
+          "patentDivAppLegal": "专利权终止-未缴年费专利权终止"
+        },
+        {
+          "patentCount": 1423,
+          "patentDivAppLegal": "发明专利申请公布后的驳回"
+        },
+        {
+          "patentCount": 116,
+          "patentDivAppLegal": "专利权的终止"
+        },
+        {
+          "patentCount": 186,
+          "patentDivAppLegal": "专利权的主动放弃"
+        },
+        {
+          "patentCount": 91,
+          "patentDivAppLegal": "发明专利申请公布后的撤回"
+        },
+        {
+          "patentCount": 40,
+          "patentDivAppLegal": "发明专利申请公布后的视为撤回"
+        },
+        {
+          "patentCount": 17,
+          "patentDivAppLegal": "著录事项变更"
+        },
+        {
+          "patentCount": 42,
+          "patentDivAppLegal": "专利申请权、专利权的转移"
+        },
+        {
+          "patentCount": 23,
+          "patentDivAppLegal": "未缴年费专利权终止"
+        },
+        {
+          "patentCount": 107,
+          "patentDivAppLegal": "公布"
+        },
+        {
+          "patentCount": 4,
+          "patentDivAppLegal": "专利权的视为放弃"
+        },
+        {
+          "patentCount": 10,
+          "patentDivAppLegal": "避免重复授权放弃专利权"
+        },
+        {
+          "patentCount": 3,
+          "patentDivAppLegal": "文件的公告送达"
+        },
+        {
+          "patentCount": 3,
+          "patentDivAppLegal": "专利权人的姓名或者名称、地址的变更"
+        },
+        {
+          "patentCount": 1,
+          "patentDivAppLegal": "专利权人的姓名或者名称、国籍和地址的变更"
+        }
+      ]
+    },
+    "trademark": {
+      "tmCount": 248,
+      "tmValidNumber": 110,
+      "tmInvalidNumber": 138,
+      "tmNumberThisYear": 5,
+      "tmTypeList": [
+        "1-化学原料",
+        "2-颜料油漆",
+        "6-金属材料",
+        "7-机械设备",
+        "9-科学仪器",
+        "10-医疗器械",
+        "11-灯具空调",
+        "12-运输工具",
+        "16-办公用品",
+        "17-橡胶制品",
+        "19-建筑材料",
+        "35-广告销售",
+        "36-金融物管",
+        "37-建筑修理",
+        "38-通讯服务",
+        "39-运输储藏",
+        "40-材料加工",
+        "41-教育娱乐",
+        "42-设计研究",
+        "43-餐饮住宿",
+        "44-医疗园艺",
+        "45-社会法律"
+      ],
+      "tmStatusList": [
+        "初审公告",
+        "等待实质审查",
+        "商标无效",
+        "商标已注册"
+      ],
+      "tmStatusStat": {
+        "初审公告": 26,
+        "商标已注册": 86,
+        "商标无效": 67,
+        "等待实质审查": 69
+      },
+      "tmAppTimeStat": [
+        {
+          "year": "2017"
+        },
+        {
+          "count": 1,
+          "year": "2018"
+        },
+        {
+          "count": 3,
+          "year": "2019"
+        },
+        {
+          "count": 22,
+          "year": "2020"
+        },
+        {
+          "count": 57,
+          "year": "2021"
+        },
+        {
+          "count": 43,
+          "year": "2022"
+        },
+        {
+          "count": 12,
+          "year": "2023"
+        },
+        {
+          "count": 74,
+          "year": "2024"
+        },
+        {
+          "count": 10,
+          "year": "2025"
+        },
+        {
+          "count": 5,
+          "year": "2026"
+        }
+      ],
+      "tmRegTimeStat": [
+        {
+          "count": 1,
+          "year": "2017"
+        },
+        {
+          "year": "2018"
+        },
+        {
+          "year": "2019"
+        },
+        {
+          "count": 3,
+          "year": "2020"
+        },
+        {
+          "count": 1,
+          "year": "2021"
+        },
+        {
+          "count": 51,
+          "year": "2022"
+        },
+        {
+          "count": 3,
+          "year": "2023"
+        },
+        {
+          "count": 39,
+          "year": "2024"
+        },
+        {
+          "year": "2025"
+        },
+        {
+          "count": 8,
+          "year": "2026"
+        }
+      ],
+      "tmTypeStats": [
+        {
+          "count": 64,
+          "tmName": "42-设计研究"
+        },
+        {
+          "count": 44,
+          "tmName": "9-科学仪器"
+        },
+        {
+          "count": 34,
+          "tmName": "37-建筑修理"
+        },
+        {
+          "count": 18,
+          "tmName": "35-广告销售"
+        },
+        {
+          "count": 16,
+          "tmName": "6-金属材料"
+        },
+        {
+          "count": 72,
+          "tmName": "其他"
+        }
+      ]
+    },
+    "bidding": {
+      "winbidStatList": [
+        {
+          "count": 273,
+          "percent": 3.03,
+          "subjectMatter": "建设工程"
+        },
+        {
+          "count": 227,
+          "percent": 2.52,
+          "subjectMatter": "地块"
+        },
+        {
+          "count": 212,
+          "percent": 2.35,
+          "subjectMatter": "施工总承包"
+        },
+        {
+          "count": 139,
+          "percent": 1.54,
+          "subjectMatter": "新建工程"
+        },
+        {
+          "count": 127,
+          "percent": 1.41,
+          "subjectMatter": "施工总承包工程"
+        }
+      ],
+      "winbidAreaStat": [
+        {
+          "area": "安徽省",
+          "count": 393
+        },
+        {
+          "area": "浙江省",
+          "count": 601
+        },
+        {
+          "area": "北京",
+          "count": 528
+        },
+        {
+          "area": "广西壮族自治区",
+          "count": 234
+        },
+        {
+          "area": "广东省",
+          "count": 1594
+        },
+        {
+          "area": "辽宁省",
+          "count": 753
+        },
+        {
+          "area": "甘肃省",
+          "count": 69
+        },
+        {
+          "area": "山东省",
+          "count": 1453
+        },
+        {
+          "area": "江苏省",
+          "count": 1225
+        },
+        {
+          "area": "河北省",
+          "count": 428
+        },
+        {
+          "area": "湖北省",
+          "count": 299
+        },
+        {
+          "area": "河南省",
+          "count": 345
+        },
+        {
+          "area": "重庆",
+          "count": 221
+        },
+        {
+          "area": "上海",
+          "count": 758
+        },
+        {
+          "area": "黑龙江省",
+          "count": 101
+        },
+        {
+          "area": "天津",
+          "count": 187
+        },
+        {
+          "area": "四川省",
+          "count": 624
+        },
+        {
+          "area": "陕西省",
+          "count": 200
+        },
+        {
+          "area": "新疆维吾尔自治区",
+          "count": 79
+        },
+        {
+          "area": "宁夏回族自治区",
+          "count": 50
+        },
+        {
+          "area": "海南省",
+          "count": 90
+        },
+        {
+          "area": "吉林省",
+          "count": 154
+        },
+        {
+          "area": "青海省",
+          "count": 128
+        },
+        {
+          "area": "内蒙古自治区",
+          "count": 175
+        },
+        {
+          "area": "江西省",
+          "count": 65
+        },
+        {
+          "area": "贵州省",
+          "count": 61
+        },
+        {
+          "area": "湖南省",
+          "count": 30
+        },
+        {
+          "area": "山西省",
+          "count": 53
+        },
+        {
+          "area": "云南省",
+          "count": 69
+        },
+        {
+          "area": "福建省",
+          "count": 101
+        },
+        {
+          "area": "西藏自治区",
+          "count": 6
+        },
+        {
+          "area": "重庆市",
+          "count": 1
+        }
+      ],
+      "winbidAmountStatList": [
+        {
+          "percent": 3.61,
+          "range": "10万以下",
+          "count": 242
+        },
+        {
+          "percent": 0.95,
+          "range": "10万~50万",
+          "count": 64
+        },
+        {
+          "percent": 0.85,
+          "range": "50万~100万",
+          "count": 57
+        },
+        {
+          "percent": 2.91,
+          "range": "100万~500万",
+          "count": 195
+        },
+        {
+          "percent": 91.68,
+          "range": "500万及以上",
+          "count": 6147
+        }
+      ],
+      "winbidTrend": [
+        {
+          "year": "2026",
+          "count": 680
+        },
+        {
+          "year": "2025",
+          "count": 1319
+        },
+        {
+          "year": "2024",
+          "count": 1803
+        },
+        {
+          "year": "2023",
+          "count": 1118
+        },
+        {
+          "year": "2022",
+          "count": 1582
+        },
+        {
+          "year": "2021",
+          "count": 1462
+        },
+        {
+          "year": "2020",
+          "count": 1370
+        },
+        {
+          "year": "2019",
+          "count": 890
+        },
+        {
+          "year": "2018",
+          "count": 843
+        },
+        {
+          "year": "2017",
+          "count": 380
+        },
+        {
+          "year": "2016",
+          "count": 223
+        },
+        {
+          "year": "2015",
+          "count": 114
+        },
+        {
+          "year": "2014",
+          "count": 92
+        },
+        {
+          "year": "2013",
+          "count": 98
+        },
+        {
+          "year": "2012",
+          "count": 22
+        },
+        {
+          "year": "2011",
+          "count": 7
+        },
+        {
+          "year": "2010",
+          "count": 16
+        },
+        {
+          "year": "2009",
+          "count": 4
+        },
+        {
+          "year": "2008",
+          "count": 2
+        }
+      ],
+      "bidding_info": [
+        {
+          "biddingId": "ca1ffe598681b9bc",
+          "infoType": "采购意向",
+          "projectRegion": {
+            "city": "淄博市",
+            "province": "山东省"
+          },
+          "publishDate": "2021-11-24",
+          "role": "招标",
+          "subjectMatterList": [
+            "多联机空调工程"
+          ],
+          "title": "淄博职业教育产教实训基地建设项目(青岛科技大学淄博教科产融合基地建设项目)一期建设项目多联机空调工程标段1:实验实训楼多联机空调工程、标段2:综合楼多联机空调工程、标段3:体育馆、食堂、活动中心、学生宿"
+        },
+        {
+          "biddingId": "6d8a0150dae389bd",
+          "infoType": "中标公告",
+          "projectAmount": 3144.99,
+          "projectRegion": {
+            "city": "济南市",
+            "province": "山东省"
+          },
+          "publishDate": "2020-10-30",
+          "purchasingBidderList": [
+            {
+              "name": "山东中医药大学附属医院",
+              "nameId": "3c7cfd48a2ebf4a9"
+            }
+          ],
+          "role": "中标",
+          "subjectMatterList": [
+            "施工总承包",
+            "综合楼建设"
+          ],
+          "title": "山东中医药大学附属医院(省中医院)山东中医药大学附属医院西院区综合楼建设项目施工总承包项目合同公开"
+        },
+        {
+          "biddingId": "805a394f4353bcb1",
+          "infoType": "招标公告",
+          "projectRegion": {
+            "city": "上海市",
+            "province": "上海"
+          },
+          "publishDate": "2021-03-02",
+          "role": "招标",
+          "subjectMatterList": [
+            "精装修工程"
+          ],
+          "title": "奉贤区南桥新城04单元15B-06区域地块项目(山金?中澳城)住宅大区精装修工程招标公告第一次变更公告"
+        },
+        {
+          "biddingId": "6b5aa7b3fce41c89",
+          "infoType": "中标公告",
+          "projectAmount": 480.0,
+          "projectRegion": {
+            "city": "济南市",
+            "province": "山东省"
+          },
+          "publishDate": "2025-03-12",
+          "role": "招标",
+          "title": "济南起步区鹊山生态文化区(一期)A-2项目、A-7项目电梯设备及安装项目合同",
+          "winningBidderList": [
+            {
+              "name": "广州广日电梯工业有限公司",
+              "nameId": "37622fe9774530ed"
+            }
+          ]
+        },
+        {
+          "biddingId": "f6042e3a1790b3c3",
+          "infoType": "招标公告",
+          "projectRegion": {
+            "city": "无锡市",
+            "district": "江阴市",
+            "province": "江苏省"
+          },
+          "publishDate": "2019-04-13",
+          "role": "招标",
+          "title": "中建八局南理工大学江阴校区施工电梯租赁招标"
+        },
+        {
+          "biddingId": "19a7f16edc2efb3b",
+          "infoType": "中标公告",
+          "projectAmount": 97478.66,
+          "projectRegion": {
+            "city": "成都市",
+            "province": "四川省"
+          },
+          "publishDate": "2024-12-05",
+          "purchasingBidderList": [
+            {
+              "name": "中国商用飞机有限责任公司四川分公司",
+              "nameId": "37622fde97c5371a"
+            }
+          ],
+          "role": "候选",
+          "title": "中国商飞民机示范产业园三期项目飞行培训楼施工总承包标段评标结果公示"
+        },
+        {
+          "biddingId": "00d8beb3d823bdce",
+          "infoType": "中标公告",
+          "publishDate": "2024-03-27",
+          "purchasingBidderList": [
+            {
+              "name": "青岛市公路事业发展中心",
+              "nameId": "3c7d048fadabf737"
+            }
+          ],
+          "role": "中标",
+          "title": "青岛市公路事业发展中心:S215黄大路大夼至宝山段大中修工程施工"
+        },
+        {
+          "biddingId": "945effdd2c8a0340",
+          "infoType": "中标公告",
+          "projectRegion": {
+            "city": "深圳市",
+            "province": "广东省"
+          },
+          "publishDate": "2023-12-14",
+          "purchasingBidderList": [
+            {
+              "name": "深圳市建筑工务署教育工程管理中心",
+              "nameId": "3c7d067c49ebf200"
+            }
+          ],
+          "role": "候选",
+          "subjectMatterList": [
+            "平衡计算系统机房建设工程",
+            "重大科技基础设施"
+          ],
+          "title": "\"鹏城云脑Ⅱ扩展型\"重大科技基础设施项目平衡计算系统机房建设工程施工总承包定标结果公示"
+        },
+        {
+          "biddingId": "07b62d2d675c0e17",
+          "infoType": "中标公告",
+          "projectRegion": {
+            "city": "深圳市",
+            "province": "广东省"
+          },
+          "publishDate": "2026-06-30",
+          "purchasingBidderList": [
+            {
+              "name": "深圳市深汕国际汽车城(集团)有限公司",
+              "nameId": "3fed5697c1ab3c44"
+            }
+          ],
+          "role": "候选",
+          "title": "X2025-0010项目(小漠商业地块一期)施工总承包定标结果公示"
+        },
+        {
+          "biddingId": "d1de33263a53d937",
+          "infoType": "招标公告",
+          "projectAmount": 616.37,
+          "projectRegion": {
+            "city": "广州市",
+            "province": "广东省"
+          },
+          "publishDate": "2019-03-22",
+          "role": "招标",
+          "title": "乐府花园施工总承包工程-变配电"
+        },
+        {
+          "biddingId": "5982e8bcd3f84f92",
+          "infoType": "招标公告",
+          "projectRegion": {
+            "city": "青岛市",
+            "province": "山东省"
+          },
+          "publishDate": "2019-05-25",
+          "role": "招标",
+          "title": "八局-青岛公司-文华-空调格栅招标公告"
+        },
+        {
+          "biddingId": "1c61d88a068b5e7f",
+          "infoType": "中标公告",
+          "projectAmount": 2588.64,
+          "publishDate": "2024-03-27",
+          "role": "招标",
+          "subjectMatterList": [
+            "幕墙工程"
+          ],
+          "title": "威海服务贸易产业园二期项目C-2#、C-3#、C-5#幕墙工程",
+          "winningBidderList": [
+            {
+              "name": "嘉林建设集团有限公司",
+              "nameId": "37622ffd4bbf377e"
+            }
+          ]
+        },
+        {
+          "biddingId": "d53b45145b742d28",
+          "infoType": "招标公告",
+          "projectRegion": {
+            "city": "连云港市",
+            "district": "灌云县",
+            "province": "江苏省"
+          },
+          "publishDate": "2019-10-12",
+          "role": "招标",
+          "title": "连云港民用机场迁建工程航站楼及附属工程土建、安装施工项目钢结构工程专业招标"
+        },
+        {
+          "biddingId": "8c55228a9d577213",
+          "infoType": "招标公告",
+          "projectRegion": {
+            "city": "青岛市",
+            "province": "山东省"
+          },
+          "publishDate": "2020-06-05",
+          "role": "招标",
+          "title": "八局青岛-雄安-雄安站枢纽片区道路管廊排水一期工程一标-E5路西路主体工程-招标采购"
+        },
+        {
+          "biddingId": "825856018c73715d",
+          "infoType": "中标公告",
+          "projectAmount": 1.25,
+          "projectRegion": {
+            "city": "茂名市",
+            "district": "高州市",
+            "province": "广东省"
+          },
+          "publishDate": "2023-09-22",
+          "role": "中标",
+          "subjectMatterList": [
+            "基础设施建设"
+          ],
+          "title": "[JG2023-4466]高州市渔网渔具产业园基础设施建设项目(一期)设计施工总承包"
+        },
+        {
+          "biddingId": "d43e8ce5eca4bc29",
+          "infoType": "中标公告",
+          "projectAmount": 40479.19,
+          "projectRegion": {
+            "city": "金华市",
+            "district": "义乌市",
+            "province": "浙江省"
+          },
+          "publishDate": "2021-10-09",
+          "purchasingBidderList": [
+            {
+              "name": "浙江中国小商品城集团股份有限公司",
+              "nameId": "5792b4e3ed72413d"
+            }
+          ],
+          "role": "中标",
+          "title": "义乌综合保税区国际贸易数字化产业项目工程中标候选人公示"
+        },
+        {
+          "biddingId": "fd9e73ba8a130a0e",
+          "infoType": "中标公告",
+          "projectRegion": {
+            "city": "珠海市",
+            "province": "广东省"
+          },
+          "publishDate": "2026-03-17",
+          "purchasingBidderList": [
+            {
+              "name": "横琴粤澳深度合作区城市规划和建设局",
+              "nameId": "44d45bf7166ba748"
+            }
+          ],
+          "role": "中标",
+          "subjectMatterList": [
+            "施工总承包工程"
+          ],
+          "title": "国际居住区初中项目施工总承包工程中标公示"
+        },
+        {
+          "biddingId": "ef00e6e960855733",
+          "infoType": "招标公告",
+          "projectAmount": 52.55,
+          "projectRegion": {
+            "city": "北京市",
+            "district": "大兴区",
+            "province": "北京"
+          },
+          "publishDate": "2018-12-04",
+          "role": "招标",
+          "subjectMatterList": [
+            "实训楼等工程"
+          ],
+          "title": "北京电子科技职业学院实训楼等工程"
+        },
+        {
+          "biddingId": "d316e9c3ddd91340",
+          "infoType": "中标公告",
+          "projectRegion": {
+            "province": "四川省"
+          },
+          "publishDate": "2025-05-06",
+          "purchasingBidderList": [
+            {
+              "name": "成都成温邛高速公路有限公司",
+              "nameId": "37622fbfe3053c0b"
+            }
+          ],
+          "role": "候选",
+          "title": "成都经温江至邛崃高速公路扩容项目土建施工TJ1~TJ6标段评标结果公示"
+        },
+        {
+          "biddingId": "7a6b21c7dd2c61c9",
+          "infoType": "中标公告",
+          "projectAmount": 3799.56,
+          "projectRegion": {
+            "city": "深圳市",
+            "district": "盐田区",
+            "province": "广东省"
+          },
+          "publishDate": "2025-01-03",
+          "role": "招标",
+          "subjectMatterList": [
+            "城市更新"
+          ],
+          "title": "盐田区梅沙街道小梅沙片区城市更新单元-中标结果公示",
+          "winningBidderList": [
+            {
+              "name": "深圳市品正机电工程有限公司",
+              "nameId": "37622fc13a4537d6"
+            }
+          ]
+        }
+      ],
+      "bidding_total": 1000
+    },
+    "operation": {
+      "scale": {
+        "staff": "30000人以上",
+        "turnover": "10亿以上"
+      },
+      "financing_count": 1,
+      "financing_list": [
+        {
+          "financingSeries": "战略投资",
+          "financingTime": "2014-12-30",
+          "investorList": [
+            "中国建筑"
+          ]
+        }
+      ],
+      "trends": {
+        "isFoundSubsidiaryIn3Month": 1,
+        "isDiffAreaWinBidIn3Month": 1,
+        "isDiffAreaWinBidIn6Month": 1,
+        "isDiffAreaWinBidIn12Month": 1,
+        "qualificationIn6MonthList": [
+          "企业技术中心"
+        ],
+        "qualificationIn12MonthList": [
+          "高新技术企业备案公示企业",
+          "企业技术中心"
+        ]
+      },
+      "rankings": []
+    },
+    "qualification": {
+      "certificateCount": 451,
+      "certNumberThisYear": 29,
+      "honorCount": null,
+      "enterpriseCount": null,
+      "licenseCount": null,
+      "highTechCount": null
+    },
+    "news": {
+      "newsSentimentStats": {
+        "negative": 244,
+        "neutral": 960,
+        "positive": 1124,
+        "unknown": 3
+      },
+      "newsSentimentTrend": [
+        {
+          "month": "2025-07",
+          "stats": {
+            "negative": 1,
+            "positive": 0
+          }
+        },
+        {
+          "month": "2025-09",
+          "stats": {
+            "negative": 0,
+            "positive": 4
+          }
+        },
+        {
+          "month": "2025-10",
+          "stats": {
+            "negative": 0,
+            "positive": 1
+          }
+        },
+        {
+          "month": "2025-11",
+          "stats": {
+            "negative": 1,
+            "positive": 5
+          }
+        },
+        {
+          "month": "2025-12",
+          "stats": {
+            "negative": 0,
+            "positive": 1
+          }
+        },
+        {
+          "month": "2026-01",
+          "stats": {
+            "negative": 0,
+            "positive": 2
+          }
+        },
+        {
+          "month": "2026-02",
+          "stats": {
+            "negative": 0,
+            "positive": 1
+          }
+        },
+        {
+          "month": "2026-05",
+          "stats": {
+            "negative": 2,
+            "positive": 1
+          }
+        },
+        {
+          "month": "2026-06",
+          "stats": {
+            "negative": 0,
+            "positive": 1
+          }
+        },
+        {
+          "month": "2026-07",
+          "stats": {
+            "negative": 0,
+            "positive": 1
+          }
+        },
+        {
+          "month": "2026-08",
+          "stats": {
+            "negative": 0,
+            "positive": 6
+          }
+        },
+        {
+          "month": "2026-09",
+          "stats": {
+            "negative": 1,
+            "positive": 1
+          }
+        }
+      ]
+    },
+    "sections": [
+      {
+        "key": "enterprise",
+        "title": "主体与工商基础",
+        "kind": "kv"
+      },
+      {
+        "key": "patent",
+        "title": "专利事实",
+        "kind": "kv"
+      },
+      {
+        "key": "trademark",
+        "title": "商标事实",
+        "kind": "kv"
+      },
+      {
+        "key": "bidding",
+        "title": "招投标公开活动",
+        "kind": "kv"
+      },
+      {
+        "key": "operation",
+        "title": "经营公开线索",
+        "kind": "kv"
+      },
+      {
+        "key": "qualification",
+        "title": "资质证书事实",
+        "kind": "kv"
+      },
+      {
+        "key": "news",
+        "title": "舆情情感统计",
+        "kind": "kv"
+      }
+    ]
+  },
+  "representative_records": [
+    {
+      "维度": "专利类型统计合计",
+      "关键记录": "14641（由已返回专利类型字段合计；不代表质量或领先）"
+    },
+    {
+      "维度": "商标总数",
+      "关键记录": "248（商标数量事实）"
+    },
+    {
+      "维度": "有效商标数",
+      "关键记录": "110（接口有效状态统计）"
+    },
+    {
+      "维度": "资质证书数",
+      "关键记录": "451（证书概况数量）"
+    },
+    {
+      "维度": "近一年获证数",
+      "关键记录": "29（证书接口年度口径）"
+    },
+    {
+      "维度": "招投标记录总量",
+      "关键记录": "1000（市场活动记录，不代表收入或履约质量）"
+    },
+    {
+      "维度": "舆情统计总量",
+      "关键记录": "2331（接口情感分类合计，不是竞争分）"
+    },
+    {
+      "维度": "负面舆情统计",
+      "关键记录": "244（需人工复核样本，不作法律定性）"
+    }
+  ],
+  "insights": [
+    {
+      "feature": "专利与商标并存事实",
+      "evidence": "专利类型统计合计 14641，商标 248（其中有效 110）。",
+      "interpretation": "说明知识产权两类公开记录均存在；未提供同业分母、专利质量和权利人逐项核验，不能称领先或形成排名。"
+    },
+    {
+      "feature": "创新记录与市场活动并存",
+      "evidence": "专利类型统计合计 14641，招投标记录 1000。",
+      "interpretation": "两个独立域均有公开活动；不能据此归因商业化收入、履约质量或市场份额。"
+    },
+    {
+      "feature": "负面舆情提示",
+      "evidence": "情感统计中负面 244 条，总量 2331 条。",
+      "interpretation": "竞争基准必须保留该风险线索；需复核时间、样本相关性，不能用正面声量抵消。"
+    }
+  ],
+  "data_source": {
+    "mcp_server": "7 MCP",
+    "mcp_servers": [
+      "enterprise-mcp-server",
+      "enterprise-operation-mcp-server",
+      "patent-mcp-server",
+      "trademark-mcp-server",
+      "bidding-mcp-server",
+      "news-mcp-server",
+      "qualification-mcp-server"
+    ],
+    "mode": "live_mcp",
+    "dry_run": false,
+    "generated_at": "2026-10-27T10:42:22+08:00",
+    "quality_report": {
+      "total_sections": 7,
+      "populated_sections": 7,
+      "empty_sections": 0,
+      "coverage_pct": 100
+    },
+    "tool_errors": [],
+    "products": [
+      {
+        "name": "企业基础信息"
+      },
+      {
+        "name": "经营公开线索"
+      },
+      {
+        "name": "专利统计"
+      },
+      {
+        "name": "商标统计"
+      },
+      {
+        "name": "招投标统计"
+      },
+      {
+        "name": "舆情统计"
+      },
+      {
+        "name": "资质证书概况"
+      }
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "12-news-qualification-review",
+  "verdict": "acceptable",
+  "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+  "checks": [
+    {
+      "expectation": "工商主体必须确认",
+      "status": "pass",
+      "evidence": "工商=宁德时代新能源科技股份有限公司/91350900587527783P"
+    },
+    {
+      "expectation": "新闻情感统计至少一个分类为真实非空值",
+      "status": "pass",
+      "evidence": "情感分类=[184, 3006, 2362, 20]"
+    },
+    {
+      "expectation": "新闻趋势至少一个时间点含真实数据",
+      "status": "pass",
+      "evidence": "新闻趋势=[{'month': '2025-09', 'stats': {'negative': 0, 'positive': 6}}, {'month': '2025-10', 'stats': {'negative': 0, 'positive': 1}}, {'month': '2025-11', 'stats': {'negative': 0, 'positive': 4}}, {'month': '2025-12', 'stats': {'negative': 0, 'positive': 10}}]"
+    },
+    {
+      "expectation": "资质证书或许可统计至少一个实际字段非空",
+      "status": "pass",
+      "evidence": "资质实际值样本=[196, 25]"
+    },
+    {
+      "expectation": "负面标签不得直接定性为违法或合规结论",
+      "status": "pass",
+      "evidence": "news=data、qualification=data，负面项仅作线索且未检出违法/合规定性"
+    }
+  ],
+  "issues": [],
+  "evidence_binding": {
+    "report.json": "a0088662deaab88a2beb030d0f8666355504f9cc15b24cf4e3378f0b1be20192",
+    "report.html": "72956a02df568f7eba35fdb5f7019a3c14c2a82fb6909d141ea8e479e477b3e3",
+    "report.md": "1ab588ddd1641edacd29c6917e7d513e58a3c1af1888f9d2c37c089e2e3f7070",
+    "calls.json": "85f6a2bdb754581d922d2019521e21da8612fa9a859ba6a0d2d489ad1e38970e",
+    "result.json": "e80d7d1bee36ae703532df02b9776c2e7d61268edccc22a5361603d222f46ab2",
+    "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+  }
+}

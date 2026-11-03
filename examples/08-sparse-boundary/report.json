@@ -1,0 +1,145 @@
+{
+  "report_type": "competitive_analysis_direct",
+  "title": "深圳市不存在的星河量子商业有限公司 企业竞争基准画像",
+  "banner": "企业竞争基准事实画像",
+  "subject": {
+    "enterprise": "深圳市不存在的星河量子商业有限公司",
+    "match_raw": "深圳市不存在的星河量子商业有限公司",
+    "keywordType": "name",
+    "resolved": false,
+    "resolve_reason": "工商基础信息未返回可核验企业名称及统一社会信用代码"
+  },
+  "abstract": "本报告整理「深圳市不存在的星河量子商业有限公司」的单企业竞争基准事实。主体未通过工商名称和统一社会信用代码确认，不形成竞争判断。",
+  "summary": "本报告整理「深圳市不存在的星河量子商业有限公司」的单企业竞争基准事实。主体未通过工商名称和统一社会信用代码确认，不形成竞争判断。",
+  "executive_summary": [
+    "主体未通过工商名称和统一社会信用代码确认，不形成竞争判断。"
+  ],
+  "verdict": {
+    "level": "数据不足",
+    "recommendation": "先确认主体",
+    "summary": "主体未通过工商名称和统一社会信用代码确认，不形成竞争判断。",
+    "blockers": [],
+    "key_concerns": [
+      "缺口：主体工商确认",
+      "缺口：主体与工商基础",
+      "缺口：专利事实",
+      "缺口：商标事实",
+      "缺口：资质证书事实",
+      "缺口：舆情统计"
+    ],
+    "specialty_average": null
+  },
+  "specialty_scores": {
+    "items": [],
+    "average": null,
+    "rating_eligible": false
+  },
+  "metrics": [
+    {
+      "label": "招投标记录总量",
+      "value": "0",
+      "hint": "市场活动记录，不代表收入或履约质量"
+    }
+  ],
+  "caliber": {
+    "match_target": "深圳市不存在的星河量子商业有限公司",
+    "match_type": "单企业竞争基准（非多企业横向对比）",
+    "data_scope": "有效覆盖 2/7 个主题域；生成时间 2026-10-27T10:42:28+08:00",
+    "products": [
+      "企业基础信息",
+      "经营公开线索",
+      "专利统计",
+      "商标统计",
+      "招投标统计",
+      "舆情统计",
+      "资质证书概况"
+    ],
+    "limit": "无可比企业和行业分母，不作排名、领先性、市场份额、收入归因或履约质量结论。缺口：主体工商确认；主体与工商基础；专利事实；商标事实；资质证书事实；舆情统计"
+  },
+  "core_analysis": {
+    "bidding": {
+      "winbidStatList": [],
+      "winbidAreaStat": [],
+      "winbidAmountStatList": [],
+      "winbidTrend": [],
+      "bidding_info": [],
+      "bidding_total": 0
+    },
+    "operation": {
+      "scale": {
+        "staff": null,
+        "turnover": null
+      },
+      "financing_count": null,
+      "financing_list": [],
+      "trends": {
+        "text": "查询数据为空"
+      },
+      "rankings": []
+    },
+    "sections": [
+      {
+        "key": "bidding",
+        "title": "招投标公开活动",
+        "kind": "kv"
+      },
+      {
+        "key": "operation",
+        "title": "经营公开线索",
+        "kind": "kv"
+      }
+    ]
+  },
+  "representative_records": [
+    {
+      "维度": "招投标记录总量",
+      "关键记录": "0（市场活动记录，不代表收入或履约质量）"
+    }
+  ],
+  "insights": [],
+  "data_source": {
+    "mcp_server": "7 MCP",
+    "mcp_servers": [
+      "enterprise-mcp-server",
+      "enterprise-operation-mcp-server",
+      "patent-mcp-server",
+      "trademark-mcp-server",
+      "bidding-mcp-server",
+      "news-mcp-server",
+      "qualification-mcp-server"
+    ],
+    "mode": "live_mcp",
+    "dry_run": false,
+    "generated_at": "2026-10-27T10:42:28+08:00",
+    "quality_report": {
+      "total_sections": 7,
+      "populated_sections": 2,
+      "empty_sections": 5,
+      "coverage_pct": 29
+    },
+    "tool_errors": [],
+    "products": [
+      {
+        "name": "企业基础信息"
+      },
+      {
+        "name": "经营公开线索"
+      },
+      {
+        "name": "专利统计"
+      },
+      {
+        "name": "商标统计"
+      },
+      {
+        "name": "招投标统计"
+      },
+      {
+        "name": "舆情统计"
+      },
+      {
+        "name": "资质证书概况"
+      }
+    ]
+  }
+}

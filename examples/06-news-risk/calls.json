@@ -1,0 +1,612 @@
+[
+  {
+    "tool": "patent_bigdata_patent_stats",
+    "domain": "patent",
+    "arguments": {
+      "matchKeyword": "特斯拉（上海）有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 0.384,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "patentDivAppLegalStat",
+      "patentTypeAppTimeStat",
+      "patentTypePubTimeStat",
+      "patentTypeStat"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "patentDivAppLegalStat[0].patentCount",
+        "value": 2
+      },
+      {
+        "path": "patentTypeAppTimeStat[0].utilityModelPatentCount",
+        "value": 2
+      },
+      {
+        "path": "patentTypePubTimeStat[0].utilityModelPatentCount",
+        "value": 2
+      },
+      {
+        "path": "patentTypeStat.utilityModelPatentCount",
+        "value": 2
+      }
+    ],
+    "response_sha256": "0820d6c10c6f9b40bdb32f8025cf327787e974b1625042ff5c43d248a1bfd92c"
+  },
+  {
+    "tool": "qualification_bigdata_qualification_certificate_profile",
+    "domain": "qualification",
+    "arguments": {
+      "matchKeyword": "特斯拉（上海）有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 0.778,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "certFirstPublishTime",
+      "certLastPublishTime",
+      "certNumberThisYear",
+      "certTypeList",
+      "certificateCount"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "certNumberThisYear",
+        "value": 22
+      },
+      {
+        "path": "certificateCount",
+        "value": 81
+      }
+    ],
+    "response_sha256": "e09473f250fe3ea209c5f8180fbf657947f321f245e4d392103b9b80c0dc4ede"
+  },
+  {
+    "tool": "news_bigdata_news_stats",
+    "domain": "news",
+    "arguments": {
+      "matchKeyword": "特斯拉（上海）有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 0.789,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "newsSentimentStats",
+      "newsSentimentTrend",
+      "sentimentLabelList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "newsSentimentStats.negative",
+        "value": 121
+      },
+      {
+        "path": "newsSentimentStats.neutral",
+        "value": 437
+      },
+      {
+        "path": "newsSentimentStats.positive",
+        "value": 161
+      },
+      {
+        "path": "newsSentimentStats.unknown",
+        "value": 2
+      },
+      {
+        "path": "newsSentimentTrend[0].stats.negative",
+        "value": 3
+      },
+      {
+        "path": "newsSentimentTrend[0].stats.positive",
+        "value": 1
+      },
+      {
+        "path": "newsSentimentTrend[1].stats.negative",
+        "value": 2
+      },
+      {
+        "path": "newsSentimentTrend[1].stats.positive",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[2].stats.negative",
+        "value": 2
+      },
+      {
+        "path": "newsSentimentTrend[2].stats.positive",
+        "value": 2
+      },
+      {
+        "path": "newsSentimentTrend[3].stats.negative",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[3].stats.positive",
+        "value": 1
+      },
+      {
+        "path": "newsSentimentTrend[4].stats.negative",
+        "value": 3
+      },
+      {
+        "path": "newsSentimentTrend[4].stats.positive",
+        "value": 3
+      }
+    ],
+    "response_sha256": "f116b249422bc9fd9122b311e1d1b51623c5e94e87dbdba6b6ee954fcd882990"
+  },
+  {
+    "tool": "bid_bigdata_bid_win_stats",
+    "domain": "bidding",
+    "arguments": {
+      "matchKeyword": "特斯拉（上海）有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 1.184,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "winbidAmountStatList",
+      "winbidAreaStat",
+      "winbidStatList",
+      "winbidTrend"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "winbidAmountStatList[0].percent",
+        "value": 100.0
+      },
+      {
+        "path": "winbidAmountStatList[0].count",
+        "value": 2
+      },
+      {
+        "path": "winbidAreaStat[0].count",
+        "value": 6
+      },
+      {
+        "path": "winbidAreaStat[1].count",
+        "value": 1
+      },
+      {
+        "path": "winbidAreaStat[2].count",
+        "value": 1
+      },
+      {
+        "path": "winbidStatList[0].count",
+        "value": 3
+      },
+      {
+        "path": "winbidStatList[0].percent",
+        "value": 27.27
+      },
+      {
+        "path": "winbidStatList[1].count",
+        "value": 3
+      },
+      {
+        "path": "winbidStatList[1].percent",
+        "value": 27.27
+      },
+      {
+        "path": "winbidStatList[2].count",
+        "value": 3
+      },
+      {
+        "path": "winbidStatList[2].percent",
+        "value": 27.27
+      },
+      {
+        "path": "winbidStatList[3].count",
+        "value": 1
+      },
+      {
+        "path": "winbidStatList[3].percent",
+        "value": 9.09
+      },
+      {
+        "path": "winbidStatList[4].count",
+        "value": 1
+      },
+      {
+        "path": "winbidStatList[4].percent",
+        "value": 9.09
+      },
+      {
+        "path": "winbidTrend[0].count",
+        "value": 3
+      },
+      {
+        "path": "winbidTrend[1].count",
+        "value": 2
+      },
+      {
+        "path": "winbidTrend[2].count",
+        "value": 1
+      },
+      {
+        "path": "winbidTrend[3].count",
+        "value": 2
+      }
+    ],
+    "response_sha256": "5e9d01eaabf04098edd4a8bf13e8734c79f623321eb4e4bcd7fd2cd866238362"
+  },
+  {
+    "tool": "bid_bigdata_bidding_info",
+    "domain": "bidding",
+    "arguments": {
+      "matchKeyword": "特斯拉（上海）有限公司",
+      "keywordType": "name",
+      "pageSize": 20
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 1.186,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 20,
+    "reported_total": 28,
+    "numeric_evidence": [
+      {
+        "path": "resultList[4].projectAmount",
+        "value": 23000.0
+      },
+      {
+        "path": "total",
+        "value": 28
+      }
+    ],
+    "response_sha256": "1d422ff1c93c27611bc004c0d9fc020c09a83e9a3469632f1383ff121ecd10bc"
+  },
+  {
+    "tool": "trademark_bigdata_trademark_profile",
+    "domain": "trademark",
+    "arguments": {
+      "matchKeyword": "特斯拉（上海）有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 1.28,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "tmCount",
+      "tmInvalidNumber",
+      "tmNumberThisYear",
+      "tmTypeList",
+      "tmValidNumber",
+      "tmStatusList",
+      "tmStatusStat"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "tmCount",
+        "value": 18
+      },
+      {
+        "path": "tmInvalidNumber",
+        "value": 18
+      },
+      {
+        "path": "tmNumberThisYear",
+        "value": 1
+      },
+      {
+        "path": "tmValidNumber",
+        "value": 0
+      },
+      {
+        "path": "tmStatusStat.等待实质审查",
+        "value": 15
+      },
+      {
+        "path": "tmStatusStat.驳回复审中",
+        "value": 3
+      }
+    ],
+    "response_sha256": "897bf760bc7cc88601ea7e7855583a14d3eb03dbd2c51754694cc19bca8b4084"
+  },
+  {
+    "tool": "trademark_bigdata_trademark_stats",
+    "domain": "trademark",
+    "arguments": {
+      "matchKeyword": "特斯拉（上海）有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 1.282,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "tmAppTimeStat",
+      "tmRegTimeStat",
+      "tmTypeStats",
+      "tmStatusStat"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "tmAppTimeStat[4].count",
+        "value": 17
+      },
+      {
+        "path": "tmTypeStats[0].count",
+        "value": 17
+      },
+      {
+        "path": "tmTypeStats[1].count",
+        "value": 1
+      },
+      {
+        "path": "tmStatusStat[0].count",
+        "value": 15
+      },
+      {
+        "path": "tmStatusStat[1].count",
+        "value": 3
+      }
+    ],
+    "response_sha256": "6c70aafdf74de2da6f63e0863737b04992165202bcb156f775cdac2fc9102665"
+  },
+  {
+    "tool": "operation_insight_business_scale",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "特斯拉（上海）有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 1.785,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "annualTurnover",
+      "enterpriseScale"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [],
+    "response_sha256": "35311bf21a9480a47d79eb1303124d140a040d2534f8af348da26f28da6853fc"
+  },
+  {
+    "tool": "operation_insight_financing_info",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "特斯拉（上海）有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 1.787,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "fpFinancingCount",
+      "fpFinancingList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "fpFinancingCount",
+        "value": 2
+      }
+    ],
+    "response_sha256": "214ac772ffc0aff34a3ec19851112f1483ecc3c7a07ab7454ddf659137762c6a"
+  },
+  {
+    "tool": "operation_insight_company_trends",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "特斯拉（上海）有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 1.791,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "isExpandNewCityIn6Month",
+      "isExpandNewCityIn12Month"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "isExpandNewCityIn6Month",
+        "value": 1
+      },
+      {
+        "path": "isExpandNewCityIn12Month",
+        "value": 1
+      }
+    ],
+    "response_sha256": "d7dceee6e28a43d02a115747e55222321bb0ee81f839989255aa99ef4d6e448a"
+  },
+  {
+    "tool": "operation_insight_enterprise_rankings",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "特斯拉（上海）有限公司",
+      "keywordType": "name",
+      "pageSize": 10
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 1.793,
+    "status": "empty",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "text"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [],
+    "response_sha256": "b2da0c4c26e517e5a1eae0af2a20ca47c52ef51906cf1c3dfa2fe10a67cc714c"
+  },
+  {
+    "tool": "enterprise_get_enterprise_base_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "特斯拉（上海）有限公司"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 2.946,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "base_info",
+      "desc",
+      "tag"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "base_info.payAmountCount.amount",
+        "value": 4670000000.0
+      },
+      {
+        "path": "base_info.regCapital.value",
+        "value": 4670000000.0
+      },
+      {
+        "path": "tag.isAnomaly",
+        "value": 0
+      }
+    ],
+    "response_sha256": "a1005fc292cda98c93a016e5bd693b0ca802ee69bda6da9e34b623b622007ee8"
+  },
+  {
+    "tool": "enterprise_get_enterprise_holder_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "特斯拉（上海）有限公司"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 2.949,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "holderList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "holderList[0].payAmount.value",
+        "value": 4670000000.0
+      },
+      {
+        "path": "holderList[0].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "holderList[0].subscriptionDetail.amount",
+        "value": 4670000000.0
+      }
+    ],
+    "response_sha256": "2dec19a15c32c1719dd6d360baa5b03b60ae8d55d8bd689dc7522b32e70b5485"
+  },
+  {
+    "tool": "enterprise_get_enterprise_invest_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "特斯拉（上海）有限公司"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 2.954,
+    "status": "empty",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "text"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [],
+    "response_sha256": "b2da0c4c26e517e5a1eae0af2a20ca47c52ef51906cf1c3dfa2fe10a67cc714c"
+  },
+  {
+    "tool": "enterprise_get_enterprise_main_person_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "特斯拉（上海）有限公司"
+    },
+    "invocation_id": "1793068942788097000",
+    "elapsed_seconds": 2.956,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 7,
+    "reported_total": 7,
+    "numeric_evidence": [
+      {
+        "path": "resultList[1].relatedEnterpriseCurrentNum",
+        "value": 579
+      },
+      {
+        "path": "resultList[1].relatedEnterpriseHistoryNum",
+        "value": 153
+      },
+      {
+        "path": "resultList[2].relatedEnterpriseCurrentNum",
+        "value": 10
+      },
+      {
+        "path": "resultList[2].relatedEnterpriseHistoryNum",
+        "value": 16
+      },
+      {
+        "path": "resultList[3].relatedEnterpriseCurrentNum",
+        "value": 2
+      },
+      {
+        "path": "resultList[3].relatedEnterpriseHistoryNum",
+        "value": 1
+      },
+      {
+        "path": "total",
+        "value": 7
+      }
+    ],
+    "response_sha256": "03c36732e16ecb41c3db1110fb723e3ef2b2789ae793508964ca7998bb03c447"
+  }
+]

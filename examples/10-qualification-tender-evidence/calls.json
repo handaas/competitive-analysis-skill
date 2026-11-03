@@ -1,0 +1,998 @@
+[
+  {
+    "tool": "qualification_bigdata_qualification_certificate_profile",
+    "domain": "qualification",
+    "arguments": {
+      "matchKeyword": "中国建筑第八工程局有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 1.094,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "certFirstPublishTime",
+      "certLastPublishTime",
+      "certNumberThisYear",
+      "certTypeList",
+      "certificateCount"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "certNumberThisYear",
+        "value": 29
+      },
+      {
+        "path": "certificateCount",
+        "value": 451
+      }
+    ],
+    "response_sha256": "93987641dfa25668fbddbfa44e2e2249a1cd245d5dfdce96fe038035b7a1200f"
+  },
+  {
+    "tool": "news_bigdata_news_stats",
+    "domain": "news",
+    "arguments": {
+      "matchKeyword": "中国建筑第八工程局有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 1.282,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "newsSentimentStats",
+      "newsSentimentTrend",
+      "sentimentLabelList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "newsSentimentStats.negative",
+        "value": 244
+      },
+      {
+        "path": "newsSentimentStats.neutral",
+        "value": 960
+      },
+      {
+        "path": "newsSentimentStats.positive",
+        "value": 1124
+      },
+      {
+        "path": "newsSentimentStats.unknown",
+        "value": 3
+      },
+      {
+        "path": "newsSentimentTrend[0].stats.negative",
+        "value": 1
+      },
+      {
+        "path": "newsSentimentTrend[0].stats.positive",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[1].stats.negative",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[1].stats.positive",
+        "value": 4
+      },
+      {
+        "path": "newsSentimentTrend[2].stats.negative",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[2].stats.positive",
+        "value": 1
+      },
+      {
+        "path": "newsSentimentTrend[3].stats.negative",
+        "value": 1
+      },
+      {
+        "path": "newsSentimentTrend[3].stats.positive",
+        "value": 5
+      },
+      {
+        "path": "newsSentimentTrend[4].stats.negative",
+        "value": 0
+      },
+      {
+        "path": "newsSentimentTrend[4].stats.positive",
+        "value": 1
+      }
+    ],
+    "response_sha256": "f55abf2c9afbdd8c50f1747101ea4cadab0cba607eb7f4a7e1fd46ed711d35a1"
+  },
+  {
+    "tool": "patent_bigdata_patent_stats",
+    "domain": "patent",
+    "arguments": {
+      "matchKeyword": "中国建筑第八工程局有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 1.285,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "patentDivAppLegalStat",
+      "patentTypeAppTimeStat",
+      "patentTypePubTimeStat",
+      "patentTypeStat"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "patentDivAppLegalStat[0].patentCount",
+        "value": 3746
+      },
+      {
+        "path": "patentDivAppLegalStat[1].patentCount",
+        "value": 5789
+      },
+      {
+        "path": "patentDivAppLegalStat[2].patentCount",
+        "value": 2392
+      },
+      {
+        "path": "patentDivAppLegalStat[3].patentCount",
+        "value": 648
+      },
+      {
+        "path": "patentDivAppLegalStat[4].patentCount",
+        "value": 1423
+      },
+      {
+        "path": "patentTypeAppTimeStat[0].inventionAppPatentCount",
+        "value": 113
+      },
+      {
+        "path": "patentTypeAppTimeStat[0].inventionLicPatentCount",
+        "value": 137
+      },
+      {
+        "path": "patentTypeAppTimeStat[0].utilityModelPatentCount",
+        "value": 685
+      },
+      {
+        "path": "patentTypeAppTimeStat[1].appearanceDesignPatentCount",
+        "value": 1
+      },
+      {
+        "path": "patentTypeAppTimeStat[1].inventionAppPatentCount",
+        "value": 106
+      },
+      {
+        "path": "patentTypeAppTimeStat[1].inventionLicPatentCount",
+        "value": 112
+      },
+      {
+        "path": "patentTypeAppTimeStat[1].utilityModelPatentCount",
+        "value": 639
+      },
+      {
+        "path": "patentTypeAppTimeStat[2].appearanceDesignPatentCount",
+        "value": 1
+      },
+      {
+        "path": "patentTypeAppTimeStat[2].inventionAppPatentCount",
+        "value": 127
+      },
+      {
+        "path": "patentTypeAppTimeStat[2].inventionLicPatentCount",
+        "value": 137
+      },
+      {
+        "path": "patentTypeAppTimeStat[2].utilityModelPatentCount",
+        "value": 862
+      },
+      {
+        "path": "patentTypeAppTimeStat[3].appearanceDesignPatentCount",
+        "value": 7
+      },
+      {
+        "path": "patentTypeAppTimeStat[3].inventionAppPatentCount",
+        "value": 248
+      },
+      {
+        "path": "patentTypeAppTimeStat[3].inventionLicPatentCount",
+        "value": 191
+      },
+      {
+        "path": "patentTypeAppTimeStat[3].utilityModelPatentCount",
+        "value": 653
+      },
+      {
+        "path": "patentTypeAppTimeStat[4].appearanceDesignPatentCount",
+        "value": 1
+      },
+      {
+        "path": "patentTypeAppTimeStat[4].inventionAppPatentCount",
+        "value": 313
+      },
+      {
+        "path": "patentTypeAppTimeStat[4].inventionLicPatentCount",
+        "value": 234
+      },
+      {
+        "path": "patentTypeAppTimeStat[4].utilityModelPatentCount",
+        "value": 621
+      },
+      {
+        "path": "patentTypePubTimeStat[0].inventionAppPatentCount",
+        "value": 86
+      },
+      {
+        "path": "patentTypePubTimeStat[0].inventionLicPatentCount",
+        "value": 113
+      },
+      {
+        "path": "patentTypePubTimeStat[0].utilityModelPatentCount",
+        "value": 640
+      },
+      {
+        "path": "patentTypePubTimeStat[1].appearanceDesignPatentCount",
+        "value": 1
+      },
+      {
+        "path": "patentTypePubTimeStat[1].inventionAppPatentCount",
+        "value": 113
+      },
+      {
+        "path": "patentTypePubTimeStat[1].inventionLicPatentCount",
+        "value": 137
+      },
+      {
+        "path": "patentTypePubTimeStat[1].utilityModelPatentCount",
+        "value": 601
+      },
+      {
+        "path": "patentTypePubTimeStat[2].inventionAppPatentCount",
+        "value": 114
+      },
+      {
+        "path": "patentTypePubTimeStat[2].inventionLicPatentCount",
+        "value": 102
+      },
+      {
+        "path": "patentTypePubTimeStat[2].utilityModelPatentCount",
+        "value": 665
+      },
+      {
+        "path": "patentTypePubTimeStat[3].appearanceDesignPatentCount",
+        "value": 5
+      },
+      {
+        "path": "patentTypePubTimeStat[3].inventionAppPatentCount",
+        "value": 191
+      },
+      {
+        "path": "patentTypePubTimeStat[3].inventionLicPatentCount",
+        "value": 105
+      },
+      {
+        "path": "patentTypePubTimeStat[3].utilityModelPatentCount",
+        "value": 928
+      },
+      {
+        "path": "patentTypePubTimeStat[4].appearanceDesignPatentCount",
+        "value": 4
+      },
+      {
+        "path": "patentTypePubTimeStat[4].inventionAppPatentCount",
+        "value": 346
+      },
+      {
+        "path": "patentTypePubTimeStat[4].inventionLicPatentCount",
+        "value": 141
+      },
+      {
+        "path": "patentTypePubTimeStat[4].utilityModelPatentCount",
+        "value": 532
+      },
+      {
+        "path": "patentTypeStat.appearanceDesignPatentCount",
+        "value": 77
+      },
+      {
+        "path": "patentTypeStat.inventionAppPatentCount",
+        "value": 4067
+      },
+      {
+        "path": "patentTypeStat.inventionLicPatentCount",
+        "value": 2237
+      },
+      {
+        "path": "patentTypeStat.utilityModelPatentCount",
+        "value": 8260
+      }
+    ],
+    "response_sha256": "3df61e6e8ce2c3af923fa1c6e7c84c40a3c1c553b8360630134d568a3ff3f89a"
+  },
+  {
+    "tool": "bid_bigdata_bid_win_stats",
+    "domain": "bidding",
+    "arguments": {
+      "matchKeyword": "中国建筑第八工程局有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 2.437,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "winbidAmountStatList",
+      "winbidAreaStat",
+      "winbidStatList",
+      "winbidTrend"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "winbidAmountStatList[0].percent",
+        "value": 3.61
+      },
+      {
+        "path": "winbidAmountStatList[0].count",
+        "value": 242
+      },
+      {
+        "path": "winbidAmountStatList[1].percent",
+        "value": 0.95
+      },
+      {
+        "path": "winbidAmountStatList[1].count",
+        "value": 64
+      },
+      {
+        "path": "winbidAmountStatList[2].percent",
+        "value": 0.85
+      },
+      {
+        "path": "winbidAmountStatList[2].count",
+        "value": 57
+      },
+      {
+        "path": "winbidAmountStatList[3].percent",
+        "value": 2.91
+      },
+      {
+        "path": "winbidAmountStatList[3].count",
+        "value": 195
+      },
+      {
+        "path": "winbidAmountStatList[4].percent",
+        "value": 91.68
+      },
+      {
+        "path": "winbidAmountStatList[4].count",
+        "value": 6147
+      },
+      {
+        "path": "winbidAreaStat[0].count",
+        "value": 393
+      },
+      {
+        "path": "winbidAreaStat[1].count",
+        "value": 601
+      },
+      {
+        "path": "winbidAreaStat[2].count",
+        "value": 528
+      },
+      {
+        "path": "winbidAreaStat[3].count",
+        "value": 234
+      },
+      {
+        "path": "winbidAreaStat[4].count",
+        "value": 1594
+      },
+      {
+        "path": "winbidStatList[0].count",
+        "value": 273
+      },
+      {
+        "path": "winbidStatList[0].percent",
+        "value": 3.03
+      },
+      {
+        "path": "winbidStatList[1].count",
+        "value": 227
+      },
+      {
+        "path": "winbidStatList[1].percent",
+        "value": 2.52
+      },
+      {
+        "path": "winbidStatList[2].count",
+        "value": 212
+      },
+      {
+        "path": "winbidStatList[2].percent",
+        "value": 2.35
+      },
+      {
+        "path": "winbidStatList[3].count",
+        "value": 139
+      },
+      {
+        "path": "winbidStatList[3].percent",
+        "value": 1.54
+      },
+      {
+        "path": "winbidStatList[4].count",
+        "value": 127
+      },
+      {
+        "path": "winbidStatList[4].percent",
+        "value": 1.41
+      },
+      {
+        "path": "winbidTrend[0].count",
+        "value": 680
+      },
+      {
+        "path": "winbidTrend[1].count",
+        "value": 1319
+      },
+      {
+        "path": "winbidTrend[2].count",
+        "value": 1803
+      },
+      {
+        "path": "winbidTrend[3].count",
+        "value": 1118
+      },
+      {
+        "path": "winbidTrend[4].count",
+        "value": 1582
+      }
+    ],
+    "response_sha256": "ecb8e2ac52b684dc95b12223d19c7cb8caede3977a88c683d714790667ee3c33"
+  },
+  {
+    "tool": "bid_bigdata_bidding_info",
+    "domain": "bidding",
+    "arguments": {
+      "matchKeyword": "中国建筑第八工程局有限公司",
+      "keywordType": "name",
+      "pageSize": 20
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 2.441,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 20,
+    "reported_total": 1000,
+    "numeric_evidence": [
+      {
+        "path": "resultList[1].projectAmount",
+        "value": 3144.99
+      },
+      {
+        "path": "resultList[3].projectAmount",
+        "value": 480.0
+      },
+      {
+        "path": "total",
+        "value": 1000
+      }
+    ],
+    "response_sha256": "ae62ee0d02f3209da0ff543908e373652653385b652bd423deb5e8b182304551"
+  },
+  {
+    "tool": "trademark_bigdata_trademark_profile",
+    "domain": "trademark",
+    "arguments": {
+      "matchKeyword": "中国建筑第八工程局有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 2.616,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "tmCount",
+      "tmInvalidNumber",
+      "tmNumberThisYear",
+      "tmTypeList",
+      "tmValidNumber",
+      "tmStatusList",
+      "tmStatusStat"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "tmCount",
+        "value": 248
+      },
+      {
+        "path": "tmInvalidNumber",
+        "value": 138
+      },
+      {
+        "path": "tmNumberThisYear",
+        "value": 5
+      },
+      {
+        "path": "tmValidNumber",
+        "value": 110
+      },
+      {
+        "path": "tmStatusStat.初审公告",
+        "value": 26
+      },
+      {
+        "path": "tmStatusStat.商标已注册",
+        "value": 86
+      },
+      {
+        "path": "tmStatusStat.商标无效",
+        "value": 67
+      },
+      {
+        "path": "tmStatusStat.等待实质审查",
+        "value": 69
+      }
+    ],
+    "response_sha256": "df1eeac6e958cefc78b2af3aaa394bed4bc6041e51742684f3d308879c3a14be"
+  },
+  {
+    "tool": "trademark_bigdata_trademark_stats",
+    "domain": "trademark",
+    "arguments": {
+      "matchKeyword": "中国建筑第八工程局有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 2.619,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "tmAppTimeStat",
+      "tmRegTimeStat",
+      "tmTypeStats",
+      "tmStatusStat"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "tmAppTimeStat[1].count",
+        "value": 1
+      },
+      {
+        "path": "tmAppTimeStat[2].count",
+        "value": 3
+      },
+      {
+        "path": "tmAppTimeStat[3].count",
+        "value": 22
+      },
+      {
+        "path": "tmAppTimeStat[4].count",
+        "value": 57
+      },
+      {
+        "path": "tmRegTimeStat[0].count",
+        "value": 1
+      },
+      {
+        "path": "tmRegTimeStat[3].count",
+        "value": 3
+      },
+      {
+        "path": "tmRegTimeStat[4].count",
+        "value": 1
+      },
+      {
+        "path": "tmTypeStats[0].count",
+        "value": 64
+      },
+      {
+        "path": "tmTypeStats[1].count",
+        "value": 44
+      },
+      {
+        "path": "tmTypeStats[2].count",
+        "value": 34
+      },
+      {
+        "path": "tmTypeStats[3].count",
+        "value": 18
+      },
+      {
+        "path": "tmTypeStats[4].count",
+        "value": 16
+      },
+      {
+        "path": "tmStatusStat[0].count",
+        "value": 26
+      },
+      {
+        "path": "tmStatusStat[1].count",
+        "value": 67
+      },
+      {
+        "path": "tmStatusStat[2].count",
+        "value": 69
+      },
+      {
+        "path": "tmStatusStat[3].count",
+        "value": 86
+      }
+    ],
+    "response_sha256": "5df6993eba9c43bae3c217288b5b410b6f934e67ca5126f14d7011af0994c162"
+  },
+  {
+    "tool": "operation_insight_business_scale",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "中国建筑第八工程局有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 3.113,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "annualTurnover",
+      "enterpriseScale"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [],
+    "response_sha256": "ee63aae554109f53ed99f207dd8367fd387a4babf40430774dfee3d9d67e3ab5"
+  },
+  {
+    "tool": "operation_insight_financing_info",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "中国建筑第八工程局有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 3.128,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "fpFinancingCount",
+      "fpFinancingList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "fpFinancingCount",
+        "value": 1
+      }
+    ],
+    "response_sha256": "61fe0257ee346dd08bdc2defb3c1eefc68617c33eba4bae301fa224127a2eaf3"
+  },
+  {
+    "tool": "operation_insight_company_trends",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "中国建筑第八工程局有限公司",
+      "keywordType": "name"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 3.133,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "isFoundSubsidiaryIn3Month",
+      "isDiffAreaWinBidIn3Month",
+      "isDiffAreaWinBidIn6Month",
+      "isDiffAreaWinBidIn12Month",
+      "qualificationIn6MonthList",
+      "qualificationIn12MonthList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "isFoundSubsidiaryIn3Month",
+        "value": 1
+      },
+      {
+        "path": "isDiffAreaWinBidIn3Month",
+        "value": 1
+      },
+      {
+        "path": "isDiffAreaWinBidIn6Month",
+        "value": 1
+      },
+      {
+        "path": "isDiffAreaWinBidIn12Month",
+        "value": 1
+      }
+    ],
+    "response_sha256": "b4e75d32383d6361b5a60607cb817b713611f35425184048d485f9e8f4981285"
+  },
+  {
+    "tool": "operation_insight_enterprise_rankings",
+    "domain": "operation",
+    "arguments": {
+      "matchKeyword": "中国建筑第八工程局有限公司",
+      "keywordType": "name",
+      "pageSize": 10
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 3.139,
+    "status": "empty",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "text"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [],
+    "response_sha256": "b2da0c4c26e517e5a1eae0af2a20ca47c52ef51906cf1c3dfa2fe10a67cc714c"
+  },
+  {
+    "tool": "enterprise_get_enterprise_base_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "中国建筑第八工程局有限公司"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 5.359,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "base_info",
+      "desc",
+      "tag"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "base_info.payAmountCount.amount",
+        "value": 15218000000.0
+      },
+      {
+        "path": "base_info.regCapital.value",
+        "value": 15218000000.0
+      },
+      {
+        "path": "tag.isAnomaly",
+        "value": 0
+      },
+      {
+        "path": "tag.isHighTechEnterprise",
+        "value": 1
+      }
+    ],
+    "response_sha256": "dfca44e2fec768b071eae3a6f198d4dc310b8451b9c6ae877ef8b5fe43a89705"
+  },
+  {
+    "tool": "enterprise_get_enterprise_holder_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "中国建筑第八工程局有限公司"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 6.704,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "holderList"
+    ],
+    "row_count": null,
+    "reported_total": null,
+    "numeric_evidence": [
+      {
+        "path": "holderList[0].payAmount.value",
+        "value": 3539621500.0
+      },
+      {
+        "path": "holderList[0].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "holderList[0].subscriptionDetail.amount",
+        "value": 15218000000.0
+      }
+    ],
+    "response_sha256": "c89f2ea2416dd53e42d6c0e79b3e4e0c9141037f6820753c08f024501b1e8ae9"
+  },
+  {
+    "tool": "enterprise_get_enterprise_invest_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "中国建筑第八工程局有限公司"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 7.995,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 50,
+    "reported_total": 278,
+    "numeric_evidence": [
+      {
+        "path": "resultList[0].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[0].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "resultList[0].regCapital.value",
+        "value": 100000000.0
+      },
+      {
+        "path": "resultList[0].subscriptionAmount.value",
+        "value": 100000000.0
+      },
+      {
+        "path": "resultList[1].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[1].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "resultList[1].regCapital.value",
+        "value": 100000000.0
+      },
+      {
+        "path": "resultList[1].subscriptionAmount.value",
+        "value": 100000000.0
+      },
+      {
+        "path": "resultList[2].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[2].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "resultList[2].regCapital.value",
+        "value": 100000000.0
+      },
+      {
+        "path": "resultList[2].subscriptionAmount.value",
+        "value": 100000000.0
+      },
+      {
+        "path": "resultList[3].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[3].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "resultList[3].regCapital.value",
+        "value": 5100000.0
+      },
+      {
+        "path": "resultList[3].subscriptionAmount.value",
+        "value": 5100000.0
+      },
+      {
+        "path": "resultList[4].isListed",
+        "value": 0
+      },
+      {
+        "path": "resultList[4].ratio",
+        "value": 1.0
+      },
+      {
+        "path": "resultList[4].regCapital.value",
+        "value": 100000000.0
+      },
+      {
+        "path": "resultList[4].subscriptionAmount.value",
+        "value": 100000000.0
+      },
+      {
+        "path": "total",
+        "value": 278
+      }
+    ],
+    "response_sha256": "e0b98a5101f9ce001c9e60fa4dd4ae55ceee96ef239bc3bd43c12aa0a548753c"
+  },
+  {
+    "tool": "enterprise_get_enterprise_main_person_info",
+    "domain": "enterprise",
+    "arguments": {
+      "keyword": "中国建筑第八工程局有限公司"
+    },
+    "invocation_id": "1793068931533948000",
+    "elapsed_seconds": 8.172,
+    "status": "data",
+    "error_category": null,
+    "result_type": "dict",
+    "top_level_fields": [
+      "resultList",
+      "total"
+    ],
+    "row_count": 8,
+    "reported_total": 8,
+    "numeric_evidence": [
+      {
+        "path": "resultList[0].relatedEnterpriseCurrentNum",
+        "value": 3
+      },
+      {
+        "path": "resultList[0].relatedEnterpriseHistoryNum",
+        "value": 5
+      },
+      {
+        "path": "resultList[1].relatedEnterpriseCurrentNum",
+        "value": 2
+      },
+      {
+        "path": "resultList[1].relatedEnterpriseHistoryNum",
+        "value": 3
+      },
+      {
+        "path": "resultList[2].relatedEnterpriseCurrentNum",
+        "value": 3
+      },
+      {
+        "path": "resultList[2].relatedEnterpriseHistoryNum",
+        "value": 8
+      },
+      {
+        "path": "resultList[3].relatedEnterpriseCurrentNum",
+        "value": 2
+      },
+      {
+        "path": "resultList[3].relatedEnterpriseHistoryNum",
+        "value": 0
+      },
+      {
+        "path": "resultList[4].relatedEnterpriseCurrentNum",
+        "value": 3
+      },
+      {
+        "path": "resultList[4].relatedEnterpriseHistoryNum",
+        "value": 5
+      },
+      {
+        "path": "total",
+        "value": 8
+      }
+    ],
+    "response_sha256": "647fc68932edcb9ff12e02f75ebf01e01fb08c6434c548053f9dabcc21316f07"
+  }
+]

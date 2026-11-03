@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="icon" href="data:," />
-  <title>比亚迪股份有限公司 供应商评估报告</title>
+  <title>宁德时代新能源科技股份有限公司 企业竞争基准画像</title>
   <style>
     :root { --bg:#eef1f5; --card:#ffffff; --text:#1f2937; --muted:#64748b; --line:#d8dee8; --blue:#003b71; --deep:#003b71; --red:#7f1d1d; --gold:#d97706; --stripe:#666; }
     * { box-sizing:border-box; letter-spacing:0 !important; }
@@ -145,6 +145,7 @@
     .chart-box-gauge { max-width:380px; }
     .chart-title { margin:0 0 8px; color:#0b3768; font-size:15px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; }
     .chart-canvas { width:100%; height:300px; }
+    .chart-canvas[data-chart-state="waiting"],.chart-canvas[data-chart-state="error"] { display:flex; align-items:center; justify-content:center; color:#64748b; font-size:13px; text-align:center; }
     .chart-box-gauge .chart-canvas { height:240px; }
     .chart-data { margin-top:10px; }
     .chart-data summary { cursor:pointer; color:#0b5ca8; font-size:12px; font-weight:700; padding:4px 0; }
@@ -212,16 +213,70 @@ var Fr={},Gr={};var Wr,Hr=function(){function t(t,e,n){var i=this;this._sleepAft
 </script>
   <script>
 (function(){
-  window.__echarts_instances=[];
+  if(window.__handaas_boot_charts){window.__handaas_boot_charts();return;}
+  window.__echarts_instances=window.__echarts_instances||[];
+  var status=window.__handaas_chart_status={state:'waiting',total:0,ready:0,failed:0};
+  var timer=null, retries=0, MAX_RETRIES=100;
+  var layoutRetries=0, MAX_LAYOUT_RETRIES=50;
+  var PALETTE=['#0b5ca8','#0284c7','#0b3768','#d97706','#059669','#dc2626','#7c3aed','#db2777','#0891b2','#65a30d'];
+  var FONTS='-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif';
+  function summarize(nodes){
+    status.total=nodes.length;status.ready=0;status.failed=0;
+    nodes.forEach(function(el){
+      if(el.getAttribute('data-chart-state')==='ready'){status.ready++;}
+      else if(el.getAttribute('data-chart-state')==='error'){status.failed++;}
+    });
+    status.state=status.ready===status.total?'ready':
+      (status.ready+status.failed===status.total?(status.ready?'degraded':'error'):'waiting');
+  }
+  function raf(fn){if(window.requestAnimationFrame){window.requestAnimationFrame(fn);}else{fn();}}
   function boot(){
-    if(typeof echarts==='undefined'){return;}
-    var PALETTE=['#0b5ca8','#0284c7','#0b3768','#d97706','#059669','#dc2626','#7c3aed','#db2777','#0891b2','#65a30d'];
-    var FONTS='-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif';
-    document.querySelectorAll('.chart-canvas').forEach(function(el){
-      var raw=el.getAttribute('data-spec'); if(!raw){return;}
-      var spec; try{spec=JSON.parse(raw.replace(/&quot;/g,'"').replace(/&amp;/g,'&'));}catch(e){return;}
-      var chart=echarts.init(el,null,{renderer:'svg'});
-      window.__echarts_instances.push(chart);
+    if(document.readyState==='loading'){return;}
+    var nodes=document.querySelectorAll('.chart-canvas');
+    if(!nodes.length){summarize(nodes);return;}
+    if(!window.echarts || typeof window.echarts.init!=='function'){
+      var exhausted=retries>=MAX_RETRIES;
+      nodes.forEach(function(el){
+        if(el.__handaas_chart_ready){return;}
+        el.__handaas_dependency_error=true;
+        el.setAttribute('data-chart-state',exhausted?'error':'waiting');
+        el.textContent=exhausted?'图表库加载失败或不可用，请查看数据明细或重新生成离线报告。':'图表库正在加载，数据明细仍可查看。';
+      });
+      summarize(nodes);
+      if(!exhausted && timer===null){
+        retries++;
+        timer=setTimeout(function(){timer=null;boot();},100);
+      }
+      return;
+    }
+    if(timer!==null){clearTimeout(timer);timer=null;}
+    var pendingLayout=0;
+    nodes.forEach(function(el){
+      if(el.__handaas_chart_ready){return;}
+      if(el.getAttribute('data-chart-state')==='error' && !el.__handaas_dependency_error){return;}
+      if(window.ResizeObserver && !el.__handaas_resize_observer){
+        el.__handaas_resize_observer=new ResizeObserver(function(){
+          var current=el.__handaas_chart;
+          if(current && typeof current.resize==='function'){try{current.resize();}catch(ignored){}}
+          else{boot();}
+        });
+        el.__handaas_resize_observer.observe(el);
+      }
+      if((el.getClientRects && el.getClientRects().length===0) || el.clientWidth<2 || el.clientHeight<2){
+        el.setAttribute('data-chart-state','waiting');
+        el.textContent='图表等待布局完成后渲染，数据明细仍可查看。';
+        pendingLayout++;
+        return;
+      }
+      var chart=null;
+      try{
+        var raw=el.getAttribute('data-spec');
+        if(!raw){throw new Error('Missing chart configuration');}
+        // getAttribute already decodes HTML entities; a second decode corrupts labels.
+        var spec=JSON.parse(raw);
+        if(['line','bar','pie','gauge','radar'].indexOf(spec.type)<0){throw new Error('Unsupported chart type');}
+        el.textContent='';
+        chart=window.echarts.init(el,null,{renderer:'svg'});
       var opt={color:PALETTE,tooltip:{trigger: spec.type==='pie'?'item':'axis'},textStyle:{fontFamily:FONTS,fontSize:12,color:'#334155'},grid:{left:48,right:24,top:30,bottom:40},legend:{top:0,textStyle:{fontSize:11}}};
       if(spec.type==='line'){
         opt.xAxis={type:'category',data:spec.x,axisLabel:{fontSize:11,interval:0,rotate: spec.x && spec.x.length>6?35:0}};
@@ -247,62 +302,1421 @@ var Fr={},Gr={};var Wr,Hr=function(){function t(t,e,n){var i=this;this._sleepAft
         opt.radar={indicator:spec.indicators,radius:'62%',axisName:{color:'#475569',fontSize:11},splitArea:{areaStyle:{color:['#f8fbff','#eef4fb']}}};
         opt.series=[{type:'radar',areaStyle:{opacity:0.18},data:spec.series}];
       }
-      chart.setOption(opt);
-      window.addEventListener('resize',function(){chart.resize();});
+        chart.setOption(opt);
+        el.__handaas_chart=chart;
+        el.__handaas_chart_ready=true;
+        el.__handaas_dependency_error=false;
+        el.setAttribute('data-chart-state','ready');
+        window.__echarts_instances.push(chart);
+        raf(function(){try{chart.resize();}catch(ignored){}});
+      }catch(e){
+        if(chart && typeof chart.dispose==='function'){try{chart.dispose();}catch(ignored){}}
+        el.__handaas_dependency_error=false;
+        el.setAttribute('data-chart-state','error');
+        el.textContent='图表绘制失败，请查看数据明细。';
+      }
     });
+    summarize(nodes);
+    if(pendingLayout && layoutRetries<MAX_LAYOUT_RETRIES){
+      layoutRetries++;
+      setTimeout(boot,100);
+    }
   }
-  if(document.readyState!=='loading'){boot();}else{document.addEventListener('DOMContentLoaded',boot);}
+  window.__handaas_boot_charts=boot;
   window.__echarts_resize_all=function(){
     (window.__echarts_instances||[]).forEach(function(c){try{c.resize();}catch(e){}});
   };
+  function bootAfterLayout(){
+    raf(function(){boot();window.__echarts_resize_all();});
+  }
+  window.addEventListener('resize',window.__echarts_resize_all);
+  window.addEventListener('load',bootAfterLayout);
+  window.addEventListener('pageshow',bootAfterLayout);
+  window.addEventListener('handaas:echarts-ready',bootAfterLayout);
+  window.addEventListener('orientationchange',bootAfterLayout);
+  // A very late external script can still recover after the bounded retry ends.
+  document.addEventListener('load',function(event){
+    if(event.target && event.target.tagName==='SCRIPT'){boot();}
+  },true);
+  document.addEventListener('DOMContentLoaded',bootAfterLayout);
+  document.addEventListener('visibilitychange',boot);
+  if(document.fonts && document.fonts.ready){document.fonts.ready.then(function(){window.__echarts_resize_all();});}
+  [0,300,1000,2500].forEach(function(ms){setTimeout(function(){boot();window.__echarts_resize_all();},ms);});
+  boot();
 })();
 </script>
 </head>
 <body>
   <article class="report-page">
-    <div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">供应商评估报告</div></div>
+    <div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">企业竞争基准事实画像</div></div>
     <div class="cover-grid">
       <aside class="cover-side">
-        <h2 class="cover-side-title">供应商评估报告</h2>
-        <p class="cover-date">2026年08月10日</p>
+        <h2 class="cover-side-title">企业竞争基准事实画像</h2>
+        <p class="cover-date">2026年10月27日</p>
         <h3 class="toc-title">目录</h3>
         <ol class="toc-list"><li><span>报告摘要</span></li><li><span>查询对象与口径</span></li><li><span>数据总览</span></li><li><span>核心分析</span></li><li><span>代表性记录</span></li><li><span>特征与洞察</span></li></ol>
         <h3 class="scope-title">报告口径</h3>
-        <div class="biz-scope"><div class="biz-scope-item"><span>匹配对象</span><strong>比亚迪股份有限公司</strong></div><div class="biz-scope-item"><span>匹配方式</span><strong>供应商评估（直接聚合 6 个 MCP：工商/风险/经营/渠道/工厂/招聘）</strong></div><div class="biz-scope-item"><span>数据范围</span><strong>覆盖 2/6 大数据源，7 个明细章节，2 条跨维度洞察</strong></div><div class="biz-scope-item"><span>局限说明</span><strong>供应商评估结论基于多维公开数据交叉分析；建议结合实地考察与财务审计综合决策。</strong></div></div>
+        <div class="biz-scope"><div class="biz-scope-item"><span>匹配对象</span><strong>宁德时代新能源科技股份有限公司</strong></div><div class="biz-scope-item"><span>匹配方式</span><strong>单企业竞争基准（非多企业横向对比）</strong></div><div class="biz-scope-item"><span>数据范围</span><strong>有效覆盖 7/7 个主题域；生成时间 2026-10-27T10:42:22+08:00</strong></div><div class="biz-scope-item"><span>局限说明</span><strong>无可比企业和行业分母，不作排名、领先性、市场份额、收入归因或履约质量结论。缺口：</strong></div></div>
       </aside>
       <section class="cover-main">
         <p class="report-kicker">COMPETITIVE ANALYSIS</p>
-        <h1>比亚迪股份有限公司 供应商评估报告</h1>
-        <p class="report-lead">本报告以「比亚迪股份有限公司」为评估对象，直接聚合工商、风险、经营、渠道、工厂、招聘 2 大数据源的多维原始数据，供应商综合评分 40.0（结论：需深入调查）。供应商专项评分均值 40.0 偏低，建议补充实地考察与更多维度数据深度调查</p>
+        <h1>宁德时代新能源科技股份有限公司 企业竞争基准画像</h1>
+        <p class="report-lead">本报告整理「宁德时代新能源科技股份有限公司」的单企业竞争基准事实。本报告只给出单企业客观基准事实，不生成竞争总分、域分、领先性、排名或市场份额结论</p>
         <div class="abstract-box">报告涵盖查询对象、数据总览、核心分析、代表性记录与结构洞察，所有数据均标注口径与来源。</div>
-        <div class="biz-metrics"><div class="biz-metric"><span class="m-name">对外投资</span><span class="m-tag"></span><span class="m-value">50</span></div><div class="biz-metric"><span class="m-name">供应商综合评分</span><span class="m-tag t-neutral">需深入调查</span><span class="m-value">40.0</span></div><div class="biz-metric"><span class="m-name">注册资本</span><span class="m-tag"></span><span class="m-value">人民币 91.17亿</span></div><div class="biz-metric"><span class="m-name">融资轮次</span><span class="m-tag"></span><span class="m-value">7</span></div><div class="biz-metric"><span class="m-name">股东数量</span><span class="m-tag"></span><span class="m-value">2</span></div><div class="biz-metric"><span class="m-name">成立年限</span><span class="m-tag"></span><span class="m-value">31 年</span></div><div class="biz-metric"><span class="m-name">财务稳健性</span><span class="m-tag"></span><span class="m-value">80</span></div><div class="biz-metric"><span class="m-name">风险隔离度</span><span class="m-tag"></span><span class="m-value">0</span></div></div>
-        <ul class="exec-list"><li>供应商专项评分均值 40.0 偏低，建议补充实地考察与更多维度数据深度调查。</li><li>财务稳健性较好，账期风险可控。建议维持健康的账期政策，平衡客户关系与资金周转。</li><li>建议补充工厂产能与经营规模数据以评估匹配度。</li></ul>
-        <div class="cover-findings"><h3 class="cover-findings-title">核心发现</h3><div class="cover-findings-grid"><div class="finding-card"><p class="f-label">账期风险与财务稳健性</p><p class="f-text">完成 7 轮融资。</p></div><div class="finding-card"><p class="f-label">产能与经营规模匹配度</p><p class="f-text">人员规模 10000人以上、年营业额 10亿以上。</p></div></div></div>
-        <div class="cover-dimensions"><span class="dim-label">分析维度</span><div class="dim-tags"><span class="dim-tag">供应商综合评分</span><span class="dim-tag">供应商概况</span><span class="dim-tag">供货能力</span><span class="dim-tag">股东出资结构</span><span class="dim-tag">对外投资清单（关联方敞口）</span><span class="dim-tag">供应商专项评分矩阵</span><span class="dim-tag">经营规模与资本运作</span></div></div>
-        <div class="cover-scope-bar"><span class="scope-item"><em>数据产品</em>企业大数据、企业风险洞察、企业经营分析、渠道洞察、工厂洞察、招聘大数据</span><span class="scope-item"><em>覆盖范围</em>覆盖 2/6 大数据源，7 个明细章节，2 条跨维度洞察</span></div>
+        <div class="biz-metrics"><div class="biz-metric"><span class="m-name">专利类型统计合计</span><span class="m-tag"></span><span class="m-value">26876</span></div><div class="biz-metric"><span class="m-name">商标总数</span><span class="m-tag"></span><span class="m-value">1534</span></div><div class="biz-metric"><span class="m-name">有效商标数</span><span class="m-tag"></span><span class="m-value">903</span></div><div class="biz-metric"><span class="m-name">资质证书数</span><span class="m-tag"></span><span class="m-value">196</span></div><div class="biz-metric"><span class="m-name">近一年获证数</span><span class="m-tag"></span><span class="m-value">25</span></div><div class="biz-metric"><span class="m-name">招投标记录总量</span><span class="m-tag"></span><span class="m-value">390</span></div><div class="biz-metric"><span class="m-name">舆情统计总量</span><span class="m-tag"></span><span class="m-value">5572</span></div><div class="biz-metric"><span class="m-name">负面舆情统计</span><span class="m-tag"></span><span class="m-value">184</span></div></div>
+        <ul class="exec-list"><li>本报告只给出单企业客观基准事实，不生成竞争总分、域分、领先性、排名或市场份额结论。</li><li>说明知识产权两类公开记录均存在；未提供同业分母、专利质量和权利人逐项核验，不能称领先或形成排名。</li><li>两个独立域均有公开活动；不能据此归因商业化收入、履约质量或市场份额。</li><li>竞争基准必须保留该风险线索；需复核时间、样本相关性，不能用正面声量抵消。</li></ul>
+        <div class="cover-findings"><h3 class="cover-findings-title">核心发现</h3><div class="cover-findings-grid"><div class="finding-card"><p class="f-label">专利与商标并存事实</p><p class="f-text">专利类型统计合计 26876，商标 1534（其中有效 903）。</p></div><div class="finding-card"><p class="f-label">创新记录与市场活动并存</p><p class="f-text">专利类型统计合计 26876，招投标记录 390。</p></div><div class="finding-card"><p class="f-label">负面舆情提示</p><p class="f-text">情感统计中负面 184 条，总量 5572 条。</p></div></div></div>
+        <div class="cover-dimensions"><span class="dim-label">分析维度</span><div class="dim-tags"><span class="dim-tag">主体与工商基础</span><span class="dim-tag">专利事实</span><span class="dim-tag">商标事实</span><span class="dim-tag">招投标公开活动</span><span class="dim-tag">经营公开线索</span><span class="dim-tag">资质证书事实</span><span class="dim-tag">舆情情感统计</span></div></div>
+        <div class="cover-scope-bar"><span class="scope-item"><em>数据产品</em>企业基础信息、经营公开线索、专利统计、商标统计、招投标统计、舆情统计、资质证书概况</span><span class="scope-item"><em>覆盖范围</em>有效覆盖 7/7 个主题域；生成时间 2026-10-27T10:42:22+08:00</span></div>
       </section>
     </div>
   </article>
   <main class="research-doc">
-    <section class="report-page biz-section"><div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">供应商评估报告</div></div><div class="biz-section-head"><div><h2>报告摘要</h2><p class="biz-section-note">概述分析对象、数据覆盖范围与核心发现。</p></div><span class="biz-tag">Summary</span></div><p class="biz-summary">本报告以「比亚迪股份有限公司」为评估对象，直接聚合工商、风险、经营、渠道、工厂、招聘 2 大数据源的多维原始数据，供应商综合评分 40.0（结论：需深入调查）。供应商专项评分均值 40.0 偏低，建议补充实地考察与更多维度数据深度调查</p></section>
-    <section class="report-page biz-section"><div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">供应商评估报告</div></div><div class="biz-section-head"><div><h2>查询对象与口径</h2><p class="biz-section-note">说明匹配对象、匹配方式与数据范围。</p></div><span class="biz-tag">Caliber</span></div><div class="info-list"><div class="info-row"><span class="info-label">匹配对象</span><span class="info-value">比亚迪股份有限公司</span></div><div class="info-row"><span class="info-label">匹配方式</span><span class="info-value">供应商评估（直接聚合 6 个 MCP：工商/风险/经营/渠道/工厂/招聘）</span></div><div class="info-row"><span class="info-label">数据范围</span><span class="info-value">覆盖 2/6 大数据源，7 个明细章节，2 条跨维度洞察</span></div><div class="info-row"><span class="info-label">局限说明</span><span class="info-value">供应商评估结论基于多维公开数据交叉分析；建议结合实地考察与财务审计综合决策。</span></div></div></section>
-    <section class="report-page biz-section"><div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">供应商评估报告</div></div><div class="biz-section-head"><div><h2>数据总览</h2><p class="biz-section-note">关键指标一览。</p></div><span class="biz-tag">Metrics</span></div><div class="biz-metrics"><div class="biz-metric"><span class="m-name">对外投资</span><span class="m-tag"></span><span class="m-value">50</span></div><div class="biz-metric"><span class="m-name">供应商综合评分</span><span class="m-tag t-neutral">需深入调查</span><span class="m-value">40.0</span></div><div class="biz-metric"><span class="m-name">注册资本</span><span class="m-tag"></span><span class="m-value">人民币 91.17亿</span></div><div class="biz-metric"><span class="m-name">融资轮次</span><span class="m-tag"></span><span class="m-value">7</span></div><div class="biz-metric"><span class="m-name">股东数量</span><span class="m-tag"></span><span class="m-value">2</span></div><div class="biz-metric"><span class="m-name">成立年限</span><span class="m-tag"></span><span class="m-value">31 年</span></div><div class="biz-metric"><span class="m-name">财务稳健性</span><span class="m-tag"></span><span class="m-value">80</span></div><div class="biz-metric"><span class="m-name">风险隔离度</span><span class="m-tag"></span><span class="m-value">0</span></div></div></section>
-    <section class="report-page biz-section"><div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">供应商评估报告</div></div><div class="biz-section-head"><div><h2>核心分析</h2><p class="biz-section-note">按维度展开目标核心数据与结构化明细。</p></div><span class="biz-tag">Analysis</span></div><h3 class="biz-subsection-title">供应商综合评分</h3><p class="biz-section-note">准入结论：需深入调查</p><div class="chart-box chart-box-gauge"><div class="chart-canvas" data-chart="gauge" data-spec="{&quot;type&quot;:&quot;gauge&quot;,&quot;value&quot;:40.0,&quot;max&quot;:100,&quot;level&quot;:&quot;需深入调查&quot;}"></div></div>
-<h3 class="biz-subsection-title">供应商概况</h3><div class="info-list"><div class="info-row"><span class="info-label">企业名称</span><span class="info-value">比亚迪股份有限公司</span></div><div class="info-row"><span class="info-label">统一社会信用代码</span><span class="info-value">91440300192317458F</span></div><div class="info-row"><span class="info-label">法定代表人</span><span class="info-value">王传福</span></div><div class="info-row"><span class="info-label">企业类型</span><span class="info-value">股份有限公司(台港澳与境内合资,上市)</span></div><div class="info-row"><span class="info-label">行业</span><span class="info-value">制造业 / 电气机械和器材制造业 / 电池制造 / 其他电池制造</span></div><div class="info-row"><span class="info-label">注册资本</span><span class="info-value">人民币 91.17亿</span></div><div class="info-row"><span class="info-label">成立日期</span><span class="info-value">1995-02-10</span></div><div class="info-row"><span class="info-label">经营状态</span><span class="info-value">营业</span></div><div class="info-row"><span class="info-label">注册地址</span><span class="info-value">深圳市大鹏新区葵涌街道延安路一号</span></div><div class="info-row"><span class="info-label">经营范围</span><span class="info-value">锂离子电池以及其他电池、充电器、电子产品、仪器仪表、柔性线路板、五金制品、液晶显示器、手机零配件、模具、塑胶制品及其相关附件的生产、销售;3D眼镜、GPS导航产品的研发、生产及销售;货物及技术进出口(不含分销、国家专营专控商品);作为比亚迪汽车有限公司比亚迪品牌乘用车、电动车的总经销商,从事上述品牌的乘用车、电动车及其零部件的营销、批发和出口,提供售后服务;电池管理系统、换流柜、逆变柜/器、汇流箱、开关柜、储能机组的销售;汽车电子装置研发、销售;新能源汽车关键零部件研发以及上述零部件的关键零件、部件的研发、销售;轨道交通运输设备(含轨道交通车辆、工程机械、各类机电设备、电子设备及零部件、电子电气件、轨道交通信号系统、通信及综合监控系统与设备)的研发、设计、销售、租赁与售后服务(不涉及国营贸易管理商品,涉及配额、许可证管理及其他专项管理的商品,按国家有关规定办理申请);轨道梁柱的研发、设计…</span></div></div>
-<h3 class="biz-subsection-title">供货能力</h3><div class="info-list"><div class="info-row"><span class="info-label">产线数</span><span class="info-value">-</span></div><div class="info-row"><span class="info-label">普工人数</span><span class="info-value">-</span></div><div class="info-row"><span class="info-label">质检人数</span><span class="info-value">-</span></div><div class="info-row"><span class="info-label">主要设备</span><span class="info-value">-</span></div><div class="info-row"><span class="info-label">管理体系认证</span><span class="info-value">-</span></div><div class="info-row"><span class="info-label">月产能</span><span class="info-value">-</span></div><div class="info-row"><span class="info-label">服务品牌数</span><span class="info-value">-</span></div><div class="info-row"><span class="info-label">主要产品数</span><span class="info-value">-</span></div></div>
-<h3 class="biz-subsection-title">股东出资结构</h3><p class="biz-section-note">股东持股比例与实缴情况（资本充实性核查基础）</p><div class="table-wrap"><table><thead><tr><th>股东名称</th><th>持股比例</th><th>认缴金额</th><th>实缴金额</th><th>股东类型</th></tr></thead><tbody><tr><td>A股股东</td><td>59.6%</td><td>人民币 54.34亿</td><td>人民币 18.13亿</td><td>其他投资者</td></tr><tr><td>境外上市外资股</td><td>40.4%</td><td>人民币 36.83亿</td><td>人民币 10.98亿</td><td>其他投资者</td></tr></tbody></table></div>
-<h3 class="biz-subsection-title">对外投资清单（关联方敞口）</h3><p class="biz-section-note">共 50 家对外投资（展示前 15 家），风险可能经关联方传导</p><div class="table-wrap"><table><thead><tr><th>被投资企业</th><th>持股比例</th><th>经营状态</th><th>成立日期</th><th>注册资本</th></tr></thead><tbody><tr><td>深圳市比亚迪锂电池有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>1998-06-09</td><td>人民币 61.60亿</td></tr><tr><td>比亚迪通信信号有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2017-10-26</td><td>人民币 1.10亿</td></tr><tr><td>深圳比亚迪实业有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2019-06-25</td><td>人民币 5000万</td></tr><tr><td>深圳市比亚迪投资管理有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2015-05-15</td><td>人民币 2000万</td></tr><tr><td>弗迪动力有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2019-12-25</td><td>人民币 1.00亿</td></tr><tr><td>广州比亚迪精工有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2014-08-04</td><td>人民币 3.00亿</td></tr><tr><td>弗迪精工有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2019-12-24</td><td>人民币 1.00亿</td></tr><tr><td>芜湖亚为建设工程有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2025-01-24</td><td>人民币 1.08亿</td></tr><tr><td>深圳市比亚迪供应链管理有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2013-10-15</td><td>人民币 35.00亿</td></tr><tr><td>弗迪电池有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2020-12-11</td><td>人民币 5.00亿</td></tr><tr><td>比亚迪建设工程有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2017-07-03</td><td>人民币 5.00亿</td></tr><tr><td>比亚迪机电设备有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2017-12-07</td><td>人民币 5000万</td></tr><tr><td>弗迪科技有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2019-12-25</td><td>人民币 1.00亿</td></tr><tr><td>深圳市弗迪创业投资有限公司</td><td>100%</td><td>营业 &gt; 存续(在营、开业、在册)</td><td>2018-05-07</td><td>人民币 1000万</td></tr><tr><td>格尔木比亚迪锂电材料有限公司</td><td>100%</td><td>营业 &gt; 开业</td><td>2021-01-27</td><td>人民币 5000万</td></tr></tbody></table></div>
-<h3 class="biz-subsection-title">供应商专项评分矩阵</h3><p class="biz-section-note">跨维度交叉评分（供货能力 / 合规健康度 / 财务稳健性 / 风险隔离度）</p><div class="table-wrap"><table><thead><tr><th>评估维度</th><th>评分</th><th>等级</th></tr></thead><tbody><tr><td>财务稳健性</td><td>80</td><td>优</td></tr><tr><td>风险隔离度</td><td>0</td><td>弱</td></tr></tbody></table></div>
-<h3 class="biz-subsection-title">经营规模与资本运作</h3><div class="info-list"><div class="info-row"><span class="info-label">人员规模</span><span class="info-value">10000人以上</span></div><div class="info-row"><span class="info-label">年营业额</span><span class="info-value">10亿以上</span></div><div class="info-row"><span class="info-label">融资轮次</span><span class="info-value">7</span></div><div class="info-row"><span class="info-label">上榜记录</span><span class="info-value">10</span></div></div></section>
-    <section class="report-page biz-section"><div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">供应商评估报告</div></div><div class="biz-section-head"><div><h2>代表性记录</h2><p class="biz-section-note">关键明细记录 Top N。</p></div><span class="biz-tag">Records</span></div><div class="table-wrap"><table><thead><tr><th>维度</th><th>关键记录</th></tr></thead><tbody><tr><td>对外投资</td><td>50 家关联企业</td></tr></tbody></table></div></section>
-    <section class="report-page biz-section"><div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">供应商评估报告</div></div><div class="biz-section-head"><div><h2>特征与洞察</h2><p class="biz-section-note">基于数据的结构化解读。</p></div><span class="biz-tag">Insights</span></div><div class="structural-feature-grid"><article class="structural-feature-card">
-  <h3>账期风险与财务稳健性</h3>
-  <p class="structural-evidence">完成 7 轮融资。</p>
-  <p>财务稳健性较好，账期风险可控。建议维持健康的账期政策，平衡客户关系与资金周转。</p>
+    <section class="report-page biz-section"><div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">企业竞争基准事实画像</div></div><div class="biz-section-head"><div><h2>报告摘要</h2><p class="biz-section-note">概述分析对象、数据覆盖范围与核心发现。</p></div><span class="biz-tag">Summary</span></div><p class="biz-summary">本报告整理「宁德时代新能源科技股份有限公司」的单企业竞争基准事实。本报告只给出单企业客观基准事实，不生成竞争总分、域分、领先性、排名或市场份额结论</p></section>
+    <section class="report-page biz-section"><div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">企业竞争基准事实画像</div></div><div class="biz-section-head"><div><h2>查询对象与口径</h2><p class="biz-section-note">说明匹配对象、匹配方式与数据范围。</p></div><span class="biz-tag">Caliber</span></div><div class="info-list"><div class="info-row"><span class="info-label">匹配对象</span><span class="info-value">宁德时代新能源科技股份有限公司</span></div><div class="info-row"><span class="info-label">匹配方式</span><span class="info-value">单企业竞争基准（非多企业横向对比）</span></div><div class="info-row"><span class="info-label">数据范围</span><span class="info-value">有效覆盖 7/7 个主题域；生成时间 2026-10-27T10:42:22+08:00</span></div><div class="info-row"><span class="info-label">局限说明</span><span class="info-value">无可比企业和行业分母，不作排名、领先性、市场份额、收入归因或履约质量结论。缺口：</span></div></div></section>
+    <section class="report-page biz-section"><div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">企业竞争基准事实画像</div></div><div class="biz-section-head"><div><h2>数据总览</h2><p class="biz-section-note">关键指标一览。</p></div><span class="biz-tag">Metrics</span></div><div class="biz-metrics"><div class="biz-metric"><span class="m-name">专利类型统计合计</span><span class="m-tag"></span><span class="m-value">26876</span></div><div class="biz-metric"><span class="m-name">商标总数</span><span class="m-tag"></span><span class="m-value">1534</span></div><div class="biz-metric"><span class="m-name">有效商标数</span><span class="m-tag"></span><span class="m-value">903</span></div><div class="biz-metric"><span class="m-name">资质证书数</span><span class="m-tag"></span><span class="m-value">196</span></div><div class="biz-metric"><span class="m-name">近一年获证数</span><span class="m-tag"></span><span class="m-value">25</span></div><div class="biz-metric"><span class="m-name">招投标记录总量</span><span class="m-tag"></span><span class="m-value">390</span></div><div class="biz-metric"><span class="m-name">舆情统计总量</span><span class="m-tag"></span><span class="m-value">5572</span></div><div class="biz-metric"><span class="m-name">负面舆情统计</span><span class="m-tag"></span><span class="m-value">184</span></div></div></section>
+    <section class="report-page biz-section"><div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">企业竞争基准事实画像</div></div><div class="biz-section-head"><div><h2>核心分析</h2><p class="biz-section-note">按维度展开目标核心数据与结构化明细。</p></div><span class="biz-tag">Analysis</span></div><h3 class="biz-subsection-title">主体与工商基础</h3><div class="info-list"><div class="info-row"><span class="info-label">企业名称</span><span class="info-value">宁德时代新能源科技股份有限公司</span></div><div class="info-row"><span class="info-label">统一社会信用代码</span><span class="info-value">91350900587527783P</span></div><div class="info-row"><span class="info-label">法定代表人</span><span class="info-value">曾毓群</span></div><div class="info-row"><span class="info-label">企业类型</span><span class="info-value">股份有限公司(上市、自然人投资或控股)</span></div><div class="info-row"><span class="info-label">行业</span><span class="info-value">科学研究和技术服务业 / 研究和试验发展 / 自然科学研究和试验发展</span></div><div class="info-row"><span class="info-label">注册资本</span><span class="info-value">人民币 45.64亿</span></div><div class="info-row"><span class="info-label">实缴资本</span><span class="info-value">-</span></div><div class="info-row"><span class="info-label">成立日期</span><span class="info-value">2011-12-16</span></div><div class="info-row"><span class="info-label">经营状态</span><span class="info-value">营业</span></div><div class="info-row"><span class="info-label">注册地址</span><span class="info-value">福建省宁德市蕉城区漳湾镇新港路2号</span></div><div class="info-row"><span class="info-label">经营范围</span><span class="info-value">锂离子电池、锂聚合物电池、燃料电池、动力电池、超大容量储能电池、超级电容器、电池管理系统及可充电电池包、风光电储能系统、相关设备仪器的开发、生产和销售及售后服务;对新能源行业的投资;锂电池及相关产品的技术服务、测试服务以及咨询服务。(依法须经批准的项目,经相关部门批准后方可开展经营活动)</span></div></div>
+<h3 class="biz-subsection-title">专利事实</h3><div class="info-list"><div class="info-row"><span class="info-label">patentCount</span><span class="info-value">26876</span></div><div class="info-row"><span class="info-label">inventionAppPatentCount</span><span class="info-value">9115</span></div><div class="info-row"><span class="info-label">inventionLicPatentCount</span><span class="info-value">5517</span></div><div class="info-row"><span class="info-label">utilityModelPatentCount</span><span class="info-value">11912</span></div><div class="info-row"><span class="info-label">appearanceDesignPatentCount</span><span class="info-value">332</span></div><div class="info-row"><span class="info-label">patentTypeAppTimeStat</span><span class="info-value">[
+  {
+    &quot;appearanceDesignPatentCount&quot;: 4,
+    &quot;inventionAppPatentCount&quot;: 135,
+    &quot;inventionLicPatentCount&quot;: 268,
+    &quot;utilityModelPatentCount&quot;: 438,
+    &quot;year&quot;: &quot;2017&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 3,
+    &quot;inventionAppPatentCount&quot;: 84,
+    &quot;inventionLicPatentCount&quot;: 335,
+    &quot;utilityModelPatentCount&quot;: 644,
+    &quot;year&quot;: &quot;2018&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 2,
+    &quot;inventionAppPatentCount&quot;: 90,
+    &quot;inventionLicPatentCount&quot;: 305,
+    &quot;utilityModelPatentCount&quot;: 394,
+    &quot;year&quot;: &quot;2019&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 3,
+    &quot;inventionAppPatentCount&quot;: 143,
+    &quot;inventionLicPatentCount&quot;: 202,
+    &quot;utilityModelPatentCount&quot;: 109,
+    &quot;year&quot;: &quot;2020&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 3,
+    &quot;inventionAppPatentCount&quot;: 458,
+    &quot;inventionLicPatentCount&quot;: 594,
+    &quot;utilityModelPatentCount&quot;: 624,
+    &quot;year&quot;: &quot;2021&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 21,
+    &quot;inventionAppPatentCount&quot;: 1388,
+    &quot;inventionLicPatentCount&quot;: 894,
+    &quot;utilityModelPatentCount&quot;: 1422,
+    &quot;year&quot;: &quot;2022&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 114,
+    &quot;inventionAppPatentCount&quot;: 2241,
+    &quot;inventionLicPatentCount&quot;: 1144,
+    &quot;utilityModelPatentCount&quot;: 2162,
+    &quot;year&quot;: &quot;2023&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 112,
+    &quot;inventionAppPatentCount&quot;: 3075,
+    &quot;inventionLicPatentCount&quot;: 623,
+    &quot;utilityModelPatentCount&quot;: 3068,
+    &quot;year&quot;: &quot;2024&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 53,
+    &quot;inventionAppPatentCount&quot;: 1118,
+    &quot;inventionLicPatentCount&quot;: 696,
+    &quot;utilityModelPatentCount&quot;: 2038,
+    &quot;year&quot;: &quot;2025&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 1,
+    &quot;inventionAppPatentCount&quot;: 243,
+    &quot;inventionLicPatentCount&quot;: 176,
+    &quot;utilityModelPatentCount&quot;: 473,
+    &quot;year&quot;: &quot;2026&quot;
+  }
+]</span></div><div class="info-row"><span class="info-label">patentTypePubTimeStat</span><span class="info-value">[
+  {
+    &quot;appearanceDesignPatentCount&quot;: 8,
+    &quot;inventionAppPatentCount&quot;: 53,
+    &quot;inventionLicPatentCount&quot;: 41,
+    &quot;utilityModelPatentCount&quot;: 311,
+    &quot;year&quot;: &quot;2017&quot;
+  },
+  {
+    &quot;inventionAppPatentCount&quot;: 95,
+    &quot;inventionLicPatentCount&quot;: 80,
+    &quot;utilityModelPatentCount&quot;: 574,
+    &quot;year&quot;: &quot;2018&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 5,
+    &quot;inventionAppPatentCount&quot;: 89,
+    &quot;inventionLicPatentCount&quot;: 83,
+    &quot;utilityModelPatentCount&quot;: 554,
+    &quot;year&quot;: &quot;2019&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 2,
+    &quot;inventionAppPatentCount&quot;: 58,
+    &quot;inventionLicPatentCount&quot;: 195,
+    &quot;utilityModelPatentCount&quot;: 248,
+    &quot;year&quot;: &quot;2020&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 2,
+    &quot;inventionAppPatentCount&quot;: 105,
+    &quot;inventionLicPatentCount&quot;: 388,
+    &quot;utilityModelPatentCount&quot;: 115,
+    &quot;year&quot;: &quot;2021&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 16,
+    &quot;inventionAppPatentCount&quot;: 87,
+    &quot;inventionLicPatentCount&quot;: 208,
+    &quot;utilityModelPatentCount&quot;: 1284,
+    &quot;year&quot;: &quot;2022&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 28,
+    &quot;inventionAppPatentCount&quot;: 1029,
+    &quot;inventionLicPatentCount&quot;: 501,
+    &quot;utilityModelPatentCount&quot;: 1497,
+    &quot;year&quot;: &quot;2023&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 115,
+    &quot;inventionAppPatentCount&quot;: 1732,
+    &quot;inventionLicPatentCount&quot;: 1263,
+    &quot;utilityModelPatentCount&quot;: 2487,
+    &quot;year&quot;: &quot;2024&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 97,
+    &quot;inventionAppPatentCount&quot;: 2932,
+    &quot;inventionLicPatentCount&quot;: 1402,
+    &quot;utilityModelPatentCount&quot;: 2657,
+    &quot;year&quot;: &quot;2025&quot;
+  },
+  {
+    &quot;appearanceDesignPatentCount&quot;: 47,
+    &quot;inventionAppPatentCount&quot;: 2863,
+    &quot;inventionLicPatentCount&quot;: 1342,
+    &quot;utilityModelPatentCount&quot;: 1815,
+    &quot;year&quot;: &quot;2026&quot;
+  }
+]</span></div><div class="info-row"><span class="info-label">patentDivAppLegalStat</span><span class="info-value">[
+  {
+    &quot;patentCount&quot;: 17080,
+    &quot;patentDivAppLegal&quot;: &quot;授权&quot;
+  },
+  {
+    &quot;patentCount&quot;: 8278,
+    &quot;patentDivAppLegal&quot;: &quot;实质审查的生效&quot;
+  },
+  {
+    &quot;patentCount&quot;: 214,
+    &quot;patentDivAppLegal&quot;: &quot;专利申请权、专利权的转移&quot;
+  },
+  {
+    &quot;patentCount&quot;: 379,
+    &quot;patentDivAppLegal&quot;: &quot;专利权终止&quot;
+  },
+  {
+    &quot;patentCount&quot;: 389,
+    &quot;patentDivAppLegal&quot;: &quot;发明专利申请公布后的驳回&quot;
+  },
+  {
+    &quot;patentCount&quot;: 185,
+    &quot;patentDivAppLegal&quot;: &quot;公布&quot;
+  },
+  {
+    &quot;patentCount&quot;: 10,
+    &quot;patentDivAppLegal&quot;: &quot;专利权的无效、部分无效宣告&quot;
+  },
+  {
+    &quot;patentCount&quot;: 103,
+    &quot;patentDivAppLegal&quot;: &quot;发明专利申请公布后的撤回&quot;
+  },
+  {
+    &quot;patentCount&quot;: 18,
+    &quot;patentDivAppLegal&quot;: &quot;著录事项变更&quot;
+  },
+  {
+    &quot;patentCount&quot;: 7,
+    &quot;patentDivAppLegal&quot;: &quot;专利权人的姓名或者名称、国籍和地址的变更&quot;
+  },
+  {
+    &quot;patentCount&quot;: 36,
+    &quot;patentDivAppLegal&quot;: &quot;发明专利申请公布后的视为撤回&quot;
+  },
+  {
+    &quot;patentCount&quot;: 53,
+    &quot;patentDivAppLegal&quot;: &quot;避免重复授权放弃专利权&quot;
+  },
+  {
+    &quot;patentCount&quot;: 8,
+    &quot;patentDivAppLegal&quot;: &quot;专利权期限的补偿&quot;
+  },
+  {
+    &quot;patentCount&quot;: 9,
+    &quot;patentDivAppLegal&quot;: &quot;专利权人的姓名或者名称、地址的变更&quot;
+  },
+  {
+    &quot;patentCount&quot;: 1,
+    &quot;patentDivAppLegal&quot;: &quot;专利权的主动放弃&quot;
+  },
+  {
+    &quot;patentCount&quot;: 5,
+    &quot;patentDivAppLegal&quot;: &quot;发明专利公报更正&quot;
+  },
+  {
+    &quot;patentCount&quot;: 1,
+    &quot;patentDivAppLegal&quot;: &quot;专利实施许可合同备案的生效、变更及注销&quot;
+  },
+  {
+    &quot;patentCount&quot;: 1,
+    &quot;patentDivAppLegal&quot;: &quot;外观设计专利公报更正&quot;
+  },
+  {
+    &quot;patentCount&quot;: 2,
+    &quot;patentDivAppLegal&quot;: &quot;专利权质押登记、变更及注销&quot;
+  }
+]</span></div></div>
+<h3 class="biz-subsection-title">商标事实</h3><div class="info-list"><div class="info-row"><span class="info-label">tmCount</span><span class="info-value">1534</span></div><div class="info-row"><span class="info-label">tmValidNumber</span><span class="info-value">903</span></div><div class="info-row"><span class="info-label">tmInvalidNumber</span><span class="info-value">631</span></div><div class="info-row"><span class="info-label">tmNumberThisYear</span><span class="info-value">201</span></div><div class="info-row"><span class="info-label">tmTypeList</span><span class="info-value">[
+  &quot;1-化学原料&quot;,
+  &quot;2-颜料油漆&quot;,
+  &quot;3-日化用品&quot;,
+  &quot;4-燃料油脂&quot;,
+  &quot;5-医药&quot;,
+  &quot;6-金属材料&quot;,
+  &quot;7-机械设备&quot;,
+  &quot;8-手工器械&quot;,
+  &quot;9-科学仪器&quot;,
+  &quot;10-医疗器械&quot;,
+  &quot;11-灯具空调&quot;,
+  &quot;12-运输工具&quot;,
+  &quot;13-军火烟火&quot;,
+  &quot;14-珠宝钟表&quot;,
+  &quot;15-乐器&quot;,
+  &quot;16-办公用品&quot;,
+  &quot;17-橡胶制品&quot;,
+  &quot;18-皮革皮具&quot;,
+  &quot;19-建筑材料&quot;,
+  &quot;20-家具&quot;,
+  &quot;21-厨房洁具&quot;,
+  &quot;22-绳网袋篷&quot;,
+  &quot;23-纱线丝&quot;,
+  &quot;24-布料床单&quot;,
+  &quot;25-服装鞋帽&quot;,
+  &quot;26-纽扣拉链&quot;,
+  &quot;27-地毯席垫&quot;,
+  &quot;28-健身器材&quot;,
+  &quot;29-食品&quot;,
+  &quot;30-方便食品&quot;,
+  &quot;31-饲料种籽&quot;,
+  &quot;32-啤酒饮料&quot;,
+  &quot;33-酒&quot;,
+  &quot;34-烟草烟具&quot;,
+  &quot;35-广告销售&quot;,
+  &quot;36-金融物管&quot;,
+  &quot;37-建筑修理&quot;,
+  &quot;38-通讯服务&quot;,
+  &quot;39-运输储藏&quot;,
+  &quot;40-材料加工&quot;,
+  &quot;41-教育娱乐&quot;,
+  &quot;42-设计研究&quot;,
+  &quot;43-餐饮住宿&quot;,
+  &quot;44-医疗园艺&quot;,
+  &quot;45-社会法律&quot;
+]</span></div><div class="info-row"><span class="info-label">tmStatusList</span><span class="info-value">[
+  &quot;商标已注册&quot;,
+  &quot;商标无效&quot;,
+  &quot;初审公告&quot;,
+  &quot;驳回复审中&quot;,
+  &quot;等待实质审查&quot;,
+  &quot;商标申请中&quot;,
+  &quot;商标异议中&quot;,
+  &quot;撤销/无效宣告申请审查中&quot;
+]</span></div><div class="info-row"><span class="info-label">tmStatusStat</span><span class="info-value">{
+  &quot;初审公告&quot;: 178,
+  &quot;商标已注册&quot;: 690,
+  &quot;商标异议中&quot;: 9,
+  &quot;商标无效&quot;: 137,
+  &quot;商标申请中&quot;: 5,
+  &quot;撤销/无效宣告申请审查中&quot;: 7,
+  &quot;等待实质审查&quot;: 297,
+  &quot;驳回复审中&quot;: 211
+}</span></div><div class="info-row"><span class="info-label">tmAppTimeStat</span><span class="info-value">[
+  {
+    &quot;count&quot;: 31,
+    &quot;year&quot;: &quot;2017&quot;
+  },
+  {
+    &quot;count&quot;: 1,
+    &quot;year&quot;: &quot;2018&quot;
+  },
+  {
+    &quot;count&quot;: 19,
+    &quot;year&quot;: &quot;2019&quot;
+  },
+  {
+    &quot;count&quot;: 95,
+    &quot;year&quot;: &quot;2020&quot;
+  },
+  {
+    &quot;count&quot;: 131,
+    &quot;year&quot;: &quot;2021&quot;
+  },
+  {
+    &quot;count&quot;: 120,
+    &quot;year&quot;: &quot;2022&quot;
+  },
+  {
+    &quot;count&quot;: 381,
+    &quot;year&quot;: &quot;2023&quot;
+  },
+  {
+    &quot;count&quot;: 264,
+    &quot;year&quot;: &quot;2024&quot;
+  },
+  {
+    &quot;count&quot;: 215,
+    &quot;year&quot;: &quot;2025&quot;
+  },
+  {
+    &quot;count&quot;: 201,
+    &quot;year&quot;: &quot;2026&quot;
+  }
+]</span></div><div class="info-row"><span class="info-label">tmRegTimeStat</span><span class="info-value">[
+  {
+    &quot;count&quot;: 18,
+    &quot;year&quot;: &quot;2017&quot;
+  },
+  {
+    &quot;count&quot;: 27,
+    &quot;year&quot;: &quot;2018&quot;
+  },
+  {
+    &quot;count&quot;: 1,
+    &quot;year&quot;: &quot;2019&quot;
+  },
+  {
+    &quot;count&quot;: 25,
+    &quot;year&quot;: &quot;2020&quot;
+  },
+  {
+    &quot;count&quot;: 65,
+    &quot;year&quot;: &quot;2021&quot;
+  },
+  {
+    &quot;count&quot;: 107,
+    &quot;year&quot;: &quot;2022&quot;
+  },
+  {
+    &quot;count&quot;: 140,
+    &quot;year&quot;: &quot;2023&quot;
+  },
+  {
+    &quot;count&quot;: 206,
+    &quot;year&quot;: &quot;2024&quot;
+  },
+  {
+    &quot;count&quot;: 190,
+    &quot;year&quot;: &quot;2025&quot;
+  },
+  {
+    &quot;count&quot;: 113,
+    &quot;year&quot;: &quot;2026&quot;
+  }
+]</span></div><div class="info-row"><span class="info-label">tmTypeStats</span><span class="info-value">[
+  {
+    &quot;count&quot;: 457,
+    &quot;tmName&quot;: &quot;9-科学仪器&quot;
+  },
+  {
+    &quot;count&quot;: 186,
+    &quot;tmName&quot;: &quot;12-运输工具&quot;
+  },
+  {
+    &quot;count&quot;: 151,
+    &quot;tmName&quot;: &quot;37-建筑修理&quot;
+  },
+  {
+    &quot;count&quot;: 138,
+    &quot;tmName&quot;: &quot;42-设计研究&quot;
+  },
+  {
+    &quot;count&quot;: 119,
+    &quot;tmName&quot;: &quot;35-广告销售&quot;
+  },
+  {
+    &quot;count&quot;: 483,
+    &quot;tmName&quot;: &quot;其他&quot;
+  }
+]</span></div></div>
+<h3 class="biz-subsection-title">招投标公开活动</h3><div class="info-list"><div class="info-row"><span class="info-label">winbidStatList</span><span class="info-value">[
+  {
+    &quot;count&quot;: 9,
+    &quot;percent&quot;: 7.44,
+    &quot;subjectMatter&quot;: &quot;储能系统设备&quot;
+  },
+  {
+    &quot;count&quot;: 7,
+    &quot;percent&quot;: 5.79,
+    &quot;subjectMatter&quot;: &quot;储能系统&quot;
+  },
+  {
+    &quot;count&quot;: 7,
+    &quot;percent&quot;: 5.79,
+    &quot;subjectMatter&quot;: &quot;动力电池&quot;
+  },
+  {
+    &quot;count&quot;: 6,
+    &quot;percent&quot;: 4.96,
+    &quot;subjectMatter&quot;: &quot;磷酸铁锂电池储能系统&quot;
+  },
+  {
+    &quot;count&quot;: 4,
+    &quot;percent&quot;: 3.31,
+    &quot;subjectMatter&quot;: &quot;储能设备&quot;
+  }
+]</span></div><div class="info-row"><span class="info-label">winbidAreaStat</span><span class="info-value">[
+  {
+    &quot;area&quot;: &quot;北京&quot;,
+    &quot;count&quot;: 17
+  },
+  {
+    &quot;area&quot;: &quot;河北省&quot;,
+    &quot;count&quot;: 6
+  },
+  {
+    &quot;area&quot;: &quot;福建省&quot;,
+    &quot;count&quot;: 50
+  },
+  {
+    &quot;area&quot;: &quot;广东省&quot;,
+    &quot;count&quot;: 10
+  },
+  {
+    &quot;area&quot;: &quot;四川省&quot;,
+    &quot;count&quot;: 3
+  },
+  {
+    &quot;area&quot;: &quot;甘肃省&quot;,
+    &quot;count&quot;: 2
+  },
+  {
+    &quot;area&quot;: &quot;江苏省&quot;,
+    &quot;count&quot;: 11
+  },
+  {
+    &quot;area&quot;: &quot;安徽省&quot;,
+    &quot;count&quot;: 2
+  },
+  {
+    &quot;area&quot;: &quot;宁夏回族自治区&quot;,
+    &quot;count&quot;: 3
+  },
+  {
+    &quot;area&quot;: &quot;新疆维吾尔自治区&quot;,
+    &quot;count&quot;: 4
+  },
+  {
+    &quot;area&quot;: &quot;山东省&quot;,
+    &quot;count&quot;: 9
+  },
+  {
+    &quot;area&quot;: &quot;上海&quot;,
+    &quot;count&quot;: 3
+  },
+  {
+    &quot;area&quot;: &quot;内蒙古自治区&quot;,
+    &quot;count&quot;: 4
+  },
+  {
+    &quot;area&quot;: &quot;黑龙江省&quot;,
+    &quot;count&quot;: 2
+  },
+  {
+    &quot;area&quot;: &quot;贵州省&quot;,
+    &quot;count&quot;: 1
+  },
+  {
+    &quot;area&quot;: &quot;吉林省&quot;,
+    &quot;count&quot;: 3
+  },
+  {
+    &quot;area&quot;: &quot;湖北省&quot;,
+    &quot;count&quot;: 1
+  },
+  {
+    &quot;area&quot;: &quot;浙江省&quot;,
+    &quot;count&quot;: 1
+  },
+  {
+    &quot;area&quot;: &quot;湖南省&quot;,
+    &quot;count&quot;: 4
+  },
+  {
+    &quot;area&quot;: &quot;青海省&quot;,
+    &quot;count&quot;: 2
+  },
+  {
+    &quot;area&quot;: &quot;广西壮族自治区&quot;,
+    &quot;count&quot;: 1
+  }
+]</span></div><div class="info-row"><span class="info-label">winbidAmountStatList</span><span class="info-value">[
+  {
+    &quot;percent&quot;: 10.0,
+    &quot;range&quot;: &quot;10万以下&quot;,
+    &quot;count&quot;: 5
+  },
+  {
+    &quot;percent&quot;: 8.0,
+    &quot;range&quot;: &quot;50万~100万&quot;,
+    &quot;count&quot;: 4
+  },
+  {
+    &quot;percent&quot;: 4.0,
+    &quot;range&quot;: &quot;100万~500万&quot;,
+    &quot;count&quot;: 2
+  },
+  {
+    &quot;percent&quot;: 78.0,
+    &quot;range&quot;: &quot;500万及以上&quot;,
+    &quot;count&quot;: 39
+  }
+]</span></div><div class="info-row"><span class="info-label">winbidTrend</span><span class="info-value">[
+  {
+    &quot;year&quot;: &quot;2026&quot;,
+    &quot;count&quot;: 26
+  },
+  {
+    &quot;year&quot;: &quot;2025&quot;,
+    &quot;count&quot;: 50
+  },
+  {
+    &quot;year&quot;: &quot;2024&quot;,
+    &quot;count&quot;: 30
+  },
+  {
+    &quot;year&quot;: &quot;2023&quot;,
+    &quot;count&quot;: 8
+  },
+  {
+    &quot;year&quot;: &quot;2022&quot;,
+    &quot;count&quot;: 2
+  },
+  {
+    &quot;year&quot;: &quot;2021&quot;,
+    &quot;count&quot;: 8
+  },
+  {
+    &quot;year&quot;: &quot;2020&quot;,
+    &quot;count&quot;: 13
+  },
+  {
+    &quot;year&quot;: &quot;2019&quot;,
+    &quot;count&quot;: 8
+  }
+]</span></div><div class="info-row"><span class="info-label">bidding_info</span><span class="info-value">[
+  {
+    &quot;biddingId&quot;: &quot;82b1c8cf8e2eec93&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;石家庄市&quot;,
+      &quot;province&quot;: &quot;河北省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2024-05-21&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;国顺科技集团有限公司&quot;,
+        &quot;nameId&quot;: &quot;38172c321eab387b&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;候选&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;独立储能示范&quot;,
+      &quot;系统集成&quot;
+    ],
+    &quot;title&quot;: &quot;独立储能示范项目系统集成采购三标段中标候选人公示&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;4a49fd99a2222958&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;province&quot;: &quot;福建省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2024-05-10&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;宁德市福鼎生态环境局&quot;,
+        &quot;nameId&quot;: &quot;3e338fda276b6d50&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;中标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;排污权&quot;
+    ],
+    &quot;title&quot;: &quot;海峡资源环境交易中心排污权交易结果公告(2024年第298号)&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;030823ca29df9016&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;province&quot;: &quot;福建省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2023-12-08&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;宁德市环境保护科学研究所&quot;,
+        &quot;nameId&quot;: &quot;3dbdc22f862a4a0d&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;中标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;排污权&quot;
+    ],
+    &quot;title&quot;: &quot;海峡资源环境交易中心排污权交易结果公告(2023年第1207号)&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;583f5183823aa565&quot;,
+    &quot;infoType&quot;: &quot;采购意向&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;广州市&quot;,
+      &quot;province&quot;: &quot;广东省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2026-04-10&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;勘探板块&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;中标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;磷酸铁锂储能系统&quot;
+    ],
+    &quot;title&quot;: &quot;中国石油天然气集团有限公司2026年磷酸铁锂储能系统集中采购(带量)&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;6cd4a71867e8fde2&quot;,
+    &quot;infoType&quot;: &quot;采购意向&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;province&quot;: &quot;宁夏回族自治区&quot;
+    },
+    &quot;publishDate&quot;: &quot;2026-06-09&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;中国能源建设集团陕西省电力设计院有限公司&quot;,
+        &quot;nameId&quot;: &quot;37622fffe77f3a07&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;中标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;储能设备&quot;
+    ],
+    &quot;title&quot;: &quot;宁夏泓恩新能源有限公司苏银分公司100MW/400MWH储能电站项目EPC总承包储能设备二次采购项目&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;e01042e1eb7adac3&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;publishDate&quot;: &quot;2024-06-04&quot;,
+    &quot;role&quot;: &quot;招标&quot;,
+    &quot;title&quot;: &quot;建设工程规划许可证(宁德时代创新实验室建设(一期)—绿色超算中心)&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;40f9a9dc242fbbd0&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;宁德市&quot;,
+      &quot;district&quot;: &quot;蕉城区&quot;,
+      &quot;province&quot;: &quot;福建省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2020-07-31&quot;,
+    &quot;role&quot;: &quot;招标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;锂离子电池生产扩建&quot;
+    ],
+    &quot;title&quot;: &quot;宁德时代锂离子电池生产扩建项目(博发一期)&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;01a4bf18c95b454b&quot;,
+    &quot;infoType&quot;: &quot;招标公告&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;宁德市&quot;,
+      &quot;province&quot;: &quot;福建省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2022-03-01&quot;,
+    &quot;role&quot;: &quot;招标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;钠离子电芯开发平台&quot;
+    ],
+    &quot;title&quot;: &quot;宁德时代钠离子电芯开发平台项目&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;2260e71312483fce&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;宁德市&quot;,
+      &quot;district&quot;: &quot;蕉城区&quot;,
+      &quot;province&quot;: &quot;福建省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2023-03-30&quot;,
+    &quot;role&quot;: &quot;招标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;X光检查机&quot;
+    ],
+    &quot;title&quot;: &quot;宁德时代新能源科技股份有限公司HD基地新增2台X光检查机&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;ab829610a3b81148&quot;,
+    &quot;infoType&quot;: &quot;招标公告&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;重庆市&quot;,
+      &quot;district&quot;: &quot;渝北区&quot;,
+      &quot;province&quot;: &quot;重庆&quot;
+    },
+    &quot;publishDate&quot;: &quot;2023-06-09&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;阿维塔科技(重庆)有限公司&quot;,
+        &quot;nameId&quot;: &quot;385a7890482abad9&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;候选&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;增资&quot;
+    ],
+    &quot;title&quot;: &quot;阿维塔科技(重庆)有限公司增资项目&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;24c45896a0b49031&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectAmount&quot;: 893.0,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;北京市&quot;,
+      &quot;district&quot;: &quot;海淀区&quot;,
+      &quot;province&quot;: &quot;北京&quot;
+    },
+    &quot;publishDate&quot;: &quot;2024-05-20&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;国家市场监督管理总局本级&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;中标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;动力电池安全预警与缺陷召回机制及研制&quot;
+    ],
+    &quot;title&quot;: &quot;构建动力电池安全预警与缺陷召回机制及研制相关国家标准&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;65f2b4b8f5834b64&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;publishDate&quot;: &quot;2023-12-24&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;中能建储能科技(武汉)有限公司&quot;,
+        &quot;nameId&quot;: &quot;4011ae13432ac4c4&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;候选&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;电芯框架&quot;
+    ],
+    &quot;title&quot;: &quot;中储科技2024年度电芯框架招标中标候选人公示&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;ad3b4e4df70bae90&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;宁德市&quot;,
+      &quot;province&quot;: &quot;福建省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2020-10-26&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;国网电动汽车服务有限公司&quot;,
+        &quot;nameId&quot;: &quot;37622fdc8d853371&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;中标&quot;,
+    &quot;title&quot;: &quot;国网电动汽车服务有限公司2020年物资招标采购项目中标结果公告&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;f79f079a5b268c06&quot;,
+    &quot;infoType&quot;: &quot;招标公告&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;天津市&quot;,
+      &quot;province&quot;: &quot;天津&quot;
+    },
+    &quot;publishDate&quot;: &quot;2025-03-21&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;济柴动力有限公司&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;候选&quot;,
+    &quot;title&quot;: &quot;中国石油集团济柴动力有限公司5MWH液冷电池系统框架协议&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;2686620832901a1d&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectAmount&quot;: 99.98,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;宁德市&quot;,
+      &quot;province&quot;: &quot;福建省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2019-04-23&quot;,
+    &quot;role&quot;: &quot;中标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;专汽电动搅拌车动力电池&quot;
+    ],
+    &quot;title&quot;: &quot;专汽电动搅拌车动力电池询价(OA)采购中标公告&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;5e2273d02f0c2619&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;宁德市&quot;,
+      &quot;district&quot;: &quot;蕉城区&quot;,
+      &quot;province&quot;: &quot;福建省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2021-02-01&quot;,
+    &quot;role&quot;: &quot;招标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;光伏发电&quot;
+    ],
+    &quot;title&quot;: &quot;宁德时代新能源科技股份有限公司Z工厂光伏发电项目&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;758f31edfe443c7a&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectAmount&quot;: 500.83,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;固原市&quot;,
+      &quot;district&quot;: &quot;原州区&quot;,
+      &quot;province&quot;: &quot;宁夏回族自治区&quot;
+    },
+    &quot;publishDate&quot;: &quot;2026-04-16&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;固原市公共交通有限公司&quot;,
+        &quot;nameId&quot;: &quot;37623005783f394b&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;中标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;新能源纯电动公交车动力电池更换&quot;
+    ],
+    &quot;title&quot;: &quot;固原市公共交通有限公司新能源纯电动公交车动力电池更换采购项目中标公告&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;9562b3759d71e343&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectAmount&quot;: 87698.46,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;张家口市&quot;,
+      &quot;district&quot;: &quot;康保县&quot;,
+      &quot;province&quot;: &quot;河北省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2026-06-12&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;河北交投垣欣能源有限公司&quot;,
+        &quot;nameId&quot;: &quot;4337ed2af7abca3c&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;中标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;储能系统设备&quot;
+    ],
+    &quot;title&quot;: &quot;河北交投康保县400MW构网型独立储能电站项目储能系统设备采购中标结果公告&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;22230c9b82a7ac1c&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectAmount&quot;: 14096.88,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;泉州市&quot;,
+      &quot;district&quot;: &quot;晋江市&quot;,
+      &quot;province&quot;: &quot;福建省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2019-04-24&quot;,
+    &quot;purchasingBidderList&quot;: [
+      {
+        &quot;name&quot;: &quot;晋江闽投电力储能科技有限公司&quot;,
+        &quot;nameId&quot;: &quot;390f1a14946b5dec&quot;
+      }
+    ],
+    &quot;role&quot;: &quot;中标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;100MWh级储能电站试点示范&quot;,
+      &quot;储能系统设备&quot;
+    ],
+    &quot;title&quot;: &quot;福建晋江100MWH级储能电站试点示范项目储能系统设备采购的中标结果公告&quot;
+  },
+  {
+    &quot;biddingId&quot;: &quot;39a8245e1282be41&quot;,
+    &quot;infoType&quot;: &quot;中标公告&quot;,
+    &quot;projectRegion&quot;: {
+      &quot;city&quot;: &quot;宁德市&quot;,
+      &quot;province&quot;: &quot;福建省&quot;
+    },
+    &quot;publishDate&quot;: &quot;2025-12-01&quot;,
+    &quot;role&quot;: &quot;招标&quot;,
+    &quot;subjectMatterList&quot;: [
+      &quot;专业玻璃拼镜切割设备&quot;
+    ],
+    &quot;title&quot;: &quot;专业玻璃拼镜切割设备&quot;
+  }
+]</span></div><div class="info-row"><span class="info-label">bidding_total</span><span class="info-value">390</span></div></div>
+<h3 class="biz-subsection-title">经营公开线索</h3><div class="info-list"><div class="info-row"><span class="info-label">scale</span><span class="info-value">{
+  &quot;staff&quot;: &quot;10000人以上&quot;,
+  &quot;turnover&quot;: &quot;10亿以上&quot;
+}</span></div><div class="info-row"><span class="info-label">financing_count</span><span class="info-value">22</span></div><div class="info-row"><span class="info-label">financing_list</span><span class="info-value">[
+  {
+    &quot;financingAmount&quot;: &quot;391.2327亿港币&quot;,
+    &quot;financingSeries&quot;: &quot;定向增发&quot;,
+    &quot;financingTime&quot;: &quot;2026-04-30&quot;
+  },
+  {
+    &quot;financingSeries&quot;: &quot;IPO&quot;,
+    &quot;financingTime&quot;: &quot;2025-05-20&quot;
+  },
+  {
+    &quot;financingAmount&quot;: &quot;近450亿人民币&quot;,
+    &quot;financingSeries&quot;: &quot;定向增发&quot;,
+    &quot;financingTime&quot;: &quot;2022-06-01&quot;,
+    &quot;investorList&quot;: [
+      &quot;财通基金&quot;,
+      &quot;摩根士丹利&quot;,
+      &quot;Barclays Bank&quot;,
+      &quot;国泰君安创投&quot;,
+      &quot;广发证券&quot;,
+      &quot;太平洋人寿&quot;,
+      &quot;麦格理银行&quot;,
+      &quot;睿远基金&quot;,
+      &quot;申万宏源证券&quot;,
+      &quot;汇丰银行&quot;,
+      &quot;高瓴资本&quot;,
+      &quot;金鹰基金&quot;,
+      &quot;泰康资产&quot;,
+      &quot;太保资产&quot;,
+      &quot;摩根大通&quot;,
+      &quot;光大永明资产&quot;,
+      &quot;南方东英&quot;,
+      &quot;博时基金&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;450亿人民币&quot;,
+    &quot;financingSeries&quot;: &quot;上市后&quot;,
+    &quot;financingTime&quot;: &quot;2022-04-29&quot;
+  },
+  {
+    &quot;financingAmount&quot;: &quot;197亿人民币&quot;,
+    &quot;financingSeries&quot;: &quot;定向增发&quot;,
+    &quot;financingTime&quot;: &quot;2020-07-17&quot;,
+    &quot;investorList&quot;: [
+      &quot;北信瑞丰基金管理有限公司&quot;,
+      &quot;摩根大通&quot;,
+      &quot;本田技研工业(中国)投资有限公司&quot;,
+      &quot;太平洋资产管理&quot;,
+      &quot;高瓴资本&quot;,
+      &quot;UBS AG&quot;,
+      &quot;国泰君安&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;196.18亿人民币&quot;,
+    &quot;financingSeries&quot;: &quot;定向增发&quot;,
+    &quot;financingTime&quot;: &quot;2020-07-01&quot;,
+    &quot;investorList&quot;: [
+      &quot;太保资产&quot;,
+      &quot;摩根大通&quot;,
+      &quot;UBS&quot;,
+      &quot;北信瑞丰基金&quot;,
+      &quot;本田&quot;,
+      &quot;华鼎资本&quot;,
+      &quot;TCL创投&quot;,
+      &quot;高瓴资本&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;未透露&quot;,
+    &quot;financingSeries&quot;: &quot;股权融资&quot;,
+    &quot;financingTime&quot;: &quot;2019-04-01&quot;,
+    &quot;investorList&quot;: [
+      &quot;高瓴资本&quot;,
+      &quot;汇丰银行&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;金额未知&quot;,
+    &quot;financingSeries&quot;: &quot;定向增发&quot;,
+    &quot;financingTime&quot;: &quot;2018-10-31&quot;,
+    &quot;investorList&quot;: [
+      &quot;易方达基金&quot;,
+      &quot;星石投资&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;金额未知&quot;,
+    &quot;financingSeries&quot;: &quot;定向增发&quot;,
+    &quot;financingTime&quot;: &quot;2018-09-30&quot;,
+    &quot;investorList&quot;: [
+      &quot;建设银行&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;28.525亿人民币&quot;,
+    &quot;financingSeries&quot;: &quot;战略投资&quot;,
+    &quot;financingTime&quot;: &quot;2018-07-17&quot;,
+    &quot;investorList&quot;: [
+      &quot;华晨宝马&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;54.62亿人民币&quot;,
+    &quot;financingSeries&quot;: &quot;300750.SZ&quot;,
+    &quot;financingTime&quot;: &quot;2018-06-11&quot;,
+    &quot;investorList&quot;: [
+      &quot;公开发行&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;金额未知&quot;,
+    &quot;financingSeries&quot;: &quot;战略投资&quot;,
+    &quot;financingTime&quot;: &quot;2017-11-10&quot;,
+    &quot;investorList&quot;: [
+      &quot;招银国际&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;3.4亿人民币&quot;,
+    &quot;financingSeries&quot;: &quot;战略投资&quot;,
+    &quot;financingTime&quot;: &quot;2017-08-20&quot;,
+    &quot;investorList&quot;: [
+      &quot;汇发新源&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;RMB13.4亿&quot;,
+    &quot;financingSeries&quot;: &quot;G轮&quot;,
+    &quot;financingTime&quot;: &quot;2017-08-17&quot;,
+    &quot;investorList&quot;: [
+      &quot;海峡基金&quot;,
+      &quot;德茂资本&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;3.4亿人民币&quot;,
+    &quot;financingSeries&quot;: &quot;战略投资&quot;,
+    &quot;financingTime&quot;: &quot;2017-06-11&quot;,
+    &quot;investorList&quot;: [
+      &quot;汇发新源&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;10亿人民币&quot;,
+    &quot;financingSeries&quot;: &quot;战略投资&quot;,
+    &quot;financingTime&quot;: &quot;2017-06-11&quot;,
+    &quot;investorList&quot;: [
+      &quot;镇江德茂海润基金&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;亿元及以上人民币&quot;,
+    &quot;financingSeries&quot;: &quot;战略投资&quot;,
+    &quot;financingTime&quot;: &quot;2017-04-30&quot;,
+    &quot;investorList&quot;: [
+      &quot;联想控股&quot;,
+      &quot;平安创新投资&quot;,
+      &quot;云锋基金&quot;,
+      &quot;七匹狼&quot;,
+      &quot;富士康&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;RMB数亿&quot;,
+    &quot;financingSeries&quot;: &quot;D+轮&quot;,
+    &quot;financingTime&quot;: &quot;2017-01-25&quot;,
+    &quot;investorList&quot;: [
+      &quot;安鹏股权投资&quot;,
+      &quot;君盛投资&quot;,
+      &quot;联想创投&quot;,
+      &quot;平安资本&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;80亿人民币&quot;,
+    &quot;financingSeries&quot;: &quot;B轮&quot;,
+    &quot;financingTime&quot;: &quot;2016-09-01&quot;,
+    &quot;investorList&quot;: [
+      &quot;深创投&quot;,
+      &quot;国投创新&quot;,
+      &quot;招银国际&quot;,
+      &quot;广发信德&quot;,
+      &quot;七匹狼&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;金额未知&quot;,
+    &quot;financingSeries&quot;: &quot;战略投资&quot;,
+    &quot;financingTime&quot;: &quot;2016-03-01&quot;,
+    &quot;investorList&quot;: [
+      &quot;云晖资本&quot;,
+      &quot;国投创新&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;1000万人民币&quot;,
+    &quot;financingSeries&quot;: &quot;A轮&quot;,
+    &quot;financingTime&quot;: &quot;2016-01-16&quot;,
+    &quot;investorList&quot;: [
+      &quot;深创投&quot;
+    ]
+  },
+  {
+    &quot;financingAmount&quot;: &quot;金额未知&quot;,
+    &quot;financingSeries&quot;: &quot;战略投资&quot;,
+    &quot;financingTime&quot;: &quot;2012-12-01&quot;,
+    &quot;investorList&quot;: [
+      &quot;越秀产业基金&quot;,
+      &quot;君联资本&quot;
+    ]
+  }
+]</span></div><div class="info-row"><span class="info-label">trends</span><span class="info-value">{
+  &quot;isStaffExpandIn3Month&quot;: 1,
+  &quot;isStaffExpandIn6Month&quot;: 1,
+  &quot;isStaffExpandIn12Month&quot;: 1,
+  &quot;isFoundSubsidiaryIn3Month&quot;: 1,
+  &quot;isExpandNewCityIn3Month&quot;: 1,
+  &quot;isExpandNewCityIn6Month&quot;: 1,
+  &quot;isExpandNewCityIn12Month&quot;: 1,
+  &quot;isNewFinancingIn3Month&quot;: 1,
+  &quot;isNewFinancingIn6Month&quot;: 1,
+  &quot;isNewFinancingIn12Month&quot;: 1,
+  &quot;isDiffAreaWinBidIn3Month&quot;: 1,
+  &quot;isDiffAreaWinBidIn6Month&quot;: 1,
+  &quot;isDiffAreaWinBidIn12Month&quot;: 1,
+  &quot;qualificationIn6MonthList&quot;: [
+    &quot;企业技术中心&quot;
+  ],
+  &quot;qualificationIn12MonthList&quot;: [
+    &quot;企业技术中心&quot;
+  ]
+}</span></div><div class="info-row"><span class="info-label">rankings</span><span class="info-value">[
+  {
+    &quot;rankingListName&quot;: &quot;2024年世界500强&quot;,
+    &quot;rankingListType&quot;: &quot;世界500强榜单&quot;,
+    &quot;rankingListYear&quot;: 2024,
+    &quot;rankingListLevel&quot;: &quot;世界500强&quot;,
+    &quot;rankingListInstitution&quot;: &quot;《财富》杂志&quot;,
+    &quot;rank&quot;: 250,
+    &quot;rankingListCompanyName&quot;: &quot;宁德时代新能源科技股份有限公司&quot;
+  },
+  {
+    &quot;rankingListName&quot;: &quot;2024年中国500强&quot;,
+    &quot;rankingListType&quot;: &quot;中国500强榜单&quot;,
+    &quot;rankingListYear&quot;: 2024,
+    &quot;rankingListLevel&quot;: &quot;中国500强&quot;,
+    &quot;rankingListInstitution&quot;: &quot;《财富》杂志&quot;,
+    &quot;rank&quot;: 68,
+    &quot;rankingListCompanyName&quot;: &quot;宁德时代新能源科技股份有限公司&quot;
+  },
+  {
+    &quot;rankingListName&quot;: &quot;2023年世界500强&quot;,
+    &quot;rankingListType&quot;: &quot;世界500强榜单&quot;,
+    &quot;rankingListYear&quot;: 2023,
+    &quot;rankingListLevel&quot;: &quot;世界500强&quot;,
+    &quot;rankingListInstitution&quot;: &quot;《财富》杂志&quot;,
+    &quot;rank&quot;: 292,
+    &quot;rankingListCompanyName&quot;: &quot;宁德时代新能源科技股份有限公司&quot;
+  },
+  {
+    &quot;rankingListName&quot;: &quot;2023年中国企业联合会、中国企业家协会联合发布中国企业500强&quot;,
+    &quot;rankingListType&quot;: &quot;中国500强榜单&quot;,
+    &quot;rankingListYear&quot;: 2023,
+    &quot;rankingListLevel&quot;: &quot;中国500强&quot;,
+    &quot;rankingListInstitution&quot;: &quot;中国企业联合会、中国企业家协会&quot;,
+    &quot;rank&quot;: 85,
+    &quot;rankingListCompanyName&quot;: &quot;宁德时代新能源科技股份有限公司&quot;
+  },
+  {
+    &quot;rankingListName&quot;: &quot;2023年中国500强&quot;,
+    &quot;rankingListType&quot;: &quot;中国500强榜单&quot;,
+    &quot;rankingListYear&quot;: 2023,
+    &quot;rankingListLevel&quot;: &quot;中国500强&quot;,
+    &quot;rankingListInstitution&quot;: &quot;《财富》杂志&quot;,
+    &quot;rank&quot;: 86,
+    &quot;rankingListCompanyName&quot;: &quot;宁德时代新能源科技股份有限公司&quot;
+  },
+  {
+    &quot;rankingListName&quot;: &quot;2023中国制造业企业500强&quot;,
+    &quot;rankingListType&quot;: &quot;制造业500强榜单&quot;,
+    &quot;rankingListYear&quot;: 2023,
+    &quot;rankingListLevel&quot;: &quot;国家级&quot;,
+    &quot;rankingListInstitution&quot;: &quot;中国企业联合会、中国企业家协会&quot;,
+    &quot;rank&quot;: 33,
+    &quot;rankingListCompanyName&quot;: &quot;宁德时代新能源科技股份有限公司&quot;
+  },
+  {
+    &quot;rankingListName&quot;: &quot;2023中国制造业民营企业500强榜单&quot;,
+    &quot;rankingListType&quot;: &quot;制造业民营500强榜单&quot;,
+    &quot;rankingListYear&quot;: 2023,
+    &quot;rankingListLevel&quot;: &quot;国家级&quot;,
+    &quot;rankingListInstitution&quot;: &quot;全国工商联经济服务部&quot;,
+    &quot;rank&quot;: 12,
+    &quot;rankingListCompanyName&quot;: &quot;宁德时代新能源科技股份有限公司&quot;
+  },
+  {
+    &quot;rankingListName&quot;: &quot;2023中国新经济企业500强&quot;,
+    &quot;rankingListType&quot;: &quot;新经济500强榜单&quot;,
+    &quot;rankingListYear&quot;: 2023,
+    &quot;rankingListLevel&quot;: &quot;国家级&quot;,
+    &quot;rankingListInstitution&quot;: &quot;中国企业评价协会&quot;,
+    &quot;rank&quot;: 4,
+    &quot;rankingListCompanyName&quot;: &quot;宁德时代新能源科技股份有限公司&quot;
+  },
+  {
+    &quot;rankingListName&quot;: &quot;2023中国民营企业500强榜单&quot;,
+    &quot;rankingListType&quot;: &quot;民营500强榜单&quot;,
+    &quot;rankingListYear&quot;: 2023,
+    &quot;rankingListLevel&quot;: &quot;国家级&quot;,
+    &quot;rankingListInstitution&quot;: &quot;全国工商联经济服务部&quot;,
+    &quot;rank&quot;: 16,
+    &quot;rankingListCompanyName&quot;: &quot;宁德时代新能源科技股份有限公司&quot;
+  },
+  {
+    &quot;rankingListName&quot;: &quot;2022年中国企业联合会、中国企业家协会联合发布中国企业500强&quot;,
+    &quot;rankingListType&quot;: &quot;中国500强榜单&quot;,
+    &quot;rankingListYear&quot;: 2022,
+    &quot;rankingListLevel&quot;: &quot;中国500强&quot;,
+    &quot;rankingListInstitution&quot;: &quot;中国企业联合会、中国企业家协会&quot;,
+    &quot;rank&quot;: 197,
+    &quot;rankingListCompanyName&quot;: &quot;宁德时代新能源科技股份有限公司&quot;
+  }
+]</span></div></div>
+<h3 class="biz-subsection-title">资质证书事实</h3><div class="info-list"><div class="info-row"><span class="info-label">certificateCount</span><span class="info-value">196</span></div><div class="info-row"><span class="info-label">certNumberThisYear</span><span class="info-value">25</span></div></div>
+<h3 class="biz-subsection-title">舆情情感统计</h3><div class="info-list"><div class="info-row"><span class="info-label">newsSentimentStats</span><span class="info-value">{
+  &quot;negative&quot;: 184,
+  &quot;neutral&quot;: 3006,
+  &quot;positive&quot;: 2362,
+  &quot;unknown&quot;: 20
+}</span></div><div class="info-row"><span class="info-label">newsSentimentTrend</span><span class="info-value">[
+  {
+    &quot;month&quot;: &quot;2025-09&quot;,
+    &quot;stats&quot;: {
+      &quot;negative&quot;: 0,
+      &quot;positive&quot;: 6
+    }
+  },
+  {
+    &quot;month&quot;: &quot;2025-10&quot;,
+    &quot;stats&quot;: {
+      &quot;negative&quot;: 0,
+      &quot;positive&quot;: 1
+    }
+  },
+  {
+    &quot;month&quot;: &quot;2025-11&quot;,
+    &quot;stats&quot;: {
+      &quot;negative&quot;: 0,
+      &quot;positive&quot;: 4
+    }
+  },
+  {
+    &quot;month&quot;: &quot;2025-12&quot;,
+    &quot;stats&quot;: {
+      &quot;negative&quot;: 0,
+      &quot;positive&quot;: 10
+    }
+  },
+  {
+    &quot;month&quot;: &quot;2026-01&quot;,
+    &quot;stats&quot;: {
+      &quot;negative&quot;: 0,
+      &quot;positive&quot;: 3
+    }
+  },
+  {
+    &quot;month&quot;: &quot;2026-03&quot;,
+    &quot;stats&quot;: {
+      &quot;negative&quot;: 0,
+      &quot;positive&quot;: 2
+    }
+  },
+  {
+    &quot;month&quot;: &quot;2026-04&quot;,
+    &quot;stats&quot;: {
+      &quot;negative&quot;: 0,
+      &quot;positive&quot;: 2
+    }
+  },
+  {
+    &quot;month&quot;: &quot;2026-05&quot;,
+    &quot;stats&quot;: {
+      &quot;negative&quot;: 0,
+      &quot;positive&quot;: 3
+    }
+  },
+  {
+    &quot;month&quot;: &quot;2026-06&quot;,
+    &quot;stats&quot;: {
+      &quot;negative&quot;: 0,
+      &quot;positive&quot;: 1
+    }
+  },
+  {
+    &quot;month&quot;: &quot;2026-07&quot;,
+    &quot;stats&quot;: {
+      &quot;negative&quot;: 0,
+      &quot;positive&quot;: 4
+    }
+  },
+  {
+    &quot;month&quot;: &quot;2026-08&quot;,
+    &quot;stats&quot;: {
+      &quot;negative&quot;: 0,
+      &quot;positive&quot;: 5
+    }
+  },
+  {
+    &quot;month&quot;: &quot;2026-09&quot;,
+    &quot;stats&quot;: {
+      &quot;negative&quot;: 0,
+      &quot;positive&quot;: 4
+    }
+  }
+]</span></div></div></section>
+    <section class="report-page biz-section"><div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">企业竞争基准事实画像</div></div><div class="biz-section-head"><div><h2>代表性记录</h2><p class="biz-section-note">关键明细记录 Top N。</p></div><span class="biz-tag">Records</span></div><div class="table-wrap"><table><thead><tr><th>维度</th><th>关键记录</th></tr></thead><tbody><tr><td>专利类型统计合计</td><td>26876（由已返回专利类型字段合计；不代表质量或领先）</td></tr><tr><td>商标总数</td><td>1534（商标数量事实）</td></tr><tr><td>有效商标数</td><td>903（接口有效状态统计）</td></tr><tr><td>资质证书数</td><td>196（证书概况数量）</td></tr><tr><td>近一年获证数</td><td>25（证书接口年度口径）</td></tr><tr><td>招投标记录总量</td><td>390（市场活动记录，不代表收入或履约质量）</td></tr><tr><td>舆情统计总量</td><td>5572（接口情感分类合计，不是竞争分）</td></tr><tr><td>负面舆情统计</td><td>184（需人工复核样本，不作法律定性）</td></tr></tbody></table></div></section>
+    <section class="report-page biz-section"><div class="report-topbar"><div class="report-stripe"></div><div class="report-banner">企业竞争基准事实画像</div></div><div class="biz-section-head"><div><h2>特征与洞察</h2><p class="biz-section-note">基于数据的结构化解读。</p></div><span class="biz-tag">Insights</span></div><div class="structural-feature-grid"><article class="structural-feature-card">
+  <h3>专利与商标并存事实</h3>
+  <p class="structural-evidence">专利类型统计合计 26876，商标 1534（其中有效 903）。</p>
+  <p>说明知识产权两类公开记录均存在；未提供同业分母、专利质量和权利人逐项核验，不能称领先或形成排名。</p>
 </article><article class="structural-feature-card">
-  <h3>产能与经营规模匹配度</h3>
-  <p class="structural-evidence">人员规模 10000人以上、年营业额 10亿以上。</p>
-  <p>建议补充工厂产能与经营规模数据以评估匹配度。</p>
+  <h3>创新记录与市场活动并存</h3>
+  <p class="structural-evidence">专利类型统计合计 26876，招投标记录 390。</p>
+  <p>两个独立域均有公开活动；不能据此归因商业化收入、履约质量或市场份额。</p>
+</article><article class="structural-feature-card">
+  <h3>负面舆情提示</h3>
+  <p class="structural-evidence">情感统计中负面 184 条，总量 5572 条。</p>
+  <p>竞争基准必须保留该风险线索；需复核时间、样本相关性，不能用正面声量抵消。</p>
 </article></div></section>
     
   </main>

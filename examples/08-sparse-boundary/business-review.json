@@ -1,0 +1,36 @@
+{
+  "id": "08-sparse-boundary",
+  "verdict": "acceptable",
+  "summary": "当前冻结产物逐项满足场景契约；结论仅限本轮公开数据和报告口径。",
+  "checks": [
+    {
+      "expectation": "主体无法确认时明确提示",
+      "status": "pass",
+      "evidence": "subject.resolved=false并明确缺少工商名称和统一社会信用代码。；本轮当前产物：technical=passed，successful_data_calls=1；subject.enterprise=深圳市不存在的星河量子商业有限公司，resolved=False；metrics[招投标记录总量=0]；quality={'total_sections': 7, 'populated_sections': 2, 'empty_sections': 5, 'coverage_pct': 29}；非空章节=['招投标公开活动', '经营公开线索']；代表记录=1；calls[patent:patent_bigdata_patent_stats=empty；qualification:qualification_bigdata_qualification_certificate_profile=empty；news:news_bigdata_news_stats=empty；bidding:bid_bigdata_bid_win_stats=empty；bidding:bid_bigdata_bidding_info=empty；trademark:trademark_bigdata_trademark_profile=empty；trademark:trademark_bigdata_trademark_stats=empty；operation:operation_insight_business_scale=empty；operation:operation_insight_financing_info=empty；operation:operation_insight_company_trends=empty；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=empty；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=empty]"
+    },
+    {
+      "expectation": "空维度不获得正向评分",
+      "status": "pass",
+      "evidence": "无竞争域分；标讯总量0为客观空记录，不是正向评分。；本轮当前产物：technical=passed，successful_data_calls=1；subject.enterprise=深圳市不存在的星河量子商业有限公司，resolved=False；metrics[招投标记录总量=0]；quality={'total_sections': 7, 'populated_sections': 2, 'empty_sections': 5, 'coverage_pct': 29}；非空章节=['招投标公开活动', '经营公开线索']；代表记录=1；calls[patent:patent_bigdata_patent_stats=empty；qualification:qualification_bigdata_qualification_certificate_profile=empty；news:news_bigdata_news_stats=empty；bidding:bid_bigdata_bid_win_stats=empty；bidding:bid_bigdata_bidding_info=empty；trademark:trademark_bigdata_trademark_profile=empty；trademark:trademark_bigdata_trademark_stats=empty；operation:operation_insight_business_scale=empty；operation:operation_insight_financing_info=empty；operation:operation_insight_company_trends=empty；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=empty；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=empty]"
+    },
+    {
+      "expectation": "不生成虚构专利商标或标讯",
+      "status": "pass",
+      "evidence": "专利、商标、标讯调用均为空，core_analysis未生成虚构明细。；本轮当前产物：technical=passed，successful_data_calls=1；subject.enterprise=深圳市不存在的星河量子商业有限公司，resolved=False；metrics[招投标记录总量=0]；quality={'total_sections': 7, 'populated_sections': 2, 'empty_sections': 5, 'coverage_pct': 29}；非空章节=['招投标公开活动', '经营公开线索']；代表记录=1；calls[patent:patent_bigdata_patent_stats=empty；qualification:qualification_bigdata_qualification_certificate_profile=empty；news:news_bigdata_news_stats=empty；bidding:bid_bigdata_bid_win_stats=empty；bidding:bid_bigdata_bidding_info=empty；trademark:trademark_bigdata_trademark_profile=empty；trademark:trademark_bigdata_trademark_stats=empty；operation:operation_insight_business_scale=empty；operation:operation_insight_financing_info=empty；operation:operation_insight_company_trends=empty；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=empty；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=empty]"
+    },
+    {
+      "expectation": "数据源模式不从失败静默降级为已验证结论",
+      "status": "pass",
+      "evidence": "mode为live_mcp，summary明确主体未确认而非把失败降级为已验证结论。；本轮当前产物：technical=passed，successful_data_calls=1；subject.enterprise=深圳市不存在的星河量子商业有限公司，resolved=False；metrics[招投标记录总量=0]；quality={'total_sections': 7, 'populated_sections': 2, 'empty_sections': 5, 'coverage_pct': 29}；非空章节=['招投标公开活动', '经营公开线索']；代表记录=1；calls[patent:patent_bigdata_patent_stats=empty；qualification:qualification_bigdata_qualification_certificate_profile=empty；news:news_bigdata_news_stats=empty；bidding:bid_bigdata_bid_win_stats=empty；bidding:bid_bigdata_bidding_info=empty；trademark:trademark_bigdata_trademark_profile=empty；trademark:trademark_bigdata_trademark_stats=empty；operation:operation_insight_business_scale=empty；operation:operation_insight_financing_info=empty；operation:operation_insight_company_trends=empty；operation:operation_insight_enterprise_rankings=empty；enterprise:enterprise_get_enterprise_base_info=data；enterprise:enterprise_get_enterprise_holder_info=empty；enterprise:enterprise_get_enterprise_invest_info=empty；enterprise:enterprise_get_enterprise_main_person_info=empty]"
+    }
+  ],
+  "issues": [],
+  "evidence_binding": {
+    "report.json": "37a42432b9c283fd8050a9d221735b9f9c8278e5a7c604d362d00b941791df05",
+    "report.html": "ea02e7583152adb8c5eabbfb03cc3940b8ce9a4c2284307896dbd790ef4d0f98",
+    "report.md": "ae680a3af112cc1e3f007d2dcd8f3162ee9b2b5b134845d1ab20bafe77c33770",
+    "calls.json": "cd9c7da4445f38d35cdf6dae85e4e878aeea92118535769272e0833bd4131476",
+    "result.json": "2bb9f22f1118a4b989b57f2322c4fe634f21cd934332651839f7da6a987459fb",
+    "source_manifest_sha256": "014e0c39ccd221d4b037bfafc75dc705b73521da54c003be18fa8ca62d4dab92"
+  }
+}
