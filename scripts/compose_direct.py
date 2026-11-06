@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 import datetime as dt
+import json
 from typing import Any, Dict, List, Mapping, Optional
 import mcp_orchestration as orch
 
@@ -110,15 +111,296 @@ def _patent_total(p: Mapping[str, Any]):
     return sum(known) if known else None
 
 
+_FIELD_LABELS = {
+    "staff": "人员规模",
+    "turnover": "年营业额",
+    "subjectMatter": "标的",
+    "count": "数量",
+    "percent": "占比",
+    "area": "区域",
+    "range": "金额区间",
+    "year": "年份",
+    "month": "月份",
+    "negative": "负面",
+    "neutral": "中立",
+    "positive": "正面",
+    "unknown": "未知",
+    "inventionAppPatentCount": "发明申请",
+    "inventionLicPatentCount": "发明授权",
+    "utilityModelPatentCount": "实用新型",
+    "appearanceDesignPatentCount": "外观设计",
+    "patentDivAppLegal": "法律状态",
+    "patentCount": "数量",
+}
+
+
+_ORGANIZED_KEYS = {
+    "patent": (
+        "专利总数",
+        "发明申请",
+        "发明授权",
+        "实用新型",
+        "外观设计",
+        "专利申请年度趋势",
+        "专利公开年度趋势",
+        "专利法律状态",
+    ),
+    "trademark": (
+        "商标总数",
+        "有效商标数",
+        "无效商标数",
+        "本年新增",
+        "商标类别",
+        "商标状态",
+        "状态统计",
+        "申请年度趋势",
+        "注册年度趋势",
+        "类型统计",
+    ),
+    "bidding": (
+        "中标标的分布",
+        "中标区域分布",
+        "中标金额分布",
+        "中标趋势",
+        "招投标明细",
+        "招投标记录总量",
+    ),
+    "news": ("情感分布", "月度情感趋势"),
+    "operation": ("人员规模", "年营业额", "融资轮次", "融资记录", "上榜记录"),
+}
+
+
+def _num_text(v: Any) -> str:
+    if v is None:
+        return ""
+    if isinstance(v, float):
+        return f"{v:.2f}".rstrip("0").rstrip(".")
+    return str(v)
+
+
+def _one_line(value: Any) -> str:
+    """Readable text for nested upstream values; retains every item."""
+    if isinstance(value, dict):
+        if {"subjectMatter", "count"} <= set(value):
+            pct = value.get("percent")
+            pct_text = f"，占比 {_num_text(pct)}%" if pct is not None else ""
+            return f"{value.get('subjectMatter')} {value.get('count')} 条{pct_text}"
+        if {"area", "count"} <= set(value):
+            return f"{value.get('area')} {value.get('count')} 条"
+        if {"range", "count"} <= set(value):
+            pct = value.get("percent")
+            pct_text = f"，占比 {_num_text(pct)}%" if pct is not None else ""
+            return f"{value.get('range')} {value.get('count')} 条{pct_text}"
+        if {"year", "count"} <= set(value):
+            return f"{value.get('year')} 年 {value.get('count')} 条"
+        if "patentDivAppLegal" in value:
+            return (
+                f"{value.get('patentDivAppLegal')} "
+                f"{value.get('patentCount', 0)} 条"
+            )
+        if "month" in value and isinstance(value.get("stats"), dict):
+            stats = value["stats"]
+            return (
+                f"{value.get('month')} 负面 {stats.get('negative', 0)} / "
+                f"正面 {stats.get('positive', 0)}"
+            )
+        if "year" in value and any(str(k).endswith("Count") for k in value):
+            parts = [
+                f"{_FIELD_LABELS.get(str(k), k)} {_num_text(v)}"
+                for k, v in value.items()
+                if v not in (None, "", "-") and k != "year"
+            ]
+            return f"{value.get('year')} 年：" + "、".join(parts)
+        parts = []
+        for key, item in value.items():
+            if item in (None, "", "-", [], {}):
+                continue
+            parts.append(f"{_FIELD_LABELS.get(str(key), key)} {_one_line(item)}")
+        return "；".join(parts)
+    if isinstance(value, (list, tuple)):
+        if all(not isinstance(x, (dict, list, tuple)) for x in value):
+            return "、".join(_num_text(x) for x in value if x not in (None, "", "-"))
+        return "；".join(_one_line(x) for x in value if x not in (None, "", "-"))
+    return _num_text(value)
+
+
+def _organized_core(core: Mapping[str, Any]) -> Dict[str, Any]:
+    """Replace raw nested payloads with readable Chinese field/value text."""
+    out = dict(core)
+    patent = core.get("patent")
+    if isinstance(patent, dict) and not any(
+        k in patent for k in _ORGANIZED_KEYS["patent"]
+    ):
+        organized = {
+            "专利总数": patent.get("patentCount"),
+            "发明申请": patent.get("inventionAppPatentCount"),
+            "发明授权": patent.get("inventionLicPatentCount"),
+            "实用新型": patent.get("utilityModelPatentCount"),
+            "外观设计": patent.get("appearanceDesignPatentCount"),
+            "专利申请年度趋势": _one_line(patent.get("patentTypeAppTimeStat")),
+            "专利公开年度趋势": _one_line(patent.get("patentTypePubTimeStat")),
+            "专利法律状态": _one_line(patent.get("patentDivAppLegalStat")),
+        }
+        out["patent"] = {k: v for k, v in organized.items() if v not in (None, "", "-", [], {})}
+    tm = core.get("trademark")
+    if isinstance(tm, dict) and not any(
+        k in tm for k in _ORGANIZED_KEYS["trademark"]
+    ):
+        organized = {
+            "商标总数": tm.get("tmCount"),
+            "有效商标数": tm.get("tmValidNumber"),
+            "无效商标数": tm.get("tmInvalidNumber"),
+            "本年新增": tm.get("tmNumberThisYear"),
+            "商标类别": _one_line(tm.get("tmTypeList")),
+            "商标状态": _one_line(tm.get("tmStatusList")),
+            "状态统计": _one_line(tm.get("tmStatusStat")),
+            "申请年度趋势": _one_line(tm.get("tmAppTimeStat")),
+            "注册年度趋势": _one_line(tm.get("tmRegTimeStat")),
+            "类型统计": _one_line(tm.get("tmTypeStats")),
+        }
+        out["trademark"] = {k: v for k, v in organized.items() if v not in (None, "", "-", [], {})}
+    bid = core.get("bidding")
+    if isinstance(bid, dict) and not any(
+        k in bid for k in _ORGANIZED_KEYS["bidding"]
+    ):
+        organized = {
+            "中标标的分布": _one_line(bid.get("winbidStatList")),
+            "中标区域分布": _one_line(bid.get("winbidAreaStat")),
+            "中标金额分布": _one_line(bid.get("winbidAmountStatList")),
+            "中标趋势": _one_line(bid.get("winbidTrend")),
+            "招投标明细": _one_line(bid.get("bidding_info")),
+            "招投标记录总量": bid.get("bidding_total"),
+        }
+        out["bidding"] = {k: v for k, v in organized.items() if v not in (None, "", "-", [], {})}
+    news = core.get("news")
+    if isinstance(news, dict) and not any(
+        k in news for k in _ORGANIZED_KEYS["news"]
+    ):
+        organized = {
+            "情感分布": _one_line(news.get("newsSentimentStats")),
+            "月度情感趋势": _one_line(news.get("newsSentimentTrend")),
+        }
+        out["news"] = {k: v for k, v in organized.items() if v not in (None, "", "-", [], {})}
+    op = core.get("operation")
+    if isinstance(op, dict) and not any(
+        k in op for k in _ORGANIZED_KEYS["operation"]
+    ):
+        scale = op.get("scale") if isinstance(op.get("scale"), dict) else {}
+        organized = {
+            "人员规模": scale.get("staff"),
+            "年营业额": scale.get("turnover"),
+            "融资轮次": op.get("financing_count"),
+            "融资记录": _one_line(op.get("financing_list")),
+            "上榜记录": _one_line(op.get("rankings")),
+        }
+        out["operation"] = {k: v for k, v in organized.items() if v not in (None, "", "-", [], {})}
+    return out
+
+
+def _quality_nonempty(value: Any) -> bool:
+    """0/False are real values; only None/''/[]/{} count as empty."""
+    if value is None or value == "":
+        return False
+    if isinstance(value, dict):
+        return any(_quality_nonempty(v) for v in value.values())
+    if isinstance(value, (list, tuple)):
+        return any(_quality_nonempty(v) for v in value)
+    return True
+
+
+def _refresh_quality_report(report: Dict[str, Any]) -> None:
+    data_source = report.get("data_source")
+    core = report.get("core_analysis")
+    if not isinstance(data_source, dict) or not isinstance(core, dict):
+        return
+    sections = core.get("sections")
+    if not isinstance(sections, list):
+        return
+    declared = [s for s in sections if isinstance(s, dict)]
+    populated = sum(
+        1 for section in declared if _quality_nonempty(core.get(section.get("key")))
+    )
+    quality = data_source.get("quality_report")
+    if not isinstance(quality, dict):
+        quality = {}
+    # The composer declares every section it attempted before empty bodies are
+    # dropped. Keep that declared total so a review pass cannot turn missing
+    # dimensions into a false 100% coverage; grow it only when a section was
+    # added, and fall back to the current count for foreign payloads.
+    try:
+        previous_total = int(quality.get("total_sections") or 0)
+    except (TypeError, ValueError):
+        previous_total = 0
+    total = max(len(declared), populated, previous_total)
+    quality["total_sections"] = total
+    quality["populated_sections"] = populated
+    quality["empty_sections"] = max(0, total - populated)
+    quality["coverage_pct"] = round(populated / total * 100) if total else 0
+    data_source["quality_report"] = quality
+
+
+def apply_content_review(
+    report: Mapping[str, Any], calls: Any = None
+) -> Dict[str, Any]:
+    """Offline content normalization for an existing competitive-analysis report."""
+    reviewed = json.loads(json.dumps(report, ensure_ascii=False))
+    core = reviewed.get("core_analysis")
+    if isinstance(core, dict):
+        sections = core.get("sections")
+        organized = _organized_core({k: v for k, v in core.items() if k != "sections"})
+        if isinstance(sections, list):
+            organized["sections"] = sections
+        reviewed["core_analysis"] = organized
+    # Patent label: direct patentCount is a total, not merely a type sum.
+    patent = (reviewed.get("core_analysis") or {}).get("patent") or {}
+    for metric in reviewed.get("metrics") or []:
+        if metric.get("label") == "专利类型统计合计" and patent.get("专利总数") is not None:
+            metric["label"] = "专利总数"
+            metric["hint"] = "上游 patentCount 总数；不代表质量或领先"
+    subject = reviewed.get("subject") or {}
+    if subject.get("resolved") is False:
+        caveat = "主体未确认，仅为同名检索线索，不归属该主体"
+        for metric in reviewed.get("metrics") or []:
+            if caveat not in str(metric.get("hint") or ""):
+                metric["hint"] = f"{metric.get('hint') or ''}（{caveat}）"
+            if metric.get("label") == "招投标记录总量" and str(metric.get("value")) == "0":
+                metric["hint"] = (
+                    "接口明确返回 0 条；主体未确认，仅作检索线索，"
+                    "不视为该主体无市场活动"
+                )
+        for insight in reviewed.get("insights") or []:
+            interpretation = str(insight.get("interpretation") or "")
+            if caveat not in interpretation:
+                updated = interpretation + f" {caveat}，不能据此归属该主体。"
+                insight["interpretation"] = updated
+                if isinstance(reviewed.get("executive_summary"), list):
+                    reviewed["executive_summary"] = [
+                        str(item).replace(interpretation, updated)
+                        for item in reviewed["executive_summary"]
+                    ]
+    caliber = reviewed.get("caliber")
+    if isinstance(caliber, dict):
+        note = "字段已整理为中文可读文本，数值逐项保留，未新增推断。"
+        if note not in str(caliber.get("limit") or ""):
+            caliber["limit"] = str(caliber.get("limit") or "") + note
+    _refresh_quality_report(reviewed)
+    return reviewed
+
+
 def build_direct_payload(
     enterprise: str, keyword_type: str, *, dry_run: bool, skills_root: str,
-    max_pages: Optional[int] = None,
+    max_pages: Optional[int] = None, calls: Any = None,
 ) -> Dict[str, Any]:
     data = orch.collect_direct(
         enterprise, keyword_type, dry_run=dry_run, skills_root=skills_root,
         detail_max_pages=max_pages,
     )
     meta = data.get("_meta") or {}
+    evidence = calls
+    if evidence is None:
+        evidence = data.get("calls")
+    if evidence is None:
+        evidence = meta.get("calls")
     errors = meta.get("errors") or {}
     canon, confirmed, reason = _identity(data, enterprise)
     sections: List[Dict[str, Any]] = []
@@ -301,4 +583,4 @@ def build_direct_payload(
             report["abstract"] += note
             report["summary"] += note
             report["caliber"]["limit"] += note
-    return report
+    return apply_content_review(report, evidence)

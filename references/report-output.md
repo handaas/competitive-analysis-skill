@@ -1,44 +1,46 @@
-# 融合报告结构规范
+# 竞争基准报告内容规范（单企业事实版）
 
-## 报告章节（9 章）
+默认 direct-mcp 只输出单企业客观基准事实，不生成竞争总分、域分、排名、领先性或市场份额。历史融合路径的评分不得写入本报告。
 
-1. **企业综合画像摘要** — 一句话定位 + 综合评分 + 置信度 + 评估结论
-2. **多维度评分雷达图** — 8 维度信号评分雷达（ECharts radar）
-3. **维度评分详情** — 表格：维度/评分/证据强度/覆盖度/数据来源/关键发现
-4. **工商基础与股权** — 来自 enterprise-report
-5. **创新实力评估** — 来自 patent + trademark + qualification
-6. **市场活跃度** — 来自 bidding + news + exhibition
-7. **风险健康度** — 来自 enterprise-risk
-8. **经营与数字化** — 来自 operation + recruitment + cloudmigration
-9. **综合研判** — 基于评分的结论（全部有数据支撑）
+## 一、章节与字段
 
-## 质量门禁
+1. 查询对象与口径：主体、匹配方式、覆盖域、时间、缺口。
+2. 数据总览：专利/商标/资质/招投标/舆情事实指标，每项带口径提示。
+3. 核心分析：主体、专利、商标、招投标、经营、资质、舆情；空章节整体跳过。
+4. 代表性记录：只复述同报告指标，不重新计算。
+5. 特征与洞察：证据字段 + 解释 + 不能推断的边界。
+6. 数据口径与来源。
 
-- 如果**所有**维度均无数据 → 拒绝生成报告，报 `QualityGateError`
-- 空维度在雷达图上显示 0 分（视觉可见覆盖缺口）
-- 综合研判只引用有数据的维度，不外推空维度
+## 二、内容整理（原始值 → 标签 → 证据）
 
-### 数据格式约束（铁律）
+| 原始字段 | 规范展示 | 证据位置 | 禁止 |
+| --- | --- | --- | --- |
+| `patentCount` | 专利总数（上游原值） | `core_analysis.patent` | 与类型字段相加后冒充独立总数 |
+| `inventionAppPatentCount` 等 | 发明申请/发明授权/实用新型/外观设计分列 | patent | 把“申请”和“授权”合并成有效专利 |
+| `patentTypeAppTimeStat` | “年份：类型 数值”逐项文本 | patent | 输出原始 JSON/数组 |
+| `tmCount` / `tmValidNumber` / `tmInvalidNumber` | 总数/有效/无效/本年新增分列 | trademark | 用有效数覆盖总数 |
+| `tmTypeList` / `tmStatusList` | 按上游类别与状态逐项列出 | trademark | 擅自合并近似类别 |
+| `certificateCount` / `certNumberThisYear` | 证书数与年度获证数 | qualification | 推断资质等级或履约能力 |
+| `bidding_total` | 招投标记录总量 | bidding | 当作中标次数或收入 |
+| `winbidStatList` 合计 | 中标标的统计合计 | bidding / metrics | 当作市场份额 |
+| `newsSentimentStats` | 负面/中立/正面/未知 + 总量 | news | 只报正面占比、隐去负面 |
 
-以下约束适用于 compose_report.py 组装数据与 render_report.py 渲染输出的全过程：
+- 英文 key 必须转为中文标签；数值逐项保留；未知写“未返回”，不得写成 `0`。
+- 分类合计必须写明“类型合计”，不得与上游 `patentCount` 混用。
+- 金额、比例、日期按上游精度保留；名称不拼接主体。
 
-1. **嵌套 JSON 字符串必须解析**：MCP 返回的某些字段（如 `regCapital`、`addressValue`、`subscriptionDetail`）可能是 JSON 字符串（例：`{"coinType":"人民币","value":430000000.0}`）。compose 层必须调用 `_unwrap_json_str()` / `_parse_reg_capital()` / `_flatten_addr()` 解析为可读文本（如"4.30 亿 人民币"、"浙江省杭州市滨江区..."）。绝不在报告正文、表格单元格或指标值中输出原始 JSON 字符串。
+## 三、语义审校门禁
 
-2. **section 标题必须用中文**：`core_analysis.sections` 数组中每个 section 的 `title` 字段必须使用中文（如"企业基本信息"、"对外投资"、"股东信息"）。`key` 字段用英文 snake_case 供程序索引，但 `title` 绝不可显示英文 key。即使缺少 sections 数组，渲染器回退逻辑也内置了 `_TITLE_MAP` 映射。
+1. **单主体限制**：没有可比企业或行业分母时，禁止“领先/落后/排名/份额/竞争力强弱”。
+2. **主题归类**：专利与商标是两个主题；只有同一字段或明确统计口径支持时才合并为“知识产权布局”，且只描述记录并存。
+3. **同义合并**：仅在上游明确别名或至少两条记录指向同一对象时合并；不确定时保留原名。
+4. **时间口径**：专利申请/公开年度、商标申请/注册年度、舆情月份分别标注；不同年份不可相加成“当前储备”。
+5. **主体口径**：`subject.resolved=false` 时，全部指标标“同名检索线索，不归属该主体”，不得生成归属该主体的洞察。
+6. **冲突与置信度**：上游字段冲突时并列展示并标“待核验”；样本/单页数据写“当前展示/样本”，不得称全量。
+7. **保留风险**：负面舆情、空维度、未知项不删除；不得用正面声量对冲。
 
-3. **指标值可读化**：所有 `metrics` 的 `value` 字段必须格式化为人类可读形式：
-   - 金额：`10995210218.0` → `109.95 亿 人民币`（≥1 亿用亿，≥1 万用万）
-   - 地址：嵌套 dict → 省+市+区拼接 或取 `value` 字段
-   - 比率：`0.8858` → `88.58%`
-   - 日期：保持 `yyyy-MM-dd` 格式
-   - "-" 表示字段缺失（MCP 未返回）；`0` 表示真实为零
+## 四、离线复核
 
-4. **企业画像指标提取**：有 fuzzy_search 的 skill 必须从返回的 record 中提取 `regCapitalValue` / `foundTime` / `operStatus` / `enterpriseType` / `legalRepresentative`，通过 `_enrich_metrics_with_profile()` 追加为指标卡。
+`compose_direct.apply_content_review(report, calls=None)` 对冻结报告做纯本地整理：嵌套专利/商标/招投标/舆情字段转为中文可读文本，`专利类型统计合计` 在存在 `patentCount` 时改为“专利总数”，主体未确认时给指标与洞察追加归属限制。不调用 MCP，不改证据文件。
 
-5. **分布派生指标**：`_derive_core_metrics()` 从 core_analysis 各 section 计算分布指标（CR3 集中度、覆盖城市/平台/类目数、价格区间、正面占比等），确保指标总数 M ≥ 6。
-
-## 禁止项
-
-- 不出现 `matchKeyword=`、`product_id`、`secret_id`、工具名
-- 不出现"联网收集""Skill 生成"等过程语言
-- 不臆造空维度的数据或结论
+正常生成 `compose_direct.build_direct_payload`（`compose_fusion_report.py` 默认直连模式）在返回前调用同一函数，JSON/HTML/Markdown 使用同一整理结果；重复调用保持幂等，不会把已整理章节再次当作原始 JSON 覆盖。整理只重算章节填充数并保留构建时声明的章节总数，缺失维度不会被折叠成 100% 覆盖；`data["calls"]` / `_meta["calls"]` 存在时作为既有调用证据传入，不触发二次查询。
